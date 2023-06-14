@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports Excel = Microsoft.Office.Interop.Excel
 
 Public Class MainForm
     Dim ExposureIndex,
@@ -29,8 +30,15 @@ Public Class MainForm
         FineAggVolume,
         AirVolume As Double
 
+    Private Sub ReferenceTablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReferenceTablesToolStripMenuItem.Click
+        ReferenceTables.Show()
+    End Sub
+
     Dim FilePath As String
     Dim Saved As Boolean
+
+    Dim HasResult As Boolean
+    Dim MixProportions(4) As Double
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         cmbExposure.SelectedIndex = 0
@@ -136,10 +144,51 @@ Public Class MainForm
             Dim RequiredWater As Double = WaterWeight - DeltaWaterWeight
 
             ' TODO: Display the output based on user selected: volume or weight (or percentages)
-            txtCementOutput.Text = Math.Round(CementVolume, 3)
-            txtWaterOutput.Text = Math.Round(WaterVolume, 3)
-            txtCAOutput.Text = Math.Round(CoarseAggVolume, 3)
-            txtFAOutput.Text = Math.Round(FineAggVolume, 3)
+            Select Case True
+                Case rdbVolume.Checked
+                    txtCementOutput.Text = Math.Round(CementVolume, 3)
+                    txtWaterOutput.Text = Math.Round(WaterVolume, 3)
+                    txtCAOutput.Text = Math.Round(CoarseAggVolume, 3)
+                    txtFAOutput.Text = Math.Round(FineAggVolume, 3)
+
+                Case rdbVolumePercent.Checked
+                    txtCementOutput.Text = Math.Round(CementVolume / 27, 3) * 100
+                    txtWaterOutput.Text = Math.Round(WaterVolume / 27, 3)
+                    txtCAOutput.Text = Math.Round(CoarseAggVolume / 27, 3)
+                    txtFAOutput.Text = Math.Round(FineAggVolume / 27, 3)
+
+                Case rdbWeight.Checked
+                    txtCementOutput.Text = Math.Round(CementWeight, 3)
+                    txtWaterOutput.Text = Math.Round(WaterWeight, 3)
+                    txtCAOutput.Text = Math.Round(CoarseAggWeight, 3)
+                    txtFAOutput.Text = Math.Round(FineAggWeight, 3)
+
+                Case rdbWeightPercent.Checked
+                    Dim TotalWeight = CementWeight + WaterWeight + CoarseAggWeight + FineAggWeight
+
+                    txtCementOutput.Text = Math.Round(CementWeight / TotalWeight, 3)
+                    txtWaterOutput.Text = Math.Round(WaterWeight / TotalWeight, 3)
+                    txtCAOutput.Text = Math.Round(CoarseAggWeight / TotalWeight, 3)
+                    txtFAOutput.Text = Math.Round(FineAggWeight / TotalWeight, 3)
+
+            End Select
+
+            ' TODO: Create pie chart based on result
+            Dim ExcelApp As New Excel.Application
+            Dim WorkBook As Excel.Workbook
+
+            ' TODO: Create visual graphics
+            HasResult = True
+
+            ReDim MixProportions(5)
+
+            MixProportions(0) = CementVolume / 27
+            MixProportions(1) = WaterVolume / 27
+            MixProportions(2) = CoarseAggVolume / 27
+            MixProportions(3) = FineAggVolume / 27
+            MixProportions(4) = AirContent
+
+            picBarChart.Refresh()
 
         Catch ex As InvalidCastException
             MessageBox.Show("Invalid input values", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -174,7 +223,48 @@ Public Class MainForm
         cmbMSA.SelectedIndex = 0
         rdbAirEntrained.Checked = True
 
+        HasResult = False
+        Array.Clear(MixProportions, 0, 5)
+        picBarChart.Refresh()
+
         txtStrength.Focus()
+    End Sub
+
+
+    Private Sub picBarChart_Paint(sender As Object, e As PaintEventArgs) Handles picBarChart.Paint
+        If HasResult Then
+            ' TODO: If possible load texture files
+            Dim ColorForCement As Brush = Brushes.AliceBlue
+            Dim ColorForWater As Brush = Brushes.Wheat
+            Dim ColorForAir As Brush = Brushes.Fuchsia
+            Dim ColorForCoarseAgg As Brush = Brushes.Aqua
+            Dim ColorForFineAgg As Brush = Brushes.AntiqueWhite
+
+            Dim Padding As Single = 32.0
+            Dim Height As Single = 40.0
+            Dim Width As Single = picBarChart.Width - 2 * Padding
+
+            Dim X, Y As Single
+            X = Padding
+            Y = picBarChart.Height / 2 - Height / 2
+
+            ' TODO: Convert to for next loop
+            e.Graphics.FillRectangle(ColorForCement, X, Y, CSng(MixProportions(0) * Width), Height)
+            X += MixProportions(0) * Width
+
+            e.Graphics.FillRectangle(ColorForWater, X, Y, CSng(MixProportions(1) * Width), Height)
+            X += MixProportions(1) * Width
+
+            e.Graphics.FillRectangle(ColorForAir, X, Y, CSng(MixProportions(2) * Width), Height)
+            X += MixProportions(2) * Width
+
+            e.Graphics.FillRectangle(ColorForCoarseAgg, X, Y, CSng(MixProportions(3) * Width), Height)
+            X += MixProportions(3) * Width
+
+            e.Graphics.FillRectangle(ColorForFineAgg, X, Y, CSng(MixProportions(4) * Width), Height)
+
+            ' TODO: Add legends
+        End If
     End Sub
 
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
@@ -189,30 +279,30 @@ Public Class MainForm
         ' Randomize input values
         ' TODO: Recheck minimum and maximum values
 
-        cmbExposure.SelectedIndex = RandomValue(0, 2)
-        cmbMSA.SelectedIndex = RandomValue(0, 7)
+        cmbExposure.SelectedIndex = Rand(0, 2)
+        cmbMSA.SelectedIndex = Rand(0, 7)
 
-        Dim Entrained = RandomValue(0, 1)
+        Dim Entrained = Rand(0, 1)
         rdbAirEntrained.Checked = Entrained = 0
         rdbNonAirEntrained.Checked = Entrained = 1
 
         Select Case True
             Case rdbAirEntrained.Checked
-                txtStrength.Text = RandomValue(2000, 5000)
+                txtStrength.Text = Rand(2000, 5000)
             Case rdbNonAirEntrained.Checked
-                txtStrength.Text = RandomValue(2000, 6500)
+                txtStrength.Text = Rand(2000, 6500)
         End Select
 
-        txtSlump.Text = RandomValue(1.0, 7.0)
-        txtCementSG.Text = RandomValue(1.0, 3.0)
-        txtCAAC.Text = RandomValue(0.01, 1.0)
-        txtCASG.Text = RandomValue(1.0, 3.0)
-        txtCASM.Text = RandomValue(0.01, 1.0)
-        txtCAUW.Text = RandomValue(1.0, 5.0)
-        txtFAAC.Text = RandomValue(0.01, 1.0)
-        txtFAFM.Text = RandomValue(2.4, 3.0)
-        txtFASG.Text = RandomValue(1.0, 3.0)
-        txtFASM.Text = RandomValue(0.01, 1.0)
+        txtSlump.Text = Rand(1.0, 7.0)
+        txtCementSG.Text = Rand(1.0, 3.0)
+        txtCAAC.Text = Rand(0.01, 1.0)
+        txtCASG.Text = Rand(1.0, 3.0)
+        txtCASM.Text = Rand(0.01, 1.0)
+        txtCAUW.Text = Rand(1.0, 5.0)
+        txtFAAC.Text = Rand(0.01, 1.0)
+        txtFAFM.Text = Rand(2.4, 3.0)
+        txtFASG.Text = Rand(1.0, 3.0)
+        txtFASM.Text = Rand(0.01, 1.0)
     End Sub
 
     Private Sub NewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewToolStripMenuItem.Click
@@ -220,4 +310,6 @@ Public Class MainForm
         Dim NewForm As New MainForm
         NewForm.Show()
     End Sub
+
+
 End Class

@@ -1,9 +1,9 @@
 ﻿Module Utils
-    Public Function RandomValue(min As Integer, max As Integer) As Integer
+    Public Function Rand(min As Integer, max As Integer) As Integer
         Return (max * Rnd()) + min
     End Function
 
-    Public Function RandomValue(min As Double, max As Double) As Double
+    Public Function Rand(min As Double, max As Double) As Double
         ' TODO: Dynamic number of decimals
         Return Math.Round(max * Rnd() + min, 3)
     End Function
