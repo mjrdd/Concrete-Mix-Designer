@@ -30,32 +30,29 @@ Public Class MainForm
         FineAggVolume,
         AirVolume As Double
 
-    Private Sub ReferenceTablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReferenceTablesToolStripMenuItem.Click
-        ReferenceTables.Show()
-    End Sub
-
     Dim FilePath As String
     Dim Saved As Boolean
 
     Dim HasResult As Boolean
     Dim MixProportions(4) As Double
 
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         WaterContentForNonAirEntrainedTableAdapter.Fill(AciDatabaseDataSet.WaterContentForNonAirEntrained)
         WaterContentForAirEntrainedTableAdapter.Fill(AciDatabaseDataSet.WaterContentForAirEntrained)
         AirContentForNonAirEntrainedTableAdapter.Fill(AciDatabaseDataSet.AirContentForNonAirEntrained)
         AirContentForAirEntrainedTableAdapter.Fill(AciDatabaseDataSet.AirContentForAirEntrained)
         WaterCementRatioTableAdapter.Fill(AciDatabaseDataSet.WaterCementRatio)
 
-        cmbExposure.SelectedIndex = 0
-        cmbMSA.SelectedIndex = 0
         rdbAirEntrained.Checked = True
-        rdbVolume.Checked = True
+        cmbMSA.SelectedIndex = 0
+        cmbExposure.SelectedIndex = 0
 
         txtStrength.Focus()
+
+        rdbVolume.Checked = True
     End Sub
 
-    Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
+    Private Sub MainForm_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
         If Not Saved Then
             Dim UserResponse As DialogResult = MessageBox.Show(
                 "The file is currently not saved. Disregard changes and close the file?",
@@ -66,12 +63,12 @@ Public Class MainForm
         End If
     End Sub
 
-    Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+    Private Sub MainForm_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
         picGraph.Refresh()
         picBarChart.Refresh()
     End Sub
 
-    Private Sub txt_KeyPress(sender As Object, e As KeyPressEventArgs) Handles _
+    Private Sub Textboxes_KeyPress(sender As Object, e As KeyPressEventArgs) Handles _
         txtStrength.KeyPress,
         txtSlump.KeyPress,
         txtCementSG.KeyPress,
@@ -99,6 +96,18 @@ Public Class MainForm
                 sender.SelectionStart = 0)
         ) Then
             e.KeyChar = Nothing
+        End If
+    End Sub
+
+    Private Sub AirEntrainment_CheckedChanged(sender As Object, e As EventArgs) Handles _
+        rdbAirEntrained.CheckedChanged,
+        rdbNonAirEntrained.CheckedChanged
+
+        ' Prevent the event handler trigger multiple times
+        If sender.Checked Then
+            lblExposure.Visible = rdbAirEntrained.Checked
+            cmbExposure.Visible = rdbAirEntrained.Checked
+            cmbExposure.SelectedIndex = 0
         End If
     End Sub
 
@@ -371,5 +380,7 @@ Public Class MainForm
         NewForm.Show()
     End Sub
 
-
+    Private Sub ReferenceTablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReferenceTablesToolStripMenuItem.Click
+        ReferenceTables.Show()
+    End Sub
 End Class

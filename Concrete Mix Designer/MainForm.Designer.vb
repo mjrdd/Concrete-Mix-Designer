@@ -69,7 +69,7 @@ Partial Class MainForm
         Me.rdbNonAirEntrained = New System.Windows.Forms.RadioButton()
         Me.rdbAirEntrained = New System.Windows.Forms.RadioButton()
         Me.Label17 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblExposure = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cmbMSA = New System.Windows.Forms.ComboBox()
@@ -98,11 +98,11 @@ Partial Class MainForm
         Me.picPieChart = New System.Windows.Forms.PictureBox()
         Me.AciDatabaseDataSet = New Concrete_Mix_Designer.ACIDatabaseDataSet()
         Me.TableAdapterManager = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.TableAdapterManager()
-        Me.WaterContentForNonAirEntrainedTableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.WaterContentForNonAirEntrainedTableAdapter()
-        Me.WaterContentForAirEntrainedTableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.WaterContentForAirEntrainedTableAdapter()
-        Me.AirContentForNonAirEntrainedTableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.AirContentForNonAirEntrainedTableAdapter()
         Me.AirContentForAirEntrainedTableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.AirContentForAirEntrainedTableAdapter()
+        Me.AirContentForNonAirEntrainedTableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.AirContentForNonAirEntrainedTableAdapter()
         Me.WaterCementRatioTableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.WaterCementRatioTableAdapter()
+        Me.WaterContentForAirEntrainedTableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.WaterContentForAirEntrainedTableAdapter()
+        Me.WaterContentForNonAirEntrainedTableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.WaterContentForNonAirEntrainedTableAdapter()
         Me.MenuStrip.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -548,7 +548,7 @@ Partial Class MainForm
         Me.GroupBox1.Controls.Add(Me.rdbNonAirEntrained)
         Me.GroupBox1.Controls.Add(Me.rdbAirEntrained)
         Me.GroupBox1.Controls.Add(Me.Label17)
-        Me.GroupBox1.Controls.Add(Me.Label3)
+        Me.GroupBox1.Controls.Add(Me.lblExposure)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.cmbMSA)
@@ -565,7 +565,7 @@ Partial Class MainForm
         'txtStrength
         '
         Me.txtStrength.Font = New System.Drawing.Font("Segoe UI", 11.0!)
-        Me.txtStrength.Location = New System.Drawing.Point(281, 23)
+        Me.txtStrength.Location = New System.Drawing.Point(283, 23)
         Me.txtStrength.Margin = New System.Windows.Forms.Padding(4)
         Me.txtStrength.Name = "txtStrength"
         Me.txtStrength.Size = New System.Drawing.Size(137, 32)
@@ -574,7 +574,7 @@ Partial Class MainForm
         'txtSlump
         '
         Me.txtSlump.Font = New System.Drawing.Font("Segoe UI", 11.0!)
-        Me.txtSlump.Location = New System.Drawing.Point(281, 64)
+        Me.txtSlump.Location = New System.Drawing.Point(283, 63)
         Me.txtSlump.Margin = New System.Windows.Forms.Padding(4)
         Me.txtSlump.Name = "txtSlump"
         Me.txtSlump.Size = New System.Drawing.Size(137, 32)
@@ -584,7 +584,7 @@ Partial Class MainForm
         '
         Me.rdbNonAirEntrained.AutoSize = True
         Me.rdbNonAirEntrained.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.rdbNonAirEntrained.Location = New System.Drawing.Point(236, 188)
+        Me.rdbNonAirEntrained.Location = New System.Drawing.Point(250, 144)
         Me.rdbNonAirEntrained.Margin = New System.Windows.Forms.Padding(4)
         Me.rdbNonAirEntrained.Name = "rdbNonAirEntrained"
         Me.rdbNonAirEntrained.Size = New System.Drawing.Size(170, 27)
@@ -597,7 +597,7 @@ Partial Class MainForm
         '
         Me.rdbAirEntrained.AutoSize = True
         Me.rdbAirEntrained.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.rdbAirEntrained.Location = New System.Drawing.Point(87, 188)
+        Me.rdbAirEntrained.Location = New System.Drawing.Point(112, 144)
         Me.rdbAirEntrained.Margin = New System.Windows.Forms.Padding(4)
         Me.rdbAirEntrained.Name = "rdbAirEntrained"
         Me.rdbAirEntrained.Size = New System.Drawing.Size(130, 27)
@@ -610,7 +610,7 @@ Partial Class MainForm
         '
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Label17.Location = New System.Drawing.Point(69, 151)
+        Me.Label17.Location = New System.Drawing.Point(84, 108)
         Me.Label17.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(191, 23)
@@ -618,23 +618,23 @@ Partial Class MainForm
         Me.Label17.Text = "Max Aggregate Size (in)"
         Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label3
+        'lblExposure
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Label3.Location = New System.Drawing.Point(188, 110)
-        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(79, 23)
-        Me.Label3.TabIndex = 1
-        Me.Label3.Text = "Exposure"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblExposure.AutoSize = True
+        Me.lblExposure.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.lblExposure.Location = New System.Drawing.Point(196, 184)
+        Me.lblExposure.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblExposure.Name = "lblExposure"
+        Me.lblExposure.Size = New System.Drawing.Size(79, 23)
+        Me.lblExposure.TabIndex = 1
+        Me.lblExposure.Text = "Exposure"
+        Me.lblExposure.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Label2.Location = New System.Drawing.Point(180, 69)
+        Me.Label2.Location = New System.Drawing.Point(188, 68)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(87, 23)
@@ -646,7 +646,7 @@ Partial Class MainForm
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Label1.Location = New System.Drawing.Point(44, 28)
+        Me.Label1.Location = New System.Drawing.Point(65, 28)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(210, 23)
@@ -660,7 +660,7 @@ Partial Class MainForm
         Me.cmbMSA.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.cmbMSA.FormattingEnabled = True
         Me.cmbMSA.Items.AddRange(New Object() {"3/8", "1/2", "3/4", "1", "1-1/2", "2", "3", "6"})
-        Me.cmbMSA.Location = New System.Drawing.Point(281, 146)
+        Me.cmbMSA.Location = New System.Drawing.Point(283, 103)
         Me.cmbMSA.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbMSA.Name = "cmbMSA"
         Me.cmbMSA.Size = New System.Drawing.Size(137, 33)
@@ -672,7 +672,7 @@ Partial Class MainForm
         Me.cmbExposure.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.cmbExposure.FormattingEnabled = True
         Me.cmbExposure.Items.AddRange(New Object() {"Mild", "Moderate", "Severe"})
-        Me.cmbExposure.Location = New System.Drawing.Point(281, 105)
+        Me.cmbExposure.Location = New System.Drawing.Point(283, 179)
         Me.cmbExposure.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbExposure.Name = "cmbExposure"
         Me.cmbExposure.Size = New System.Drawing.Size(137, 33)
@@ -952,25 +952,25 @@ Partial Class MainForm
         Me.TableAdapterManager.WaterContentForAirEntrainedTableAdapter = Me.WaterContentForAirEntrainedTableAdapter
         Me.TableAdapterManager.WaterContentForNonAirEntrainedTableAdapter = Me.WaterContentForNonAirEntrainedTableAdapter
         '
-        'WaterContentForNonAirEntrainedTableAdapter
+        'AirContentForAirEntrainedTableAdapter
         '
-        Me.WaterContentForNonAirEntrainedTableAdapter.ClearBeforeFill = True
-        '
-        'WaterContentForAirEntrainedTableAdapter
-        '
-        Me.WaterContentForAirEntrainedTableAdapter.ClearBeforeFill = True
+        Me.AirContentForAirEntrainedTableAdapter.ClearBeforeFill = True
         '
         'AirContentForNonAirEntrainedTableAdapter
         '
         Me.AirContentForNonAirEntrainedTableAdapter.ClearBeforeFill = True
         '
-        'AirContentForAirEntrainedTableAdapter
-        '
-        Me.AirContentForAirEntrainedTableAdapter.ClearBeforeFill = True
-        '
         'WaterCementRatioTableAdapter
         '
         Me.WaterCementRatioTableAdapter.ClearBeforeFill = True
+        '
+        'WaterContentForAirEntrainedTableAdapter
+        '
+        Me.WaterContentForAirEntrainedTableAdapter.ClearBeforeFill = True
+        '
+        'WaterContentForNonAirEntrainedTableAdapter
+        '
+        Me.WaterContentForNonAirEntrainedTableAdapter.ClearBeforeFill = True
         '
         'MainForm
         '
@@ -1054,7 +1054,7 @@ Partial Class MainForm
     Friend WithEvents cmbExposure As ComboBox
     Friend WithEvents rdbNonAirEntrained As RadioButton
     Friend WithEvents rdbAirEntrained As RadioButton
-    Friend WithEvents Label3 As Label
+    Friend WithEvents lblExposure As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
