@@ -41,6 +41,12 @@ Public Class MainForm
     Dim MixProportions(4) As Double
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        WaterContentForNonAirEntrainedTableAdapter.Fill(AciDatabaseDataSet.WaterContentForNonAirEntrained)
+        WaterContentForAirEntrainedTableAdapter.Fill(AciDatabaseDataSet.WaterContentForAirEntrained)
+        AirContentForNonAirEntrainedTableAdapter.Fill(AciDatabaseDataSet.AirContentForNonAirEntrained)
+        AirContentForAirEntrainedTableAdapter.Fill(AciDatabaseDataSet.AirContentForAirEntrained)
+        WaterCementRatioTableAdapter.Fill(AciDatabaseDataSet.WaterCementRatio)
+
         cmbExposure.SelectedIndex = 0
         cmbMSA.SelectedIndex = 0
         rdbAirEntrained.Checked = True
@@ -113,10 +119,64 @@ Public Class MainForm
             FineAggSG = txtFASG.Text
             FineAggSM = txtFASM.Text
 
-            Dim BulkVolumeOfCoarseAgg As Double
-            BulkVolumeOfCoarseAgg = 23
+            Dim WaterContentTable,
+                AirContentTable,
+                WaterCementRatioTable As DataTable
 
-            CoarseAggWeight = BulkVolumeOfCoarseAgg * CoarseAggUW * 27
+            Dim SlumpRowIndex As Integer
+            Select Case Slump
+                Case 1.0 To 2.0
+                    SlumpRowIndex = 0
+                Case 2.0 To 5.0
+                    SlumpRowIndex = 1
+                Case 6.0 To 7.0
+                    SlumpRowIndex = 2
+                Case Else
+                    Exit Sub
+            End Select
+
+            Select Case True
+                Case rdbAirEntrained.Checked
+                    WaterContentTable = WaterContentForAirEntrainedTableAdapter.GetData().CopyToDataTable()
+                    AirContentTable = AirContentForAirEntrainedTableAdapter.GetData().CopyToDataTable()
+
+                    WaterWeight = WaterContentTable.Rows.Item(SlumpRowIndex).Item(MSAIndex + 1)
+                    AirContent = AirContentTable.Rows.Item(ExposureIndex).Item(MSAIndex + 1)
+
+                Case rdbNonAirEntrained.Checked
+                    WaterContentTable = WaterContentForNonAirEntrainedTableAdapter.GetData().CopyToDataTable()
+                    AirContentTable = AirContentForNonAirEntrainedTableAdapter.GetData().CopyToDataTable()
+
+                    WaterWeight = WaterContentTable.Rows.Item(SlumpRowIndex).Item(MSAIndex + 1)
+                    AirContent = AirContentTable.Rows.Item(0).Item(MSAIndex + 1)
+            End Select
+
+            WaterCementRatioTable = WaterCementRatioTableAdapter.GetData().CopyToDataTable()
+
+            ' TODO: Interpolate data
+            Dim RowIndex As Integer
+            For RowIndex = 0 To WaterCementRatioTable.Rows.Count - 1
+                If WaterCementRatioTable.Rows.Item(RowIndex).Item(0) = Strength Then
+                    Exit For
+
+                ElseIf WaterCementRatioTable.Rows.Item(RowIndex).Item(0) < Strength And
+                    WaterCementRatioTable.Rows.Item(RowIndex + 1).Item(0) > Strength Then
+                    Exit For
+                End If
+            Next
+
+            Dim WCColIndex As Integer
+            Select Case True
+                Case rdbAirEntrained.Checked
+                    WCColIndex = 1
+                Case rdbNonAirEntrained.Checked
+                    WCColIndex = 2
+            End Select
+
+            WaterCementRatio = WaterCementRatioTable.Rows.Item(RowIndex).Item(WCColIndex)
+            CementWeight = WaterWeight / WaterCementRatio
+
+            CoarseAggWeight = 0.63 * CoarseAggUW * 27
             CoarseAggWeight *= 1 + CoarseAggAC
 
             ' Compute for the volume
@@ -234,11 +294,11 @@ Public Class MainForm
     Private Sub picBarChart_Paint(sender As Object, e As PaintEventArgs) Handles picBarChart.Paint
         If HasResult Then
             ' TODO: If possible load texture files
-            Dim ColorForCement As Brush = Brushes.AliceBlue
-            Dim ColorForWater As Brush = Brushes.Wheat
-            Dim ColorForAir As Brush = Brushes.Fuchsia
-            Dim ColorForCoarseAgg As Brush = Brushes.Aqua
-            Dim ColorForFineAgg As Brush = Brushes.AntiqueWhite
+            Dim ColorForCement As Brush = Brushes.Gray
+            Dim ColorForWater As Brush = Brushes.LightBlue
+            Dim ColorForAir As Brush = Brushes.White
+            Dim ColorForCoarseAgg As Brush = Brushes.PeachPuff
+            Dim ColorForFineAgg As Brush = Brushes.SandyBrown
 
             Dim Padding As Single = 32.0
             Dim Height As Single = 40.0

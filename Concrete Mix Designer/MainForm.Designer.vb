@@ -23,7 +23,7 @@ Partial Class MainForm
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
-        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.MenuStrip = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -96,7 +96,14 @@ Partial Class MainForm
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.picBarChart = New System.Windows.Forms.PictureBox()
         Me.picPieChart = New System.Windows.Forms.PictureBox()
-        Me.MenuStrip1.SuspendLayout()
+        Me.AciDatabaseDataSet = New Concrete_Mix_Designer.ACIDatabaseDataSet()
+        Me.TableAdapterManager = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.TableAdapterManager()
+        Me.WaterContentForNonAirEntrainedTableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.WaterContentForNonAirEntrainedTableAdapter()
+        Me.WaterContentForAirEntrainedTableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.WaterContentForAirEntrainedTableAdapter()
+        Me.AirContentForNonAirEntrainedTableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.AirContentForNonAirEntrainedTableAdapter()
+        Me.AirContentForAirEntrainedTableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.AirContentForAirEntrainedTableAdapter()
+        Me.WaterCementRatioTableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.WaterCementRatioTableAdapter()
+        Me.MenuStrip.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -118,19 +125,20 @@ Partial Class MainForm
         Me.Panel5.SuspendLayout()
         CType(Me.picBarChart, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picPieChart, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.AciDatabaseDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'MenuStrip1
+        'MenuStrip
         '
-        Me.MenuStrip1.BackColor = System.Drawing.Color.Transparent
-        Me.MenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.HelpToolStripMenuItem})
-        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
-        Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(7, 2, 0, 2)
-        Me.MenuStrip1.Size = New System.Drawing.Size(1259, 28)
-        Me.MenuStrip1.TabIndex = 0
-        Me.MenuStrip1.Text = "MenuStrip1"
+        Me.MenuStrip.BackColor = System.Drawing.Color.Transparent
+        Me.MenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.HelpToolStripMenuItem})
+        Me.MenuStrip.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip.Name = "MenuStrip"
+        Me.MenuStrip.Padding = New System.Windows.Forms.Padding(7, 2, 0, 2)
+        Me.MenuStrip.Size = New System.Drawing.Size(1259, 28)
+        Me.MenuStrip.TabIndex = 0
+        Me.MenuStrip.Text = "MenuStrip1"
         '
         'FileToolStripMenuItem
         '
@@ -145,7 +153,7 @@ Partial Class MainForm
         Me.NewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
         Me.NewToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
-        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
         Me.NewToolStripMenuItem.Text = "&New"
         '
         'OpenToolStripMenuItem
@@ -154,13 +162,13 @@ Partial Class MainForm
         Me.OpenToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
         Me.OpenToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
-        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
         Me.OpenToolStripMenuItem.Text = "&Open"
         '
         'toolStripSeparator
         '
         Me.toolStripSeparator.Name = "toolStripSeparator"
-        Me.toolStripSeparator.Size = New System.Drawing.Size(221, 6)
+        Me.toolStripSeparator.Size = New System.Drawing.Size(178, 6)
         '
         'SaveToolStripMenuItem
         '
@@ -168,24 +176,24 @@ Partial Class MainForm
         Me.SaveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
         Me.SaveToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
         Me.SaveToolStripMenuItem.Text = "&Save"
         '
         'SaveAsToolStripMenuItem
         '
         Me.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem"
-        Me.SaveAsToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.SaveAsToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
         Me.SaveAsToolStripMenuItem.Text = "Save &As"
         '
         'toolStripSeparator1
         '
         Me.toolStripSeparator1.Name = "toolStripSeparator1"
-        Me.toolStripSeparator1.Size = New System.Drawing.Size(221, 6)
+        Me.toolStripSeparator1.Size = New System.Drawing.Size(178, 6)
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
         Me.ExitToolStripMenuItem.Text = "E&xit"
         '
         'ToolsToolStripMenuItem
@@ -198,13 +206,13 @@ Partial Class MainForm
         'RadomizeToolStripMenuItem
         '
         Me.RadomizeToolStripMenuItem.Name = "RadomizeToolStripMenuItem"
-        Me.RadomizeToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.RadomizeToolStripMenuItem.Size = New System.Drawing.Size(167, 26)
         Me.RadomizeToolStripMenuItem.Text = "&Randomize"
         '
         'OptionsToolStripMenuItem
         '
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
-        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(167, 26)
         Me.OptionsToolStripMenuItem.Text = "&Options"
         '
         'HelpToolStripMenuItem
@@ -217,25 +225,25 @@ Partial Class MainForm
         'ReferenceTablesToolStripMenuItem
         '
         Me.ReferenceTablesToolStripMenuItem.Name = "ReferenceTablesToolStripMenuItem"
-        Me.ReferenceTablesToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.ReferenceTablesToolStripMenuItem.Size = New System.Drawing.Size(203, 26)
         Me.ReferenceTablesToolStripMenuItem.Text = "&Reference Tables"
         '
         'toolStripSeparator5
         '
         Me.toolStripSeparator5.Name = "toolStripSeparator5"
-        Me.toolStripSeparator5.Size = New System.Drawing.Size(221, 6)
+        Me.toolStripSeparator5.Size = New System.Drawing.Size(200, 6)
         '
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(203, 26)
         Me.AboutToolStripMenuItem.Text = "&About..."
         '
         'SplitContainer1
         '
         Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SplitContainer1.Location = New System.Drawing.Point(0, 28)
-        Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(4)
         Me.SplitContainer1.Name = "SplitContainer1"
         '
         'SplitContainer1.Panel1
@@ -248,7 +256,7 @@ Partial Class MainForm
         Me.SplitContainer1.Panel2.Controls.Add(Me.Panel6)
         Me.SplitContainer1.Panel2.Controls.Add(Me.Panel5)
         Me.SplitContainer1.Panel2.Controls.Add(Me.picPieChart)
-        Me.SplitContainer1.Panel2.Padding = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.SplitContainer1.Panel2.Padding = New System.Windows.Forms.Padding(9)
         Me.SplitContainer1.Panel2MinSize = 520
         Me.SplitContainer1.Size = New System.Drawing.Size(1259, 810)
         Me.SplitContainer1.SplitterDistance = 560
@@ -259,7 +267,7 @@ Partial Class MainForm
         '
         Me.SplitContainer2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SplitContainer2.Location = New System.Drawing.Point(0, 0)
-        Me.SplitContainer2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SplitContainer2.Margin = New System.Windows.Forms.Padding(4)
         Me.SplitContainer2.Name = "SplitContainer2"
         Me.SplitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal
         '
@@ -287,9 +295,9 @@ Partial Class MainForm
         Me.Panel2.Controls.Add(Me.GroupBox1)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Padding = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.Panel2.Padding = New System.Windows.Forms.Padding(9)
         Me.Panel2.Size = New System.Drawing.Size(560, 346)
         Me.Panel2.TabIndex = 0
         '
@@ -304,9 +312,9 @@ Partial Class MainForm
         Me.GroupBox4.Controls.Add(Me.txtFASG)
         Me.GroupBox4.Controls.Add(Me.Label12)
         Me.GroupBox4.Location = New System.Drawing.Point(16, 549)
-        Me.GroupBox4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox4.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox4.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox4.Size = New System.Drawing.Size(428, 197)
         Me.GroupBox4.TabIndex = 3
         Me.GroupBox4.TabStop = False
@@ -316,7 +324,7 @@ Partial Class MainForm
         '
         Me.txtFASM.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtFASM.Location = New System.Drawing.Point(281, 145)
-        Me.txtFASM.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtFASM.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFASM.Name = "txtFASM"
         Me.txtFASM.Size = New System.Drawing.Size(137, 32)
         Me.txtFASM.TabIndex = 3
@@ -337,7 +345,7 @@ Partial Class MainForm
         '
         Me.txtFAFM.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtFAFM.Location = New System.Drawing.Point(281, 105)
-        Me.txtFAFM.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtFAFM.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFAFM.Name = "txtFAFM"
         Me.txtFAFM.Size = New System.Drawing.Size(137, 32)
         Me.txtFAFM.TabIndex = 2
@@ -358,7 +366,7 @@ Partial Class MainForm
         '
         Me.txtFAAC.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtFAAC.Location = New System.Drawing.Point(281, 64)
-        Me.txtFAAC.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtFAAC.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFAAC.Name = "txtFAAC"
         Me.txtFAAC.Size = New System.Drawing.Size(137, 32)
         Me.txtFAAC.TabIndex = 1
@@ -379,7 +387,7 @@ Partial Class MainForm
         '
         Me.txtFASG.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtFASG.Location = New System.Drawing.Point(281, 23)
-        Me.txtFASG.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtFASG.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFASG.Name = "txtFASG"
         Me.txtFASG.Size = New System.Drawing.Size(137, 32)
         Me.txtFASG.TabIndex = 0
@@ -407,9 +415,9 @@ Partial Class MainForm
         Me.GroupBox3.Controls.Add(Me.Label6)
         Me.GroupBox3.Controls.Add(Me.Label5)
         Me.GroupBox3.Location = New System.Drawing.Point(16, 345)
-        Me.GroupBox3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox3.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox3.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox3.Size = New System.Drawing.Size(428, 197)
         Me.GroupBox3.TabIndex = 2
         Me.GroupBox3.TabStop = False
@@ -419,7 +427,7 @@ Partial Class MainForm
         '
         Me.txtCASM.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtCASM.Location = New System.Drawing.Point(281, 145)
-        Me.txtCASM.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtCASM.Margin = New System.Windows.Forms.Padding(4)
         Me.txtCASM.Name = "txtCASM"
         Me.txtCASM.Size = New System.Drawing.Size(137, 32)
         Me.txtCASM.TabIndex = 3
@@ -428,7 +436,7 @@ Partial Class MainForm
         '
         Me.txtCAUW.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtCAUW.Location = New System.Drawing.Point(281, 105)
-        Me.txtCAUW.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtCAUW.Margin = New System.Windows.Forms.Padding(4)
         Me.txtCAUW.Name = "txtCAUW"
         Me.txtCAUW.Size = New System.Drawing.Size(137, 32)
         Me.txtCAUW.TabIndex = 2
@@ -437,7 +445,7 @@ Partial Class MainForm
         '
         Me.txtCAAC.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtCAAC.Location = New System.Drawing.Point(281, 64)
-        Me.txtCAAC.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtCAAC.Margin = New System.Windows.Forms.Padding(4)
         Me.txtCAAC.Name = "txtCAAC"
         Me.txtCAAC.Size = New System.Drawing.Size(137, 32)
         Me.txtCAAC.TabIndex = 1
@@ -446,7 +454,7 @@ Partial Class MainForm
         '
         Me.txtCASG.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtCASG.Location = New System.Drawing.Point(281, 23)
-        Me.txtCASG.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtCASG.Margin = New System.Windows.Forms.Padding(4)
         Me.txtCASG.Name = "txtCASG"
         Me.txtCASG.Size = New System.Drawing.Size(137, 32)
         Me.txtCASG.TabIndex = 0
@@ -504,9 +512,9 @@ Partial Class MainForm
         Me.GroupBox2.Controls.Add(Me.txtCementSG)
         Me.GroupBox2.Controls.Add(Me.Label4)
         Me.GroupBox2.Location = New System.Drawing.Point(16, 258)
-        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox2.Size = New System.Drawing.Size(428, 79)
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
@@ -516,7 +524,7 @@ Partial Class MainForm
         '
         Me.txtCementSG.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtCementSG.Location = New System.Drawing.Point(281, 23)
-        Me.txtCementSG.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtCementSG.Margin = New System.Windows.Forms.Padding(4)
         Me.txtCementSG.Name = "txtCementSG"
         Me.txtCementSG.Size = New System.Drawing.Size(137, 32)
         Me.txtCementSG.TabIndex = 0
@@ -546,9 +554,9 @@ Partial Class MainForm
         Me.GroupBox1.Controls.Add(Me.cmbMSA)
         Me.GroupBox1.Controls.Add(Me.cmbExposure)
         Me.GroupBox1.Location = New System.Drawing.Point(16, 12)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Size = New System.Drawing.Size(428, 239)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
@@ -558,7 +566,7 @@ Partial Class MainForm
         '
         Me.txtStrength.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtStrength.Location = New System.Drawing.Point(281, 23)
-        Me.txtStrength.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtStrength.Margin = New System.Windows.Forms.Padding(4)
         Me.txtStrength.Name = "txtStrength"
         Me.txtStrength.Size = New System.Drawing.Size(137, 32)
         Me.txtStrength.TabIndex = 0
@@ -567,7 +575,7 @@ Partial Class MainForm
         '
         Me.txtSlump.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtSlump.Location = New System.Drawing.Point(281, 64)
-        Me.txtSlump.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtSlump.Margin = New System.Windows.Forms.Padding(4)
         Me.txtSlump.Name = "txtSlump"
         Me.txtSlump.Size = New System.Drawing.Size(137, 32)
         Me.txtSlump.TabIndex = 1
@@ -577,7 +585,7 @@ Partial Class MainForm
         Me.rdbNonAirEntrained.AutoSize = True
         Me.rdbNonAirEntrained.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.rdbNonAirEntrained.Location = New System.Drawing.Point(236, 188)
-        Me.rdbNonAirEntrained.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdbNonAirEntrained.Margin = New System.Windows.Forms.Padding(4)
         Me.rdbNonAirEntrained.Name = "rdbNonAirEntrained"
         Me.rdbNonAirEntrained.Size = New System.Drawing.Size(170, 27)
         Me.rdbNonAirEntrained.TabIndex = 5
@@ -590,7 +598,7 @@ Partial Class MainForm
         Me.rdbAirEntrained.AutoSize = True
         Me.rdbAirEntrained.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.rdbAirEntrained.Location = New System.Drawing.Point(87, 188)
-        Me.rdbAirEntrained.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdbAirEntrained.Margin = New System.Windows.Forms.Padding(4)
         Me.rdbAirEntrained.Name = "rdbAirEntrained"
         Me.rdbAirEntrained.Size = New System.Drawing.Size(130, 27)
         Me.rdbAirEntrained.TabIndex = 4
@@ -653,7 +661,7 @@ Partial Class MainForm
         Me.cmbMSA.FormattingEnabled = True
         Me.cmbMSA.Items.AddRange(New Object() {"3/8", "1/2", "3/4", "1", "1-1/2", "2", "3", "6"})
         Me.cmbMSA.Location = New System.Drawing.Point(281, 146)
-        Me.cmbMSA.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmbMSA.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbMSA.Name = "cmbMSA"
         Me.cmbMSA.Size = New System.Drawing.Size(137, 33)
         Me.cmbMSA.TabIndex = 3
@@ -665,7 +673,7 @@ Partial Class MainForm
         Me.cmbExposure.FormattingEnabled = True
         Me.cmbExposure.Items.AddRange(New Object() {"Mild", "Moderate", "Severe"})
         Me.cmbExposure.Location = New System.Drawing.Point(281, 105)
-        Me.cmbExposure.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmbExposure.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbExposure.Name = "cmbExposure"
         Me.cmbExposure.Size = New System.Drawing.Size(137, 33)
         Me.cmbExposure.TabIndex = 2
@@ -685,7 +693,7 @@ Partial Class MainForm
         'btnReset
         '
         Me.btnReset.Location = New System.Drawing.Point(141, 24)
-        Me.btnReset.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnReset.Margin = New System.Windows.Forms.Padding(4)
         Me.btnReset.Name = "btnReset"
         Me.btnReset.Size = New System.Drawing.Size(109, 34)
         Me.btnReset.TabIndex = 1
@@ -695,7 +703,7 @@ Partial Class MainForm
         'btnCompute
         '
         Me.btnCompute.Location = New System.Drawing.Point(24, 24)
-        Me.btnCompute.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnCompute.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCompute.Name = "btnCompute"
         Me.btnCompute.Size = New System.Drawing.Size(109, 34)
         Me.btnCompute.TabIndex = 0
@@ -707,9 +715,9 @@ Partial Class MainForm
         Me.Panel4.Controls.Add(Me.picGraph)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Location = New System.Drawing.Point(0, 0)
-        Me.Panel4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel4.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Padding = New System.Windows.Forms.Padding(9, 9, 9, 9)
+        Me.Panel4.Padding = New System.Windows.Forms.Padding(9)
         Me.Panel4.Size = New System.Drawing.Size(560, 390)
         Me.Panel4.TabIndex = 1
         '
@@ -718,7 +726,7 @@ Partial Class MainForm
         Me.picGraph.BackColor = System.Drawing.Color.Transparent
         Me.picGraph.Dock = System.Windows.Forms.DockStyle.Fill
         Me.picGraph.Location = New System.Drawing.Point(9, 9)
-        Me.picGraph.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.picGraph.Margin = New System.Windows.Forms.Padding(4)
         Me.picGraph.Name = "picGraph"
         Me.picGraph.Size = New System.Drawing.Size(542, 372)
         Me.picGraph.TabIndex = 0
@@ -733,7 +741,7 @@ Partial Class MainForm
         Me.Panel6.Controls.Add(Me.rdbVolume)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel6.Location = New System.Drawing.Point(9, 9)
-        Me.Panel6.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel6.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Padding = New System.Windows.Forms.Padding(11, 10, 11, 10)
         Me.Panel6.Size = New System.Drawing.Size(677, 241)
@@ -753,9 +761,9 @@ Partial Class MainForm
         Me.GroupBox5.Controls.Add(Me.txtCementOutput)
         Me.GroupBox5.Controls.Add(Me.Label16)
         Me.GroupBox5.Location = New System.Drawing.Point(236, 14)
-        Me.GroupBox5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox5.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox5.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox5.Size = New System.Drawing.Size(426, 197)
         Me.GroupBox5.TabIndex = 4
         Me.GroupBox5.TabStop = False
@@ -765,7 +773,7 @@ Partial Class MainForm
         '
         Me.txtFAOutput.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtFAOutput.Location = New System.Drawing.Point(249, 145)
-        Me.txtFAOutput.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtFAOutput.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFAOutput.Name = "txtFAOutput"
         Me.txtFAOutput.ReadOnly = True
         Me.txtFAOutput.Size = New System.Drawing.Size(167, 32)
@@ -786,7 +794,7 @@ Partial Class MainForm
         '
         Me.txtCAOutput.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtCAOutput.Location = New System.Drawing.Point(249, 105)
-        Me.txtCAOutput.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtCAOutput.Margin = New System.Windows.Forms.Padding(4)
         Me.txtCAOutput.Name = "txtCAOutput"
         Me.txtCAOutput.ReadOnly = True
         Me.txtCAOutput.Size = New System.Drawing.Size(167, 32)
@@ -807,7 +815,7 @@ Partial Class MainForm
         '
         Me.txtWaterOutput.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtWaterOutput.Location = New System.Drawing.Point(249, 64)
-        Me.txtWaterOutput.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtWaterOutput.Margin = New System.Windows.Forms.Padding(4)
         Me.txtWaterOutput.Name = "txtWaterOutput"
         Me.txtWaterOutput.ReadOnly = True
         Me.txtWaterOutput.Size = New System.Drawing.Size(167, 32)
@@ -828,7 +836,7 @@ Partial Class MainForm
         '
         Me.txtCementOutput.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.txtCementOutput.Location = New System.Drawing.Point(249, 23)
-        Me.txtCementOutput.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtCementOutput.Margin = New System.Windows.Forms.Padding(4)
         Me.txtCementOutput.Name = "txtCementOutput"
         Me.txtCementOutput.ReadOnly = True
         Me.txtCementOutput.Size = New System.Drawing.Size(167, 32)
@@ -850,7 +858,7 @@ Partial Class MainForm
         Me.rdbWeightPercent.AutoSize = True
         Me.rdbWeightPercent.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.rdbWeightPercent.Location = New System.Drawing.Point(15, 121)
-        Me.rdbWeightPercent.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdbWeightPercent.Margin = New System.Windows.Forms.Padding(4)
         Me.rdbWeightPercent.Name = "rdbWeightPercent"
         Me.rdbWeightPercent.Size = New System.Drawing.Size(137, 27)
         Me.rdbWeightPercent.TabIndex = 3
@@ -863,7 +871,7 @@ Partial Class MainForm
         Me.rdbWeight.AutoSize = True
         Me.rdbWeight.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.rdbWeight.Location = New System.Drawing.Point(15, 85)
-        Me.rdbWeight.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdbWeight.Margin = New System.Windows.Forms.Padding(4)
         Me.rdbWeight.Name = "rdbWeight"
         Me.rdbWeight.Size = New System.Drawing.Size(144, 27)
         Me.rdbWeight.TabIndex = 2
@@ -876,7 +884,7 @@ Partial Class MainForm
         Me.rdbVolumePercent.AutoSize = True
         Me.rdbVolumePercent.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.rdbVolumePercent.Location = New System.Drawing.Point(15, 49)
-        Me.rdbVolumePercent.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdbVolumePercent.Margin = New System.Windows.Forms.Padding(4)
         Me.rdbVolumePercent.Name = "rdbVolumePercent"
         Me.rdbVolumePercent.Size = New System.Drawing.Size(141, 27)
         Me.rdbVolumePercent.TabIndex = 1
@@ -889,7 +897,7 @@ Partial Class MainForm
         Me.rdbVolume.AutoSize = True
         Me.rdbVolume.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.rdbVolume.Location = New System.Drawing.Point(15, 14)
-        Me.rdbVolume.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.rdbVolume.Margin = New System.Windows.Forms.Padding(4)
         Me.rdbVolume.Name = "rdbVolume"
         Me.rdbVolume.Size = New System.Drawing.Size(151, 27)
         Me.rdbVolume.TabIndex = 0
@@ -902,7 +910,7 @@ Partial Class MainForm
         Me.Panel5.Controls.Add(Me.picBarChart)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel5.Location = New System.Drawing.Point(9, 629)
-        Me.Panel5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel5.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(677, 172)
         Me.Panel5.TabIndex = 2
@@ -912,7 +920,7 @@ Partial Class MainForm
         Me.picBarChart.BackColor = System.Drawing.Color.Transparent
         Me.picBarChart.Dock = System.Windows.Forms.DockStyle.Fill
         Me.picBarChart.Location = New System.Drawing.Point(0, 0)
-        Me.picBarChart.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.picBarChart.Margin = New System.Windows.Forms.Padding(4)
         Me.picBarChart.Name = "picBarChart"
         Me.picBarChart.Size = New System.Drawing.Size(677, 172)
         Me.picBarChart.TabIndex = 1
@@ -923,11 +931,46 @@ Partial Class MainForm
         Me.picPieChart.BackColor = System.Drawing.Color.Transparent
         Me.picPieChart.Dock = System.Windows.Forms.DockStyle.Fill
         Me.picPieChart.Location = New System.Drawing.Point(9, 9)
-        Me.picPieChart.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.picPieChart.Margin = New System.Windows.Forms.Padding(4)
         Me.picPieChart.Name = "picPieChart"
         Me.picPieChart.Size = New System.Drawing.Size(677, 792)
         Me.picPieChart.TabIndex = 1
         Me.picPieChart.TabStop = False
+        '
+        'AciDatabaseDataSet
+        '
+        Me.AciDatabaseDataSet.DataSetName = "ACIDatabaseDataSet"
+        Me.AciDatabaseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'TableAdapterManager
+        '
+        Me.TableAdapterManager.AirContentForAirEntrainedTableAdapter = Me.AirContentForAirEntrainedTableAdapter
+        Me.TableAdapterManager.AirContentForNonAirEntrainedTableAdapter = Me.AirContentForNonAirEntrainedTableAdapter
+        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
+        Me.TableAdapterManager.UpdateOrder = Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
+        Me.TableAdapterManager.WaterCementRatioTableAdapter = Me.WaterCementRatioTableAdapter
+        Me.TableAdapterManager.WaterContentForAirEntrainedTableAdapter = Me.WaterContentForAirEntrainedTableAdapter
+        Me.TableAdapterManager.WaterContentForNonAirEntrainedTableAdapter = Me.WaterContentForNonAirEntrainedTableAdapter
+        '
+        'WaterContentForNonAirEntrainedTableAdapter
+        '
+        Me.WaterContentForNonAirEntrainedTableAdapter.ClearBeforeFill = True
+        '
+        'WaterContentForAirEntrainedTableAdapter
+        '
+        Me.WaterContentForAirEntrainedTableAdapter.ClearBeforeFill = True
+        '
+        'AirContentForNonAirEntrainedTableAdapter
+        '
+        Me.AirContentForNonAirEntrainedTableAdapter.ClearBeforeFill = True
+        '
+        'AirContentForAirEntrainedTableAdapter
+        '
+        Me.AirContentForAirEntrainedTableAdapter.ClearBeforeFill = True
+        '
+        'WaterCementRatioTableAdapter
+        '
+        Me.WaterCementRatioTableAdapter.ClearBeforeFill = True
         '
         'MainForm
         '
@@ -935,15 +978,15 @@ Partial Class MainForm
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1259, 838)
         Me.Controls.Add(Me.SplitContainer1)
-        Me.Controls.Add(Me.MenuStrip1)
-        Me.MainMenuStrip = Me.MenuStrip1
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Controls.Add(Me.MenuStrip)
+        Me.MainMenuStrip = Me.MenuStrip
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MinimumSize = New System.Drawing.Size(1274, 875)
         Me.Name = "MainForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Concrete Mix Designer"
-        Me.MenuStrip1.ResumeLayout(False)
-        Me.MenuStrip1.PerformLayout()
+        Me.MenuStrip.ResumeLayout(False)
+        Me.MenuStrip.PerformLayout()
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -971,12 +1014,13 @@ Partial Class MainForm
         Me.Panel5.ResumeLayout(False)
         CType(Me.picBarChart, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picPieChart, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.AciDatabaseDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents MenuStrip As MenuStrip
     Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents NewToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OpenToolStripMenuItem As ToolStripMenuItem
@@ -1049,4 +1093,11 @@ Partial Class MainForm
     Friend WithEvents txtSlump As TextBox
     Friend WithEvents cmbMSA As ComboBox
     Friend WithEvents Label17 As Label
+    Friend WithEvents AciDatabaseDataSet As ACIDatabaseDataSet
+    Friend WithEvents TableAdapterManager As ACIDatabaseDataSetTableAdapters.TableAdapterManager
+    Friend WithEvents AirContentForAirEntrainedTableAdapter As ACIDatabaseDataSetTableAdapters.AirContentForAirEntrainedTableAdapter
+    Friend WithEvents AirContentForNonAirEntrainedTableAdapter As ACIDatabaseDataSetTableAdapters.AirContentForNonAirEntrainedTableAdapter
+    Friend WithEvents WaterCementRatioTableAdapter As ACIDatabaseDataSetTableAdapters.WaterCementRatioTableAdapter
+    Friend WithEvents WaterContentForAirEntrainedTableAdapter As ACIDatabaseDataSetTableAdapters.WaterContentForAirEntrainedTableAdapter
+    Friend WithEvents WaterContentForNonAirEntrainedTableAdapter As ACIDatabaseDataSetTableAdapters.WaterContentForNonAirEntrainedTableAdapter
 End Class
