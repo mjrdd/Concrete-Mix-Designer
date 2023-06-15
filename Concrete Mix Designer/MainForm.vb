@@ -31,7 +31,7 @@ Public Class MainForm
         AirVolume As Double
 
     Dim SaveFilePath As String
-    Dim Saved As Boolean
+    Dim Saved As Boolean = True
 
     Dim PieChartExportFilename As String
 
@@ -101,6 +101,22 @@ Public Class MainForm
         ) Then
             e.KeyChar = Nothing
         End If
+    End Sub
+
+    Private Sub Textboxes_TextChanged(sender As Object, e As EventArgs) Handles _
+        txtStrength.TextChanged,
+        txtSlump.TextChanged,
+        txtCementSG.TextChanged,
+        txtCAAC.TextChanged,
+        txtCASG.TextChanged,
+        txtCASM.TextChanged,
+        txtCAUW.TextChanged,
+        txtFAAC.TextChanged,
+        txtFAFM.TextChanged,
+        txtFASG.TextChanged,
+        txtFASM.TextChanged
+
+        Saved = False
     End Sub
 
     Private Sub AirEntrainment_CheckedChanged(sender As Object, e As EventArgs) Handles _
@@ -530,45 +546,66 @@ Public Class MainForm
         NewForm.Show()
     End Sub
 
-    Private Function ParseData(strData As String(), key As String) As String
-        For i As Integer = 0 To strData.Length - 1
-            If strData(i).StartsWith(key) Then
-                Return strData(i).Substring(strData(i).IndexOf("=") + 1)
-            End If
-        Next
-    End Function
-
     Private Sub OpenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenToolStripMenuItem.Click
+        If Not Saved Then
+            Dim Result As DialogResult = MessageBox.Show(
+                "There are changes that have not been saved. Would you like to save the session before proceeding?",
+                "Unsaved Changes",
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Question
+            )
+
+            If Result = DialogResult.Yes Then
+                SaveToolStripMenuItem.PerformClick()
+
+            ElseIf Result = DialogResult.Cancel Then
+                Exit Sub
+
+            End If
+        End If
+
         Try
+            OpenFileDialog1.Filter = "Concrete Mix Designs (*.cmix)|*.cmix"
+            OpenFileDialog1.FileName = "Concrete Mix Design.cmix"
+
             If OpenFileDialog1.ShowDialog = DialogResult.OK Then
                 SaveFilePath = OpenFileDialog1.FileName
-                Dim SavedData = Split(My.Computer.FileSystem.ReadAllText(SaveFilePath), vbCrLf)
 
-                txtStrength.Text = ParseData(SavedData, "Strength")
-                txtSlump.Text = ParseData(SavedData, "Slump")
-                cmbMSA.SelectedIndex = ParseData(SavedData, "MSA")
-                rdbAirEntrained.Checked = CInt(ParseData(SavedData, "Entrainment")) = 2
-                rdbNonAirEntrained.Checked = CInt(ParseData(SavedData, "Entrainment")) = 1
-                cmbExposure.SelectedIndex = ParseData(SavedData, "Exposure")
-                txtCementSG.Text = ParseData(SavedData, "CementSG")
-                txtCAAC.Text = ParseData(SavedData, "CAAC")
-                txtCASG.Text = ParseData(SavedData, "CASG")
-                txtCASM.Text = ParseData(SavedData, "CASM")
-                txtCAUW.Text = ParseData(SavedData, "CAUW")
-                txtFAAC.Text = ParseData(SavedData, "FAAC")
-                txtFAFM.Text = ParseData(SavedData, "FAFM")
-                txtFASG.Text = ParseData(SavedData, "FASG")
-                txtFASM.Text = ParseData(SavedData, "FASM")
+                Dim DataArray = Split(My.Computer.FileSystem.ReadAllText(SaveFilePath), vbCrLf)
+                Dim DataList As New Dictionary(Of String, String)
+
+                For i As Integer = 0 To DataArray.Length - 1
+                    Dim DataEntry = Split(DataArray(i), "=")
+                    DataList.Add(DataEntry(0), DataEntry(1))
+                Next
+
+                txtStrength.Text = DataList("Strength")
+                txtSlump.Text = DataList("Slump")
+                cmbMSA.SelectedIndex = DataList("MSA")
+                rdbAirEntrained.Checked = CInt(DataList("Entrainment")) = 2
+                rdbNonAirEntrained.Checked = CInt(DataList("Entrainment")) = 1
+                cmbExposure.SelectedIndex = DataList("Exposure")
+                txtCementSG.Text = DataList("CementSG")
+                txtCAAC.Text = DataList("CAAC")
+                txtCASG.Text = DataList("CASG")
+                txtCASM.Text = DataList("CASM")
+                txtCAUW.Text = DataList("CAUW")
+                txtFAAC.Text = DataList("FAAC")
+                txtFAFM.Text = DataList("FAFM")
+                txtFASG.Text = DataList("FASG")
+                txtFASM.Text = DataList("FASM")
 
                 btnCompute.PerformClick()
+                Saved = True
             End If
 
         Catch ex As Exception
+            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
         End Try
     End Sub
 
-    Private Function GetData() As String
+    Private Function SerializeData() As String
         Return "Strength=" & Strength & vbCrLf &
             "Slump=" & Slump & vbCrLf &
             "MSA=" & MSAIndex & vbCrLf &
@@ -587,29 +624,37 @@ Public Class MainForm
     End Function
 
     Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
-        If SaveFilePath <> Nothing Then
-            My.Computer.FileSystem.WriteAllText(SaveFilePath, GetData, False)
-            Saved = True
-
-        Else
-            SaveFileDialog1.Filter = "Concrete Mix Designs (*.cmix)|*.cmix"
-
-            If SaveFileDialog1.ShowDialog = DialogResult.OK Then
-                SaveFilePath = SaveFileDialog1.FileName
-                My.Computer.FileSystem.WriteAllText(SaveFilePath, GetData, False)
+        Try
+            If SaveFilePath <> Nothing Then
+                My.Computer.FileSystem.WriteAllText(SaveFilePath, SerializeData, False)
                 Saved = True
+
+            Else
+                SaveAsToolStripMenuItem.PerformClick()
+
             End If
-        End If
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+        End Try
     End Sub
 
     Private Sub SaveAsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveAsToolStripMenuItem.Click
-        SaveFileDialog1.Filter = "Concrete Mix Designs (*.cmix)|*.cmix"
+        Try
+            SaveFileDialog1.Filter = "Concrete Mix Designs (*.cmix)|*.cmix"
+            SaveFileDialog1.FileName = "Concrete Mix Design.cmix"
 
-        If SaveFileDialog1.ShowDialog = DialogResult.OK Then
-            SaveFilePath = SaveFileDialog1.FileName
-            My.Computer.FileSystem.WriteAllText(SaveFilePath, GetData, False)
-            Saved = True
-        End If
+            If SaveFileDialog1.ShowDialog = DialogResult.OK Then
+                SaveFilePath = SaveFileDialog1.FileName
+                My.Computer.FileSystem.WriteAllText(SaveFilePath, SerializeData, False)
+                Saved = True
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+        End Try
     End Sub
 
     Private Sub ReferenceTablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReferenceTablesToolStripMenuItem.Click
