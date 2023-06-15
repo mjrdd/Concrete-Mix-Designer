@@ -30,9 +30,7 @@ Public Class MainForm
         FineAggVolume,
         AirVolume As Double
 
-
-
-    Dim FilePath As String
+    Dim SaveFilePath As String
     Dim Saved As Boolean
 
     Dim PieChartExportFilename As String
@@ -532,8 +530,86 @@ Public Class MainForm
         NewForm.Show()
     End Sub
 
-    Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
+    Private Function ParseData(strData As String(), key As String) As String
+        For i As Integer = 0 To strData.Length - 1
+            If strData(i).StartsWith(key) Then
+                Return strData(i).Substring(strData(i).IndexOf("=") + 1)
+            End If
+        Next
+    End Function
 
+    Private Sub OpenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenToolStripMenuItem.Click
+        Try
+            If OpenFileDialog1.ShowDialog = DialogResult.OK Then
+                SaveFilePath = OpenFileDialog1.FileName
+                Dim SavedData = Split(My.Computer.FileSystem.ReadAllText(SaveFilePath), vbCrLf)
+
+                txtStrength.Text = ParseData(SavedData, "Strength")
+                txtSlump.Text = ParseData(SavedData, "Slump")
+                cmbMSA.SelectedIndex = ParseData(SavedData, "MSA")
+                rdbAirEntrained.Checked = CInt(ParseData(SavedData, "Entrainment")) = 2
+                rdbNonAirEntrained.Checked = CInt(ParseData(SavedData, "Entrainment")) = 1
+                cmbExposure.SelectedIndex = ParseData(SavedData, "Exposure")
+                txtCementSG.Text = ParseData(SavedData, "CementSG")
+                txtCAAC.Text = ParseData(SavedData, "CAAC")
+                txtCASG.Text = ParseData(SavedData, "CASG")
+                txtCASM.Text = ParseData(SavedData, "CASM")
+                txtCAUW.Text = ParseData(SavedData, "CAUW")
+                txtFAAC.Text = ParseData(SavedData, "FAAC")
+                txtFAFM.Text = ParseData(SavedData, "FAFM")
+                txtFASG.Text = ParseData(SavedData, "FASG")
+                txtFASM.Text = ParseData(SavedData, "FASM")
+
+                btnCompute.PerformClick()
+            End If
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Function GetData() As String
+        Return "Strength=" & Strength & vbCrLf &
+            "Slump=" & Slump & vbCrLf &
+            "MSA=" & MSAIndex & vbCrLf &
+            "Entrainment=" & If(rdbNonAirEntrained.Checked, 1, 2) & vbCrLf &
+            "Exposure=" & ExposureIndex & vbCrLf &
+            "CementSG=" & CementSG & vbCrLf &
+            "CAAC=" & CoarseAggAC & vbCrLf &
+            "CASG=" & CoarseAggSG & vbCrLf &
+            "CASM=" & CoarseAggSM & vbCrLf &
+            "CAUW=" & CoarseAggUW & vbCrLf &
+            "FAAC=" & FineAggAC & vbCrLf &
+            "FAFM=" & FineAggFM & vbCrLf &
+            "FASG=" & FineAggSG & vbCrLf &
+            "FASM=" & FineAggSM
+
+    End Function
+
+    Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
+        If SaveFilePath <> Nothing Then
+            My.Computer.FileSystem.WriteAllText(SaveFilePath, GetData, False)
+            Saved = True
+
+        Else
+            SaveFileDialog1.Filter = "Concrete Mix Designs (*.cmix)|*.cmix"
+
+            If SaveFileDialog1.ShowDialog = DialogResult.OK Then
+                SaveFilePath = SaveFileDialog1.FileName
+                My.Computer.FileSystem.WriteAllText(SaveFilePath, GetData, False)
+                Saved = True
+            End If
+        End If
+    End Sub
+
+    Private Sub SaveAsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveAsToolStripMenuItem.Click
+        SaveFileDialog1.Filter = "Concrete Mix Designs (*.cmix)|*.cmix"
+
+        If SaveFileDialog1.ShowDialog = DialogResult.OK Then
+            SaveFilePath = SaveFileDialog1.FileName
+            My.Computer.FileSystem.WriteAllText(SaveFilePath, GetData, False)
+            Saved = True
+        End If
     End Sub
 
     Private Sub ReferenceTablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReferenceTablesToolStripMenuItem.Click
