@@ -38,6 +38,9 @@ Public Class MainForm
     Dim HasResult As Boolean
     Dim MixProportions(4) As Double
 
+    Dim MousePosX, MousePosY As Integer
+    Dim StrengthValueFromGraph As Double
+
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         WaterContentForNonAirEntrainedTableAdapter.Fill(AciDatabaseDataSet.WaterContentForNonAirEntrained)
         WaterContentForAirEntrainedTableAdapter.Fill(AciDatabaseDataSet.WaterContentForAirEntrained)
@@ -147,6 +150,11 @@ Public Class MainForm
             FineAggFM = txtFAFM.Text
             FineAggSG = txtFASG.Text
             FineAggSM = txtFASM.Text
+
+            If PieChartExportFilename <> Nothing Then
+                picPieChart.Image.Dispose()
+                picBarChart.Image = Nothing
+            End If
 
             Dim WaterContentTable,
                 AirContentTable,
@@ -342,10 +350,7 @@ Public Class MainForm
                 .ChartTitle.Text = "Concrete Mix Proportions"
             End With
 
-            If PieChartExportFilename <> Nothing Then
-                picPieChart.Image.Dispose()
-                picBarChart.Image = Nothing
-            End If
+
 
             Dim PieChartExportPathDir As String = IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Concrete Mix Designer")
             If Not IO.Directory.Exists(PieChartExportPathDir) Then IO.Directory.CreateDirectory(PieChartExportPathDir)
@@ -470,74 +475,67 @@ Public Class MainForm
             End If
 
         Catch ex As Exception
-            MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
         End Try
 
     End Sub
 
     Private Sub picGraph_Paint(sender As Object, e As PaintEventArgs) Handles picGraph.Paint
-        Dim AxisOrigin(1), Interval(1) As Integer
-        AxisOrigin = {30, picGraph.Height - 30}
+        Dim AxisOriginX, AxisOriginY, StepX, StepY As Integer
+        AxisOriginX = 30
+        AxisOriginY = picGraph.Height - 30
 
-        Dim AxisWidth = picGraph.Width - 60
-        Dim AxisHeight = picGraph.Height - 60
-        Interval(0) = AxisWidth / 10
-        Interval(1) = AxisHeight / 5
+        Dim Width = picGraph.Width - 30
+        Dim Height = picGraph.Height - 30
+        StepX = Width / 10
+        StepY = Height / 5
 
         With e.Graphics
-            .DrawLine(Pens.DarkGray, 0, AxisOrigin(1), picGraph.Width, AxisOrigin(1))
-            .DrawLine(Pens.DarkGray, AxisOrigin(0), 0, AxisOrigin(0), picGraph.Height)
+            .DrawLine(Pens.DarkGray, 0, AxisOriginY, picGraph.Width, AxisOriginY)
+            .DrawLine(Pens.DarkGray, AxisOriginX, 0, AxisOriginX, picGraph.Height)
 
-            For i As Integer = AxisOrigin(0) + Interval(0) To AxisOrigin(0) + AxisWidth Step Interval(0)
-                .DrawLine(Pens.Gray, i, AxisOrigin(1) - 4, i, AxisOrigin(1) + 4)
+            For i As Integer = AxisOriginX + StepX To AxisOriginX + Width Step StepX
+                .DrawLine(Pens.Gray, i, AxisOriginY - 4, i, AxisOriginY + 4)
             Next
 
-            For i As Integer = AxisOrigin(1) - Interval(1) To AxisOrigin(1) - AxisHeight Step -Interval(1)
-                .DrawLine(Pens.Gray, AxisOrigin(0) - 4, i, AxisOrigin(0) + 4, i)
+            For i As Integer = AxisOriginY - StepY To StepY - Height Step -StepY
+                .DrawLine(Pens.Gray, AxisOriginX - 4, i, AxisOriginX + 4, i)
             Next
 
-            For i As Integer = 0 To AxisWidth
-                Dim y As Single = 17878 * Math.E ^ (-2.623 * i / AxisWidth)
-                .DrawRectangle(Pens.Black, AxisOrigin(0) + i, AxisOrigin(1) - (y / 8000) * AxisHeight, 1, 1)
+            For i As Integer = 0 To Width
+                Dim DeltaY As Single = 17878 * Math.E ^ (-2.623 * i / Width)
+                .DrawRectangle(Pens.Black, AxisOriginX + i, AxisOriginY - (DeltaY / 8000) * Height, 1, 1)
             Next
+
+            Dim Ratio = (MousePosX - 30) / Width
+            StrengthValueFromGraph = 17878 * Math.E ^ (-2.623 * Ratio)
+            Dim PosY As Single = AxisOriginY - (StrengthValueFromGraph / 8000) * Height
+
+            .DrawLine(Pens.Red, MousePosX, PosY, MousePosX, AxisOriginY)
+            .DrawLine(Pens.Red, 30, PosY, MousePosX, PosY)
+
+            Dim TextFont As New Font("Arial", 10, FontStyle.Regular)
+            .DrawString(Math.Round(StrengthValueFromGraph) & " psi", TextFont, Brushes.Red, 35, PosY - 20)
+
+            Dim TextFormat As New StringFormat With {
+                .Alignment = StringAlignment.Center
+            }
+
+            .DrawString(Math.Round(Ratio, 2), TextFont, Brushes.Red, MousePosX, AxisOriginY + 10, TextFormat)
         End With
     End Sub
 
-    Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
-        Close()
+    Private Sub picGraph_MouseMove(sender As Object, e As MouseEventArgs) Handles picGraph.MouseMove
+        MousePosX = e.X
+        MousePosY = e.Y
+
+        picGraph.Refresh()
+
     End Sub
 
-    Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
-        AboutForm.ShowDialog()
-    End Sub
-
-    Private Sub RadomizeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RadomizeToolStripMenuItem.Click
-        ' Randomize input values
-        ' TODO: Recheck minimum and maximum values
-        Dim Entrained = Rand(0, 1)
-        rdbAirEntrained.Checked = Entrained = 0
-        rdbNonAirEntrained.Checked = Entrained = 1
-
-        Select Case True
-            Case rdbAirEntrained.Checked
-                txtStrength.Text = Rand(2000, 5000)
-                cmbExposure.SelectedIndex = Rand(0, 2)
-            Case rdbNonAirEntrained.Checked
-                txtStrength.Text = Rand(2000, 6500)
-        End Select
-        cmbMSA.SelectedIndex = Rand(0, 7)
-
-        txtSlump.Text = Rand(1.0, 7.0)
-        txtCementSG.Text = Rand(3.0, 3.16)
-        txtCAAC.Text = Rand(0.01, 0.1)
-        txtCASG.Text = Rand(2.5, 3.0)
-        txtCASM.Text = Rand(0.01, 0.1)
-        txtCAUW.Text = Rand(75.0, 110.0)
-        txtFAAC.Text = Rand(0.01, 0.1)
-        txtFAFM.Text = Rand(2.0, 3.5)
-        txtFASG.Text = Rand(2.5, 3.0)
-        txtFASM.Text = Rand(0.01, 0.1)
+    Private Sub picGraph_MouseUp(sender As Object, e As MouseEventArgs) Handles picGraph.MouseUp
+        txtStrength.Text = Math.Round(StrengthValueFromGraph)
     End Sub
 
     Private Sub NewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewToolStripMenuItem.Click
@@ -657,9 +655,42 @@ Public Class MainForm
         End Try
     End Sub
 
+    Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
+        Close()
+    End Sub
+
+    Private Sub RandomizeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RandomizeToolStripMenuItem.Click
+        Dim Entrained = RandomNumber(0, 1)
+        rdbAirEntrained.Checked = Entrained = 0
+        rdbNonAirEntrained.Checked = Entrained = 1
+
+        Select Case True
+            Case rdbAirEntrained.Checked
+                txtStrength.Text = RandomNumber(2000, 5000)
+                cmbExposure.SelectedIndex = RandomNumber(0, 2)
+            Case rdbNonAirEntrained.Checked
+                txtStrength.Text = RandomNumber(2000, 6500)
+        End Select
+        cmbMSA.SelectedIndex = RandomNumber(0, 7)
+
+        txtSlump.Text = RandomNumber(1.0, 7.0, 3)
+        txtCementSG.Text = RandomNumber(3.0, 3.16, 3)
+        txtCAAC.Text = RandomNumber(0.01, 0.1, 3)
+        txtCASG.Text = RandomNumber(2.5, 3.0, 3)
+        txtCASM.Text = RandomNumber(0.01, 0.1, 3)
+        txtCAUW.Text = RandomNumber(75.0, 110.0, 3)
+        txtFAAC.Text = RandomNumber(0.01, 0.1, 3)
+        txtFAFM.Text = RandomNumber(2.0, 3.5, 3)
+        txtFASG.Text = RandomNumber(2.5, 3.0, 3)
+        txtFASM.Text = RandomNumber(0.01, 0.1, 3)
+    End Sub
+
     Private Sub ReferenceTablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReferenceTablesToolStripMenuItem.Click
         ReferenceTables.Show()
     End Sub
 
+    Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
+        AboutForm.ShowDialog()
+    End Sub
 
 End Class

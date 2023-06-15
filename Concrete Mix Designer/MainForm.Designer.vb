@@ -33,7 +33,7 @@ Partial Class MainForm
         Me.toolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RadomizeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RandomizeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReferenceTablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -199,21 +199,21 @@ Partial Class MainForm
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RadomizeToolStripMenuItem, Me.OptionsToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RandomizeToolStripMenuItem, Me.OptionsToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(58, 24)
         Me.ToolsToolStripMenuItem.Text = "&Tools"
         '
-        'RadomizeToolStripMenuItem
+        'RandomizeToolStripMenuItem
         '
-        Me.RadomizeToolStripMenuItem.Name = "RadomizeToolStripMenuItem"
-        Me.RadomizeToolStripMenuItem.Size = New System.Drawing.Size(167, 26)
-        Me.RadomizeToolStripMenuItem.Text = "&Randomize"
+        Me.RandomizeToolStripMenuItem.Name = "RandomizeToolStripMenuItem"
+        Me.RandomizeToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.RandomizeToolStripMenuItem.Text = "&Randomize"
         '
         'OptionsToolStripMenuItem
         '
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
-        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(167, 26)
+        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
         Me.OptionsToolStripMenuItem.Text = "&Options"
         '
         'HelpToolStripMenuItem
@@ -1030,7 +1030,7 @@ Partial Class MainForm
     Friend WithEvents toolStripSeparator1 As ToolStripSeparator
     Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents RadomizeToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents RandomizeToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OptionsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents HelpToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ReferenceTablesToolStripMenuItem As ToolStripMenuItem
