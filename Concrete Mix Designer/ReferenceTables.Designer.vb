@@ -22,50 +22,16 @@ Partial Class ReferenceTables
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.WaterCementRatioDataGridView = New System.Windows.Forms.DataGridView()
+        Me.RequiredStrengthDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NonAirEntrainedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AirEntrainedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ACIDatabaseDataSet = New Concrete_Mix_Designer.ACIDatabaseDataSet()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.AirContentForAirEntrainedDataGridView = New System.Windows.Forms.DataGridView()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.AirContentForNonAirEntrainedDataGridView = New System.Windows.Forms.DataGridView()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.WaterContentForAirEntrainedDataGridView = New System.Windows.Forms.DataGridView()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.WaterContentForNonAirEntrainedDataGridView = New System.Windows.Forms.DataGridView()
-        Me.ACIDatabaseDataSet = New Concrete_Mix_Designer.ACIDatabaseDataSet()
-        Me.TableAdapterManager = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.TableAdapterManager()
-        Me.WaterContentForAirEntrainedTableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.WaterContentForAirEntrainedTableAdapter()
-        Me.WaterContentForNonAirEntrainedTableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.WaterContentForNonAirEntrainedTableAdapter()
-        Me.AirContentForAirEntrainedTableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.AirContentForAirEntrainedTableAdapter()
-        Me.AirContentForNonAirEntrainedTableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.AirContentForNonAirEntrainedTableAdapter()
-        Me.WaterCementRatioTableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.WaterCementRatioTableAdapter()
-        Me.MSA38DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MSA12DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MSA34DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MSA1DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MSA112DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MSA2DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MSA3DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MSA6DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SlumpDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MSA38DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MSA12DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MSA34DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MSA1DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MSA112DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MSA2DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MSA3DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MSA6DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.EntrappedAirDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MSA38DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MSA12DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MSA34DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MSA1DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MSA112DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MSA2DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MSA3DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MSA6DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ExposureDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MSA38DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MSA12DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -75,12 +41,61 @@ Partial Class ReferenceTables
         Me.MSA2DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MSA3DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MSA6DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RequiredStrengthDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.NonAirEntrainedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AirEntrainedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.AirContentForNonAirEntrainedDataGridView = New System.Windows.Forms.DataGridView()
+        Me.EntrappedAirDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MSA38DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MSA12DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MSA34DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MSA1DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MSA112DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MSA2DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MSA3DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MSA6DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.WaterContentForAirEntrainedDataGridView = New System.Windows.Forms.DataGridView()
+        Me.SlumpDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MSA38DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MSA12DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MSA34DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MSA1DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MSA112DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MSA2DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MSA3DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MSA6DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.WaterContentForNonAirEntrainedDataGridView = New System.Windows.Forms.DataGridView()
+        Me.MSA38DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MSA12DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MSA34DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MSA1DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MSA112DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MSA2DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MSA3DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MSA6DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TableAdapterManager = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.TableAdapterManager()
+        Me.AirContentForAirEntrainedTableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.AirContentForAirEntrainedTableAdapter()
+        Me.AirContentForNonAirEntrainedTableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.AirContentForNonAirEntrainedTableAdapter()
+        Me.WaterCementRatioTableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.WaterCementRatioTableAdapter()
+        Me.WaterContentForAirEntrainedTableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.WaterContentForAirEntrainedTableAdapter()
+        Me.WaterContentForNonAirEntrainedTableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.WaterContentForNonAirEntrainedTableAdapter()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.BulkVolumeOfDRCABindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.BulkVolumeOfDRCATableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.BulkVolumeOfDRCATableAdapter()
+        Me.BulkVolumeOfDRCADataGridView = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         CType(Me.WaterCementRatioDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ACIDatabaseDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox4.SuspendLayout()
         CType(Me.AirContentForAirEntrainedDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox3.SuspendLayout()
@@ -89,12 +104,15 @@ Partial Class ReferenceTables
         CType(Me.WaterContentForAirEntrainedDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         CType(Me.WaterContentForNonAirEntrainedDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ACIDatabaseDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox6.SuspendLayout()
+        CType(Me.BulkVolumeOfDRCABindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.BulkVolumeOfDRCADataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
         '
         Me.Panel1.AutoScroll = True
+        Me.Panel1.Controls.Add(Me.GroupBox6)
         Me.Panel1.Controls.Add(Me.GroupBox5)
         Me.Panel1.Controls.Add(Me.GroupBox4)
         Me.Panel1.Controls.Add(Me.GroupBox3)
@@ -104,7 +122,7 @@ Partial Class ReferenceTables
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Padding = New System.Windows.Forms.Padding(8)
-        Me.Panel1.Size = New System.Drawing.Size(702, 593)
+        Me.Panel1.Size = New System.Drawing.Size(702, 645)
         Me.Panel1.TabIndex = 0
         '
         'GroupBox5
@@ -115,7 +133,7 @@ Partial Class ReferenceTables
         Me.GroupBox5.Location = New System.Drawing.Point(11, 966)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Padding = New System.Windows.Forms.Padding(8)
-        Me.GroupBox5.Size = New System.Drawing.Size(659, 450)
+        Me.GroupBox5.Size = New System.Drawing.Size(638, 450)
         Me.GroupBox5.TabIndex = 1
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Water-Cement Ratio"
@@ -133,8 +151,37 @@ Partial Class ReferenceTables
         Me.WaterCementRatioDataGridView.Name = "WaterCementRatioDataGridView"
         Me.WaterCementRatioDataGridView.RowHeadersWidth = 51
         Me.WaterCementRatioDataGridView.RowTemplate.Height = 24
-        Me.WaterCementRatioDataGridView.Size = New System.Drawing.Size(636, 413)
+        Me.WaterCementRatioDataGridView.Size = New System.Drawing.Size(615, 413)
         Me.WaterCementRatioDataGridView.TabIndex = 0
+        '
+        'RequiredStrengthDataGridViewTextBoxColumn
+        '
+        Me.RequiredStrengthDataGridViewTextBoxColumn.DataPropertyName = "Required Strength"
+        Me.RequiredStrengthDataGridViewTextBoxColumn.HeaderText = "Required Strength"
+        Me.RequiredStrengthDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.RequiredStrengthDataGridViewTextBoxColumn.Name = "RequiredStrengthDataGridViewTextBoxColumn"
+        Me.RequiredStrengthDataGridViewTextBoxColumn.Width = 125
+        '
+        'NonAirEntrainedDataGridViewTextBoxColumn
+        '
+        Me.NonAirEntrainedDataGridViewTextBoxColumn.DataPropertyName = "Non-Air Entrained"
+        Me.NonAirEntrainedDataGridViewTextBoxColumn.HeaderText = "Non-Air Entrained"
+        Me.NonAirEntrainedDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.NonAirEntrainedDataGridViewTextBoxColumn.Name = "NonAirEntrainedDataGridViewTextBoxColumn"
+        Me.NonAirEntrainedDataGridViewTextBoxColumn.Width = 125
+        '
+        'AirEntrainedDataGridViewTextBoxColumn
+        '
+        Me.AirEntrainedDataGridViewTextBoxColumn.DataPropertyName = "Air Entrained"
+        Me.AirEntrainedDataGridViewTextBoxColumn.HeaderText = "Air Entrained"
+        Me.AirEntrainedDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.AirEntrainedDataGridViewTextBoxColumn.Name = "AirEntrainedDataGridViewTextBoxColumn"
+        Me.AirEntrainedDataGridViewTextBoxColumn.Width = 125
+        '
+        'ACIDatabaseDataSet
+        '
+        Me.ACIDatabaseDataSet.DataSetName = "ACIDatabaseDataSet"
+        Me.ACIDatabaseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'GroupBox4
         '
@@ -144,7 +191,7 @@ Partial Class ReferenceTables
         Me.GroupBox4.Location = New System.Drawing.Point(11, 710)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Padding = New System.Windows.Forms.Padding(8)
-        Me.GroupBox4.Size = New System.Drawing.Size(659, 250)
+        Me.GroupBox4.Size = New System.Drawing.Size(638, 250)
         Me.GroupBox4.TabIndex = 1
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Air Content For Air Entrained"
@@ -162,338 +209,8 @@ Partial Class ReferenceTables
         Me.AirContentForAirEntrainedDataGridView.Name = "AirContentForAirEntrainedDataGridView"
         Me.AirContentForAirEntrainedDataGridView.RowHeadersWidth = 51
         Me.AirContentForAirEntrainedDataGridView.RowTemplate.Height = 24
-        Me.AirContentForAirEntrainedDataGridView.Size = New System.Drawing.Size(637, 213)
+        Me.AirContentForAirEntrainedDataGridView.Size = New System.Drawing.Size(616, 213)
         Me.AirContentForAirEntrainedDataGridView.TabIndex = 0
-        '
-        'GroupBox3
-        '
-        Me.GroupBox3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox3.Controls.Add(Me.AirContentForNonAirEntrainedDataGridView)
-        Me.GroupBox3.Location = New System.Drawing.Point(12, 524)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Padding = New System.Windows.Forms.Padding(8)
-        Me.GroupBox3.Size = New System.Drawing.Size(658, 180)
-        Me.GroupBox3.TabIndex = 1
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Air Content For Non-Air Entrained"
-        '
-        'AirContentForNonAirEntrainedDataGridView
-        '
-        Me.AirContentForNonAirEntrainedDataGridView.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.AirContentForNonAirEntrainedDataGridView.AutoGenerateColumns = False
-        Me.AirContentForNonAirEntrainedDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.AirContentForNonAirEntrainedDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.EntrappedAirDataGridViewTextBoxColumn, Me.MSA38DataGridViewTextBoxColumn2, Me.MSA12DataGridViewTextBoxColumn2, Me.MSA34DataGridViewTextBoxColumn2, Me.MSA1DataGridViewTextBoxColumn2, Me.MSA112DataGridViewTextBoxColumn2, Me.MSA2DataGridViewTextBoxColumn2, Me.MSA3DataGridViewTextBoxColumn2, Me.MSA6DataGridViewTextBoxColumn2})
-        Me.AirContentForNonAirEntrainedDataGridView.DataMember = "AirContentForNonAirEntrained"
-        Me.AirContentForNonAirEntrainedDataGridView.DataSource = Me.ACIDatabaseDataSet
-        Me.AirContentForNonAirEntrainedDataGridView.Location = New System.Drawing.Point(11, 26)
-        Me.AirContentForNonAirEntrainedDataGridView.Name = "AirContentForNonAirEntrainedDataGridView"
-        Me.AirContentForNonAirEntrainedDataGridView.RowHeadersWidth = 51
-        Me.AirContentForNonAirEntrainedDataGridView.RowTemplate.Height = 24
-        Me.AirContentForNonAirEntrainedDataGridView.Size = New System.Drawing.Size(636, 143)
-        Me.AirContentForNonAirEntrainedDataGridView.TabIndex = 0
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox2.Controls.Add(Me.WaterContentForAirEntrainedDataGridView)
-        Me.GroupBox2.Location = New System.Drawing.Point(12, 268)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(8)
-        Me.GroupBox2.Size = New System.Drawing.Size(658, 250)
-        Me.GroupBox2.TabIndex = 1
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Water Content For Air Entrained"
-        '
-        'WaterContentForAirEntrainedDataGridView
-        '
-        Me.WaterContentForAirEntrainedDataGridView.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.WaterContentForAirEntrainedDataGridView.AutoGenerateColumns = False
-        Me.WaterContentForAirEntrainedDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.WaterContentForAirEntrainedDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SlumpDataGridViewTextBoxColumn, Me.MSA38DataGridViewTextBoxColumn1, Me.MSA12DataGridViewTextBoxColumn1, Me.MSA34DataGridViewTextBoxColumn1, Me.MSA1DataGridViewTextBoxColumn1, Me.MSA112DataGridViewTextBoxColumn1, Me.MSA2DataGridViewTextBoxColumn1, Me.MSA3DataGridViewTextBoxColumn1, Me.MSA6DataGridViewTextBoxColumn1})
-        Me.WaterContentForAirEntrainedDataGridView.DataMember = "WaterContentForAirEntrained"
-        Me.WaterContentForAirEntrainedDataGridView.DataSource = Me.ACIDatabaseDataSet
-        Me.WaterContentForAirEntrainedDataGridView.Location = New System.Drawing.Point(11, 26)
-        Me.WaterContentForAirEntrainedDataGridView.Name = "WaterContentForAirEntrainedDataGridView"
-        Me.WaterContentForAirEntrainedDataGridView.RowHeadersWidth = 51
-        Me.WaterContentForAirEntrainedDataGridView.RowTemplate.Height = 24
-        Me.WaterContentForAirEntrainedDataGridView.Size = New System.Drawing.Size(636, 213)
-        Me.WaterContentForAirEntrainedDataGridView.TabIndex = 0
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox1.Controls.Add(Me.WaterContentForNonAirEntrainedDataGridView)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(8)
-        Me.GroupBox1.Size = New System.Drawing.Size(658, 250)
-        Me.GroupBox1.TabIndex = 0
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Water Content For Non-Air Entrained"
-        '
-        'WaterContentForNonAirEntrainedDataGridView
-        '
-        Me.WaterContentForNonAirEntrainedDataGridView.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.WaterContentForNonAirEntrainedDataGridView.AutoGenerateColumns = False
-        Me.WaterContentForNonAirEntrainedDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.WaterContentForNonAirEntrainedDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.MSA38DataGridViewTextBoxColumn, Me.MSA12DataGridViewTextBoxColumn, Me.MSA34DataGridViewTextBoxColumn, Me.MSA1DataGridViewTextBoxColumn, Me.MSA112DataGridViewTextBoxColumn, Me.MSA2DataGridViewTextBoxColumn, Me.MSA3DataGridViewTextBoxColumn, Me.MSA6DataGridViewTextBoxColumn})
-        Me.WaterContentForNonAirEntrainedDataGridView.DataMember = "WaterContentForNonAirEntrained"
-        Me.WaterContentForNonAirEntrainedDataGridView.DataSource = Me.ACIDatabaseDataSet
-        Me.WaterContentForNonAirEntrainedDataGridView.Location = New System.Drawing.Point(11, 26)
-        Me.WaterContentForNonAirEntrainedDataGridView.Name = "WaterContentForNonAirEntrainedDataGridView"
-        Me.WaterContentForNonAirEntrainedDataGridView.RowHeadersWidth = 51
-        Me.WaterContentForNonAirEntrainedDataGridView.RowTemplate.Height = 24
-        Me.WaterContentForNonAirEntrainedDataGridView.Size = New System.Drawing.Size(636, 213)
-        Me.WaterContentForNonAirEntrainedDataGridView.TabIndex = 0
-        '
-        'ACIDatabaseDataSet
-        '
-        Me.ACIDatabaseDataSet.DataSetName = "ACIDatabaseDataSet"
-        Me.ACIDatabaseDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'TableAdapterManager
-        '
-        Me.TableAdapterManager.AirContentForAirEntrainedTableAdapter = Me.AirContentForAirEntrainedTableAdapter
-        Me.TableAdapterManager.AirContentForNonAirEntrainedTableAdapter = Me.AirContentForNonAirEntrainedTableAdapter
-        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
-        Me.TableAdapterManager.UpdateOrder = Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
-        Me.TableAdapterManager.WaterCementRatioTableAdapter = Me.WaterCementRatioTableAdapter
-        Me.TableAdapterManager.WaterContentForAirEntrainedTableAdapter = Me.WaterContentForAirEntrainedTableAdapter
-        Me.TableAdapterManager.WaterContentForNonAirEntrainedTableAdapter = Me.WaterContentForNonAirEntrainedTableAdapter
-        '
-        'WaterContentForAirEntrainedTableAdapter
-        '
-        Me.WaterContentForAirEntrainedTableAdapter.ClearBeforeFill = True
-        '
-        'WaterContentForNonAirEntrainedTableAdapter
-        '
-        Me.WaterContentForNonAirEntrainedTableAdapter.ClearBeforeFill = True
-        '
-        'AirContentForAirEntrainedTableAdapter
-        '
-        Me.AirContentForAirEntrainedTableAdapter.ClearBeforeFill = True
-        '
-        'AirContentForNonAirEntrainedTableAdapter
-        '
-        Me.AirContentForNonAirEntrainedTableAdapter.ClearBeforeFill = True
-        '
-        'WaterCementRatioTableAdapter
-        '
-        Me.WaterCementRatioTableAdapter.ClearBeforeFill = True
-        '
-        'MSA38DataGridViewTextBoxColumn
-        '
-        Me.MSA38DataGridViewTextBoxColumn.DataPropertyName = "MSA 3/8"
-        Me.MSA38DataGridViewTextBoxColumn.HeaderText = "MSA 3/8"
-        Me.MSA38DataGridViewTextBoxColumn.MinimumWidth = 6
-        Me.MSA38DataGridViewTextBoxColumn.Name = "MSA38DataGridViewTextBoxColumn"
-        Me.MSA38DataGridViewTextBoxColumn.Width = 125
-        '
-        'MSA12DataGridViewTextBoxColumn
-        '
-        Me.MSA12DataGridViewTextBoxColumn.DataPropertyName = "MSA 1/2"
-        Me.MSA12DataGridViewTextBoxColumn.HeaderText = "MSA 1/2"
-        Me.MSA12DataGridViewTextBoxColumn.MinimumWidth = 6
-        Me.MSA12DataGridViewTextBoxColumn.Name = "MSA12DataGridViewTextBoxColumn"
-        Me.MSA12DataGridViewTextBoxColumn.Width = 125
-        '
-        'MSA34DataGridViewTextBoxColumn
-        '
-        Me.MSA34DataGridViewTextBoxColumn.DataPropertyName = "MSA 3/4"
-        Me.MSA34DataGridViewTextBoxColumn.HeaderText = "MSA 3/4"
-        Me.MSA34DataGridViewTextBoxColumn.MinimumWidth = 6
-        Me.MSA34DataGridViewTextBoxColumn.Name = "MSA34DataGridViewTextBoxColumn"
-        Me.MSA34DataGridViewTextBoxColumn.Width = 125
-        '
-        'MSA1DataGridViewTextBoxColumn
-        '
-        Me.MSA1DataGridViewTextBoxColumn.DataPropertyName = "MSA 1"
-        Me.MSA1DataGridViewTextBoxColumn.HeaderText = "MSA 1"
-        Me.MSA1DataGridViewTextBoxColumn.MinimumWidth = 6
-        Me.MSA1DataGridViewTextBoxColumn.Name = "MSA1DataGridViewTextBoxColumn"
-        Me.MSA1DataGridViewTextBoxColumn.Width = 125
-        '
-        'MSA112DataGridViewTextBoxColumn
-        '
-        Me.MSA112DataGridViewTextBoxColumn.DataPropertyName = "MSA 1-1/2"
-        Me.MSA112DataGridViewTextBoxColumn.HeaderText = "MSA 1-1/2"
-        Me.MSA112DataGridViewTextBoxColumn.MinimumWidth = 6
-        Me.MSA112DataGridViewTextBoxColumn.Name = "MSA112DataGridViewTextBoxColumn"
-        Me.MSA112DataGridViewTextBoxColumn.Width = 125
-        '
-        'MSA2DataGridViewTextBoxColumn
-        '
-        Me.MSA2DataGridViewTextBoxColumn.DataPropertyName = "MSA 2"
-        Me.MSA2DataGridViewTextBoxColumn.HeaderText = "MSA 2"
-        Me.MSA2DataGridViewTextBoxColumn.MinimumWidth = 6
-        Me.MSA2DataGridViewTextBoxColumn.Name = "MSA2DataGridViewTextBoxColumn"
-        Me.MSA2DataGridViewTextBoxColumn.Width = 125
-        '
-        'MSA3DataGridViewTextBoxColumn
-        '
-        Me.MSA3DataGridViewTextBoxColumn.DataPropertyName = "MSA 3"
-        Me.MSA3DataGridViewTextBoxColumn.HeaderText = "MSA 3"
-        Me.MSA3DataGridViewTextBoxColumn.MinimumWidth = 6
-        Me.MSA3DataGridViewTextBoxColumn.Name = "MSA3DataGridViewTextBoxColumn"
-        Me.MSA3DataGridViewTextBoxColumn.Width = 125
-        '
-        'MSA6DataGridViewTextBoxColumn
-        '
-        Me.MSA6DataGridViewTextBoxColumn.DataPropertyName = "MSA 6"
-        Me.MSA6DataGridViewTextBoxColumn.HeaderText = "MSA 6"
-        Me.MSA6DataGridViewTextBoxColumn.MinimumWidth = 6
-        Me.MSA6DataGridViewTextBoxColumn.Name = "MSA6DataGridViewTextBoxColumn"
-        Me.MSA6DataGridViewTextBoxColumn.Width = 125
-        '
-        'SlumpDataGridViewTextBoxColumn
-        '
-        Me.SlumpDataGridViewTextBoxColumn.DataPropertyName = "Slump"
-        Me.SlumpDataGridViewTextBoxColumn.HeaderText = "Slump"
-        Me.SlumpDataGridViewTextBoxColumn.MinimumWidth = 6
-        Me.SlumpDataGridViewTextBoxColumn.Name = "SlumpDataGridViewTextBoxColumn"
-        Me.SlumpDataGridViewTextBoxColumn.Width = 125
-        '
-        'MSA38DataGridViewTextBoxColumn1
-        '
-        Me.MSA38DataGridViewTextBoxColumn1.DataPropertyName = "MSA 3/8"
-        Me.MSA38DataGridViewTextBoxColumn1.HeaderText = "MSA 3/8"
-        Me.MSA38DataGridViewTextBoxColumn1.MinimumWidth = 6
-        Me.MSA38DataGridViewTextBoxColumn1.Name = "MSA38DataGridViewTextBoxColumn1"
-        Me.MSA38DataGridViewTextBoxColumn1.Width = 125
-        '
-        'MSA12DataGridViewTextBoxColumn1
-        '
-        Me.MSA12DataGridViewTextBoxColumn1.DataPropertyName = "MSA 1/2"
-        Me.MSA12DataGridViewTextBoxColumn1.HeaderText = "MSA 1/2"
-        Me.MSA12DataGridViewTextBoxColumn1.MinimumWidth = 6
-        Me.MSA12DataGridViewTextBoxColumn1.Name = "MSA12DataGridViewTextBoxColumn1"
-        Me.MSA12DataGridViewTextBoxColumn1.Width = 125
-        '
-        'MSA34DataGridViewTextBoxColumn1
-        '
-        Me.MSA34DataGridViewTextBoxColumn1.DataPropertyName = "MSA 3/4"
-        Me.MSA34DataGridViewTextBoxColumn1.HeaderText = "MSA 3/4"
-        Me.MSA34DataGridViewTextBoxColumn1.MinimumWidth = 6
-        Me.MSA34DataGridViewTextBoxColumn1.Name = "MSA34DataGridViewTextBoxColumn1"
-        Me.MSA34DataGridViewTextBoxColumn1.Width = 125
-        '
-        'MSA1DataGridViewTextBoxColumn1
-        '
-        Me.MSA1DataGridViewTextBoxColumn1.DataPropertyName = "MSA 1"
-        Me.MSA1DataGridViewTextBoxColumn1.HeaderText = "MSA 1"
-        Me.MSA1DataGridViewTextBoxColumn1.MinimumWidth = 6
-        Me.MSA1DataGridViewTextBoxColumn1.Name = "MSA1DataGridViewTextBoxColumn1"
-        Me.MSA1DataGridViewTextBoxColumn1.Width = 125
-        '
-        'MSA112DataGridViewTextBoxColumn1
-        '
-        Me.MSA112DataGridViewTextBoxColumn1.DataPropertyName = "MSA 1-1/2"
-        Me.MSA112DataGridViewTextBoxColumn1.HeaderText = "MSA 1-1/2"
-        Me.MSA112DataGridViewTextBoxColumn1.MinimumWidth = 6
-        Me.MSA112DataGridViewTextBoxColumn1.Name = "MSA112DataGridViewTextBoxColumn1"
-        Me.MSA112DataGridViewTextBoxColumn1.Width = 125
-        '
-        'MSA2DataGridViewTextBoxColumn1
-        '
-        Me.MSA2DataGridViewTextBoxColumn1.DataPropertyName = "MSA 2"
-        Me.MSA2DataGridViewTextBoxColumn1.HeaderText = "MSA 2"
-        Me.MSA2DataGridViewTextBoxColumn1.MinimumWidth = 6
-        Me.MSA2DataGridViewTextBoxColumn1.Name = "MSA2DataGridViewTextBoxColumn1"
-        Me.MSA2DataGridViewTextBoxColumn1.Width = 125
-        '
-        'MSA3DataGridViewTextBoxColumn1
-        '
-        Me.MSA3DataGridViewTextBoxColumn1.DataPropertyName = "MSA 3"
-        Me.MSA3DataGridViewTextBoxColumn1.HeaderText = "MSA 3"
-        Me.MSA3DataGridViewTextBoxColumn1.MinimumWidth = 6
-        Me.MSA3DataGridViewTextBoxColumn1.Name = "MSA3DataGridViewTextBoxColumn1"
-        Me.MSA3DataGridViewTextBoxColumn1.Width = 125
-        '
-        'MSA6DataGridViewTextBoxColumn1
-        '
-        Me.MSA6DataGridViewTextBoxColumn1.DataPropertyName = "MSA 6"
-        Me.MSA6DataGridViewTextBoxColumn1.HeaderText = "MSA 6"
-        Me.MSA6DataGridViewTextBoxColumn1.MinimumWidth = 6
-        Me.MSA6DataGridViewTextBoxColumn1.Name = "MSA6DataGridViewTextBoxColumn1"
-        Me.MSA6DataGridViewTextBoxColumn1.Width = 125
-        '
-        'EntrappedAirDataGridViewTextBoxColumn
-        '
-        Me.EntrappedAirDataGridViewTextBoxColumn.DataPropertyName = "Entrapped Air"
-        Me.EntrappedAirDataGridViewTextBoxColumn.HeaderText = "Entrapped Air"
-        Me.EntrappedAirDataGridViewTextBoxColumn.MinimumWidth = 6
-        Me.EntrappedAirDataGridViewTextBoxColumn.Name = "EntrappedAirDataGridViewTextBoxColumn"
-        Me.EntrappedAirDataGridViewTextBoxColumn.Width = 125
-        '
-        'MSA38DataGridViewTextBoxColumn2
-        '
-        Me.MSA38DataGridViewTextBoxColumn2.DataPropertyName = "MSA 3/8"
-        Me.MSA38DataGridViewTextBoxColumn2.HeaderText = "MSA 3/8"
-        Me.MSA38DataGridViewTextBoxColumn2.MinimumWidth = 6
-        Me.MSA38DataGridViewTextBoxColumn2.Name = "MSA38DataGridViewTextBoxColumn2"
-        Me.MSA38DataGridViewTextBoxColumn2.Width = 125
-        '
-        'MSA12DataGridViewTextBoxColumn2
-        '
-        Me.MSA12DataGridViewTextBoxColumn2.DataPropertyName = "MSA 1/2"
-        Me.MSA12DataGridViewTextBoxColumn2.HeaderText = "MSA 1/2"
-        Me.MSA12DataGridViewTextBoxColumn2.MinimumWidth = 6
-        Me.MSA12DataGridViewTextBoxColumn2.Name = "MSA12DataGridViewTextBoxColumn2"
-        Me.MSA12DataGridViewTextBoxColumn2.Width = 125
-        '
-        'MSA34DataGridViewTextBoxColumn2
-        '
-        Me.MSA34DataGridViewTextBoxColumn2.DataPropertyName = "MSA 3/4"
-        Me.MSA34DataGridViewTextBoxColumn2.HeaderText = "MSA 3/4"
-        Me.MSA34DataGridViewTextBoxColumn2.MinimumWidth = 6
-        Me.MSA34DataGridViewTextBoxColumn2.Name = "MSA34DataGridViewTextBoxColumn2"
-        Me.MSA34DataGridViewTextBoxColumn2.Width = 125
-        '
-        'MSA1DataGridViewTextBoxColumn2
-        '
-        Me.MSA1DataGridViewTextBoxColumn2.DataPropertyName = "MSA 1"
-        Me.MSA1DataGridViewTextBoxColumn2.HeaderText = "MSA 1"
-        Me.MSA1DataGridViewTextBoxColumn2.MinimumWidth = 6
-        Me.MSA1DataGridViewTextBoxColumn2.Name = "MSA1DataGridViewTextBoxColumn2"
-        Me.MSA1DataGridViewTextBoxColumn2.Width = 125
-        '
-        'MSA112DataGridViewTextBoxColumn2
-        '
-        Me.MSA112DataGridViewTextBoxColumn2.DataPropertyName = "MSA 1-1/2"
-        Me.MSA112DataGridViewTextBoxColumn2.HeaderText = "MSA 1-1/2"
-        Me.MSA112DataGridViewTextBoxColumn2.MinimumWidth = 6
-        Me.MSA112DataGridViewTextBoxColumn2.Name = "MSA112DataGridViewTextBoxColumn2"
-        Me.MSA112DataGridViewTextBoxColumn2.Width = 125
-        '
-        'MSA2DataGridViewTextBoxColumn2
-        '
-        Me.MSA2DataGridViewTextBoxColumn2.DataPropertyName = "MSA 2"
-        Me.MSA2DataGridViewTextBoxColumn2.HeaderText = "MSA 2"
-        Me.MSA2DataGridViewTextBoxColumn2.MinimumWidth = 6
-        Me.MSA2DataGridViewTextBoxColumn2.Name = "MSA2DataGridViewTextBoxColumn2"
-        Me.MSA2DataGridViewTextBoxColumn2.Width = 125
-        '
-        'MSA3DataGridViewTextBoxColumn2
-        '
-        Me.MSA3DataGridViewTextBoxColumn2.DataPropertyName = "MSA 3"
-        Me.MSA3DataGridViewTextBoxColumn2.HeaderText = "MSA 3"
-        Me.MSA3DataGridViewTextBoxColumn2.MinimumWidth = 6
-        Me.MSA3DataGridViewTextBoxColumn2.Name = "MSA3DataGridViewTextBoxColumn2"
-        Me.MSA3DataGridViewTextBoxColumn2.Width = 125
-        '
-        'MSA6DataGridViewTextBoxColumn2
-        '
-        Me.MSA6DataGridViewTextBoxColumn2.DataPropertyName = "MSA 6"
-        Me.MSA6DataGridViewTextBoxColumn2.HeaderText = "MSA 6"
-        Me.MSA6DataGridViewTextBoxColumn2.MinimumWidth = 6
-        Me.MSA6DataGridViewTextBoxColumn2.Name = "MSA6DataGridViewTextBoxColumn2"
-        Me.MSA6DataGridViewTextBoxColumn2.Width = 125
         '
         'ExposureDataGridViewTextBoxColumn
         '
@@ -567,36 +284,447 @@ Partial Class ReferenceTables
         Me.MSA6DataGridViewTextBoxColumn3.Name = "MSA6DataGridViewTextBoxColumn3"
         Me.MSA6DataGridViewTextBoxColumn3.Width = 125
         '
-        'RequiredStrengthDataGridViewTextBoxColumn
+        'GroupBox3
         '
-        Me.RequiredStrengthDataGridViewTextBoxColumn.DataPropertyName = "Required Strength"
-        Me.RequiredStrengthDataGridViewTextBoxColumn.HeaderText = "Required Strength"
-        Me.RequiredStrengthDataGridViewTextBoxColumn.MinimumWidth = 6
-        Me.RequiredStrengthDataGridViewTextBoxColumn.Name = "RequiredStrengthDataGridViewTextBoxColumn"
-        Me.RequiredStrengthDataGridViewTextBoxColumn.Width = 125
+        Me.GroupBox3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox3.Controls.Add(Me.AirContentForNonAirEntrainedDataGridView)
+        Me.GroupBox3.Location = New System.Drawing.Point(12, 524)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Padding = New System.Windows.Forms.Padding(8)
+        Me.GroupBox3.Size = New System.Drawing.Size(637, 180)
+        Me.GroupBox3.TabIndex = 1
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Air Content For Non-Air Entrained"
         '
-        'NonAirEntrainedDataGridViewTextBoxColumn
+        'AirContentForNonAirEntrainedDataGridView
         '
-        Me.NonAirEntrainedDataGridViewTextBoxColumn.DataPropertyName = "Non-Air Entrained"
-        Me.NonAirEntrainedDataGridViewTextBoxColumn.HeaderText = "Non-Air Entrained"
-        Me.NonAirEntrainedDataGridViewTextBoxColumn.MinimumWidth = 6
-        Me.NonAirEntrainedDataGridViewTextBoxColumn.Name = "NonAirEntrainedDataGridViewTextBoxColumn"
-        Me.NonAirEntrainedDataGridViewTextBoxColumn.Width = 125
+        Me.AirContentForNonAirEntrainedDataGridView.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.AirContentForNonAirEntrainedDataGridView.AutoGenerateColumns = False
+        Me.AirContentForNonAirEntrainedDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.AirContentForNonAirEntrainedDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.EntrappedAirDataGridViewTextBoxColumn, Me.MSA38DataGridViewTextBoxColumn2, Me.MSA12DataGridViewTextBoxColumn2, Me.MSA34DataGridViewTextBoxColumn2, Me.MSA1DataGridViewTextBoxColumn2, Me.MSA112DataGridViewTextBoxColumn2, Me.MSA2DataGridViewTextBoxColumn2, Me.MSA3DataGridViewTextBoxColumn2, Me.MSA6DataGridViewTextBoxColumn2})
+        Me.AirContentForNonAirEntrainedDataGridView.DataMember = "AirContentForNonAirEntrained"
+        Me.AirContentForNonAirEntrainedDataGridView.DataSource = Me.ACIDatabaseDataSet
+        Me.AirContentForNonAirEntrainedDataGridView.Location = New System.Drawing.Point(11, 26)
+        Me.AirContentForNonAirEntrainedDataGridView.Name = "AirContentForNonAirEntrainedDataGridView"
+        Me.AirContentForNonAirEntrainedDataGridView.RowHeadersWidth = 51
+        Me.AirContentForNonAirEntrainedDataGridView.RowTemplate.Height = 24
+        Me.AirContentForNonAirEntrainedDataGridView.Size = New System.Drawing.Size(615, 143)
+        Me.AirContentForNonAirEntrainedDataGridView.TabIndex = 0
         '
-        'AirEntrainedDataGridViewTextBoxColumn
+        'EntrappedAirDataGridViewTextBoxColumn
         '
-        Me.AirEntrainedDataGridViewTextBoxColumn.DataPropertyName = "Air Entrained"
-        Me.AirEntrainedDataGridViewTextBoxColumn.HeaderText = "Air Entrained"
-        Me.AirEntrainedDataGridViewTextBoxColumn.MinimumWidth = 6
-        Me.AirEntrainedDataGridViewTextBoxColumn.Name = "AirEntrainedDataGridViewTextBoxColumn"
-        Me.AirEntrainedDataGridViewTextBoxColumn.Width = 125
+        Me.EntrappedAirDataGridViewTextBoxColumn.DataPropertyName = "Entrapped Air"
+        Me.EntrappedAirDataGridViewTextBoxColumn.HeaderText = "Entrapped Air"
+        Me.EntrappedAirDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.EntrappedAirDataGridViewTextBoxColumn.Name = "EntrappedAirDataGridViewTextBoxColumn"
+        Me.EntrappedAirDataGridViewTextBoxColumn.Width = 125
+        '
+        'MSA38DataGridViewTextBoxColumn2
+        '
+        Me.MSA38DataGridViewTextBoxColumn2.DataPropertyName = "MSA 3/8"
+        Me.MSA38DataGridViewTextBoxColumn2.HeaderText = "MSA 3/8"
+        Me.MSA38DataGridViewTextBoxColumn2.MinimumWidth = 6
+        Me.MSA38DataGridViewTextBoxColumn2.Name = "MSA38DataGridViewTextBoxColumn2"
+        Me.MSA38DataGridViewTextBoxColumn2.Width = 125
+        '
+        'MSA12DataGridViewTextBoxColumn2
+        '
+        Me.MSA12DataGridViewTextBoxColumn2.DataPropertyName = "MSA 1/2"
+        Me.MSA12DataGridViewTextBoxColumn2.HeaderText = "MSA 1/2"
+        Me.MSA12DataGridViewTextBoxColumn2.MinimumWidth = 6
+        Me.MSA12DataGridViewTextBoxColumn2.Name = "MSA12DataGridViewTextBoxColumn2"
+        Me.MSA12DataGridViewTextBoxColumn2.Width = 125
+        '
+        'MSA34DataGridViewTextBoxColumn2
+        '
+        Me.MSA34DataGridViewTextBoxColumn2.DataPropertyName = "MSA 3/4"
+        Me.MSA34DataGridViewTextBoxColumn2.HeaderText = "MSA 3/4"
+        Me.MSA34DataGridViewTextBoxColumn2.MinimumWidth = 6
+        Me.MSA34DataGridViewTextBoxColumn2.Name = "MSA34DataGridViewTextBoxColumn2"
+        Me.MSA34DataGridViewTextBoxColumn2.Width = 125
+        '
+        'MSA1DataGridViewTextBoxColumn2
+        '
+        Me.MSA1DataGridViewTextBoxColumn2.DataPropertyName = "MSA 1"
+        Me.MSA1DataGridViewTextBoxColumn2.HeaderText = "MSA 1"
+        Me.MSA1DataGridViewTextBoxColumn2.MinimumWidth = 6
+        Me.MSA1DataGridViewTextBoxColumn2.Name = "MSA1DataGridViewTextBoxColumn2"
+        Me.MSA1DataGridViewTextBoxColumn2.Width = 125
+        '
+        'MSA112DataGridViewTextBoxColumn2
+        '
+        Me.MSA112DataGridViewTextBoxColumn2.DataPropertyName = "MSA 1-1/2"
+        Me.MSA112DataGridViewTextBoxColumn2.HeaderText = "MSA 1-1/2"
+        Me.MSA112DataGridViewTextBoxColumn2.MinimumWidth = 6
+        Me.MSA112DataGridViewTextBoxColumn2.Name = "MSA112DataGridViewTextBoxColumn2"
+        Me.MSA112DataGridViewTextBoxColumn2.Width = 125
+        '
+        'MSA2DataGridViewTextBoxColumn2
+        '
+        Me.MSA2DataGridViewTextBoxColumn2.DataPropertyName = "MSA 2"
+        Me.MSA2DataGridViewTextBoxColumn2.HeaderText = "MSA 2"
+        Me.MSA2DataGridViewTextBoxColumn2.MinimumWidth = 6
+        Me.MSA2DataGridViewTextBoxColumn2.Name = "MSA2DataGridViewTextBoxColumn2"
+        Me.MSA2DataGridViewTextBoxColumn2.Width = 125
+        '
+        'MSA3DataGridViewTextBoxColumn2
+        '
+        Me.MSA3DataGridViewTextBoxColumn2.DataPropertyName = "MSA 3"
+        Me.MSA3DataGridViewTextBoxColumn2.HeaderText = "MSA 3"
+        Me.MSA3DataGridViewTextBoxColumn2.MinimumWidth = 6
+        Me.MSA3DataGridViewTextBoxColumn2.Name = "MSA3DataGridViewTextBoxColumn2"
+        Me.MSA3DataGridViewTextBoxColumn2.Width = 125
+        '
+        'MSA6DataGridViewTextBoxColumn2
+        '
+        Me.MSA6DataGridViewTextBoxColumn2.DataPropertyName = "MSA 6"
+        Me.MSA6DataGridViewTextBoxColumn2.HeaderText = "MSA 6"
+        Me.MSA6DataGridViewTextBoxColumn2.MinimumWidth = 6
+        Me.MSA6DataGridViewTextBoxColumn2.Name = "MSA6DataGridViewTextBoxColumn2"
+        Me.MSA6DataGridViewTextBoxColumn2.Width = 125
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox2.Controls.Add(Me.WaterContentForAirEntrainedDataGridView)
+        Me.GroupBox2.Location = New System.Drawing.Point(12, 268)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(8)
+        Me.GroupBox2.Size = New System.Drawing.Size(637, 250)
+        Me.GroupBox2.TabIndex = 1
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Water Content For Air Entrained"
+        '
+        'WaterContentForAirEntrainedDataGridView
+        '
+        Me.WaterContentForAirEntrainedDataGridView.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.WaterContentForAirEntrainedDataGridView.AutoGenerateColumns = False
+        Me.WaterContentForAirEntrainedDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.WaterContentForAirEntrainedDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SlumpDataGridViewTextBoxColumn, Me.MSA38DataGridViewTextBoxColumn1, Me.MSA12DataGridViewTextBoxColumn1, Me.MSA34DataGridViewTextBoxColumn1, Me.MSA1DataGridViewTextBoxColumn1, Me.MSA112DataGridViewTextBoxColumn1, Me.MSA2DataGridViewTextBoxColumn1, Me.MSA3DataGridViewTextBoxColumn1, Me.MSA6DataGridViewTextBoxColumn1})
+        Me.WaterContentForAirEntrainedDataGridView.DataMember = "WaterContentForAirEntrained"
+        Me.WaterContentForAirEntrainedDataGridView.DataSource = Me.ACIDatabaseDataSet
+        Me.WaterContentForAirEntrainedDataGridView.Location = New System.Drawing.Point(11, 26)
+        Me.WaterContentForAirEntrainedDataGridView.Name = "WaterContentForAirEntrainedDataGridView"
+        Me.WaterContentForAirEntrainedDataGridView.RowHeadersWidth = 51
+        Me.WaterContentForAirEntrainedDataGridView.RowTemplate.Height = 24
+        Me.WaterContentForAirEntrainedDataGridView.Size = New System.Drawing.Size(615, 213)
+        Me.WaterContentForAirEntrainedDataGridView.TabIndex = 0
+        '
+        'SlumpDataGridViewTextBoxColumn
+        '
+        Me.SlumpDataGridViewTextBoxColumn.DataPropertyName = "Slump"
+        Me.SlumpDataGridViewTextBoxColumn.HeaderText = "Slump"
+        Me.SlumpDataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.SlumpDataGridViewTextBoxColumn.Name = "SlumpDataGridViewTextBoxColumn"
+        Me.SlumpDataGridViewTextBoxColumn.Width = 125
+        '
+        'MSA38DataGridViewTextBoxColumn1
+        '
+        Me.MSA38DataGridViewTextBoxColumn1.DataPropertyName = "MSA 3/8"
+        Me.MSA38DataGridViewTextBoxColumn1.HeaderText = "MSA 3/8"
+        Me.MSA38DataGridViewTextBoxColumn1.MinimumWidth = 6
+        Me.MSA38DataGridViewTextBoxColumn1.Name = "MSA38DataGridViewTextBoxColumn1"
+        Me.MSA38DataGridViewTextBoxColumn1.Width = 125
+        '
+        'MSA12DataGridViewTextBoxColumn1
+        '
+        Me.MSA12DataGridViewTextBoxColumn1.DataPropertyName = "MSA 1/2"
+        Me.MSA12DataGridViewTextBoxColumn1.HeaderText = "MSA 1/2"
+        Me.MSA12DataGridViewTextBoxColumn1.MinimumWidth = 6
+        Me.MSA12DataGridViewTextBoxColumn1.Name = "MSA12DataGridViewTextBoxColumn1"
+        Me.MSA12DataGridViewTextBoxColumn1.Width = 125
+        '
+        'MSA34DataGridViewTextBoxColumn1
+        '
+        Me.MSA34DataGridViewTextBoxColumn1.DataPropertyName = "MSA 3/4"
+        Me.MSA34DataGridViewTextBoxColumn1.HeaderText = "MSA 3/4"
+        Me.MSA34DataGridViewTextBoxColumn1.MinimumWidth = 6
+        Me.MSA34DataGridViewTextBoxColumn1.Name = "MSA34DataGridViewTextBoxColumn1"
+        Me.MSA34DataGridViewTextBoxColumn1.Width = 125
+        '
+        'MSA1DataGridViewTextBoxColumn1
+        '
+        Me.MSA1DataGridViewTextBoxColumn1.DataPropertyName = "MSA 1"
+        Me.MSA1DataGridViewTextBoxColumn1.HeaderText = "MSA 1"
+        Me.MSA1DataGridViewTextBoxColumn1.MinimumWidth = 6
+        Me.MSA1DataGridViewTextBoxColumn1.Name = "MSA1DataGridViewTextBoxColumn1"
+        Me.MSA1DataGridViewTextBoxColumn1.Width = 125
+        '
+        'MSA112DataGridViewTextBoxColumn1
+        '
+        Me.MSA112DataGridViewTextBoxColumn1.DataPropertyName = "MSA 1-1/2"
+        Me.MSA112DataGridViewTextBoxColumn1.HeaderText = "MSA 1-1/2"
+        Me.MSA112DataGridViewTextBoxColumn1.MinimumWidth = 6
+        Me.MSA112DataGridViewTextBoxColumn1.Name = "MSA112DataGridViewTextBoxColumn1"
+        Me.MSA112DataGridViewTextBoxColumn1.Width = 125
+        '
+        'MSA2DataGridViewTextBoxColumn1
+        '
+        Me.MSA2DataGridViewTextBoxColumn1.DataPropertyName = "MSA 2"
+        Me.MSA2DataGridViewTextBoxColumn1.HeaderText = "MSA 2"
+        Me.MSA2DataGridViewTextBoxColumn1.MinimumWidth = 6
+        Me.MSA2DataGridViewTextBoxColumn1.Name = "MSA2DataGridViewTextBoxColumn1"
+        Me.MSA2DataGridViewTextBoxColumn1.Width = 125
+        '
+        'MSA3DataGridViewTextBoxColumn1
+        '
+        Me.MSA3DataGridViewTextBoxColumn1.DataPropertyName = "MSA 3"
+        Me.MSA3DataGridViewTextBoxColumn1.HeaderText = "MSA 3"
+        Me.MSA3DataGridViewTextBoxColumn1.MinimumWidth = 6
+        Me.MSA3DataGridViewTextBoxColumn1.Name = "MSA3DataGridViewTextBoxColumn1"
+        Me.MSA3DataGridViewTextBoxColumn1.Width = 125
+        '
+        'MSA6DataGridViewTextBoxColumn1
+        '
+        Me.MSA6DataGridViewTextBoxColumn1.DataPropertyName = "MSA 6"
+        Me.MSA6DataGridViewTextBoxColumn1.HeaderText = "MSA 6"
+        Me.MSA6DataGridViewTextBoxColumn1.MinimumWidth = 6
+        Me.MSA6DataGridViewTextBoxColumn1.Name = "MSA6DataGridViewTextBoxColumn1"
+        Me.MSA6DataGridViewTextBoxColumn1.Width = 125
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox1.Controls.Add(Me.WaterContentForNonAirEntrainedDataGridView)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(8)
+        Me.GroupBox1.Size = New System.Drawing.Size(637, 250)
+        Me.GroupBox1.TabIndex = 0
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Water Content For Non-Air Entrained"
+        '
+        'WaterContentForNonAirEntrainedDataGridView
+        '
+        Me.WaterContentForNonAirEntrainedDataGridView.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.WaterContentForNonAirEntrainedDataGridView.AutoGenerateColumns = False
+        Me.WaterContentForNonAirEntrainedDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.WaterContentForNonAirEntrainedDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.MSA38DataGridViewTextBoxColumn, Me.MSA12DataGridViewTextBoxColumn, Me.MSA34DataGridViewTextBoxColumn, Me.MSA1DataGridViewTextBoxColumn, Me.MSA112DataGridViewTextBoxColumn, Me.MSA2DataGridViewTextBoxColumn, Me.MSA3DataGridViewTextBoxColumn, Me.MSA6DataGridViewTextBoxColumn})
+        Me.WaterContentForNonAirEntrainedDataGridView.DataMember = "WaterContentForNonAirEntrained"
+        Me.WaterContentForNonAirEntrainedDataGridView.DataSource = Me.ACIDatabaseDataSet
+        Me.WaterContentForNonAirEntrainedDataGridView.Location = New System.Drawing.Point(11, 26)
+        Me.WaterContentForNonAirEntrainedDataGridView.Name = "WaterContentForNonAirEntrainedDataGridView"
+        Me.WaterContentForNonAirEntrainedDataGridView.RowHeadersWidth = 51
+        Me.WaterContentForNonAirEntrainedDataGridView.RowTemplate.Height = 24
+        Me.WaterContentForNonAirEntrainedDataGridView.Size = New System.Drawing.Size(615, 213)
+        Me.WaterContentForNonAirEntrainedDataGridView.TabIndex = 0
+        '
+        'MSA38DataGridViewTextBoxColumn
+        '
+        Me.MSA38DataGridViewTextBoxColumn.DataPropertyName = "MSA 3/8"
+        Me.MSA38DataGridViewTextBoxColumn.HeaderText = "MSA 3/8"
+        Me.MSA38DataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.MSA38DataGridViewTextBoxColumn.Name = "MSA38DataGridViewTextBoxColumn"
+        Me.MSA38DataGridViewTextBoxColumn.Width = 125
+        '
+        'MSA12DataGridViewTextBoxColumn
+        '
+        Me.MSA12DataGridViewTextBoxColumn.DataPropertyName = "MSA 1/2"
+        Me.MSA12DataGridViewTextBoxColumn.HeaderText = "MSA 1/2"
+        Me.MSA12DataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.MSA12DataGridViewTextBoxColumn.Name = "MSA12DataGridViewTextBoxColumn"
+        Me.MSA12DataGridViewTextBoxColumn.Width = 125
+        '
+        'MSA34DataGridViewTextBoxColumn
+        '
+        Me.MSA34DataGridViewTextBoxColumn.DataPropertyName = "MSA 3/4"
+        Me.MSA34DataGridViewTextBoxColumn.HeaderText = "MSA 3/4"
+        Me.MSA34DataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.MSA34DataGridViewTextBoxColumn.Name = "MSA34DataGridViewTextBoxColumn"
+        Me.MSA34DataGridViewTextBoxColumn.Width = 125
+        '
+        'MSA1DataGridViewTextBoxColumn
+        '
+        Me.MSA1DataGridViewTextBoxColumn.DataPropertyName = "MSA 1"
+        Me.MSA1DataGridViewTextBoxColumn.HeaderText = "MSA 1"
+        Me.MSA1DataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.MSA1DataGridViewTextBoxColumn.Name = "MSA1DataGridViewTextBoxColumn"
+        Me.MSA1DataGridViewTextBoxColumn.Width = 125
+        '
+        'MSA112DataGridViewTextBoxColumn
+        '
+        Me.MSA112DataGridViewTextBoxColumn.DataPropertyName = "MSA 1-1/2"
+        Me.MSA112DataGridViewTextBoxColumn.HeaderText = "MSA 1-1/2"
+        Me.MSA112DataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.MSA112DataGridViewTextBoxColumn.Name = "MSA112DataGridViewTextBoxColumn"
+        Me.MSA112DataGridViewTextBoxColumn.Width = 125
+        '
+        'MSA2DataGridViewTextBoxColumn
+        '
+        Me.MSA2DataGridViewTextBoxColumn.DataPropertyName = "MSA 2"
+        Me.MSA2DataGridViewTextBoxColumn.HeaderText = "MSA 2"
+        Me.MSA2DataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.MSA2DataGridViewTextBoxColumn.Name = "MSA2DataGridViewTextBoxColumn"
+        Me.MSA2DataGridViewTextBoxColumn.Width = 125
+        '
+        'MSA3DataGridViewTextBoxColumn
+        '
+        Me.MSA3DataGridViewTextBoxColumn.DataPropertyName = "MSA 3"
+        Me.MSA3DataGridViewTextBoxColumn.HeaderText = "MSA 3"
+        Me.MSA3DataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.MSA3DataGridViewTextBoxColumn.Name = "MSA3DataGridViewTextBoxColumn"
+        Me.MSA3DataGridViewTextBoxColumn.Width = 125
+        '
+        'MSA6DataGridViewTextBoxColumn
+        '
+        Me.MSA6DataGridViewTextBoxColumn.DataPropertyName = "MSA 6"
+        Me.MSA6DataGridViewTextBoxColumn.HeaderText = "MSA 6"
+        Me.MSA6DataGridViewTextBoxColumn.MinimumWidth = 6
+        Me.MSA6DataGridViewTextBoxColumn.Name = "MSA6DataGridViewTextBoxColumn"
+        Me.MSA6DataGridViewTextBoxColumn.Width = 125
+        '
+        'TableAdapterManager
+        '
+        Me.TableAdapterManager.AirContentForAirEntrainedTableAdapter = Me.AirContentForAirEntrainedTableAdapter
+        Me.TableAdapterManager.AirContentForNonAirEntrainedTableAdapter = Me.AirContentForNonAirEntrainedTableAdapter
+        Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
+        Me.TableAdapterManager.BulkVolumeOfDRCATableAdapter = Nothing
+        Me.TableAdapterManager.UpdateOrder = Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
+        Me.TableAdapterManager.WaterCementRatioTableAdapter = Me.WaterCementRatioTableAdapter
+        Me.TableAdapterManager.WaterContentForAirEntrainedTableAdapter = Me.WaterContentForAirEntrainedTableAdapter
+        Me.TableAdapterManager.WaterContentForNonAirEntrainedTableAdapter = Me.WaterContentForNonAirEntrainedTableAdapter
+        '
+        'AirContentForAirEntrainedTableAdapter
+        '
+        Me.AirContentForAirEntrainedTableAdapter.ClearBeforeFill = True
+        '
+        'AirContentForNonAirEntrainedTableAdapter
+        '
+        Me.AirContentForNonAirEntrainedTableAdapter.ClearBeforeFill = True
+        '
+        'WaterCementRatioTableAdapter
+        '
+        Me.WaterCementRatioTableAdapter.ClearBeforeFill = True
+        '
+        'WaterContentForAirEntrainedTableAdapter
+        '
+        Me.WaterContentForAirEntrainedTableAdapter.ClearBeforeFill = True
+        '
+        'WaterContentForNonAirEntrainedTableAdapter
+        '
+        Me.WaterContentForNonAirEntrainedTableAdapter.ClearBeforeFill = True
+        '
+        'GroupBox6
+        '
+        Me.GroupBox6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox6.Controls.Add(Me.BulkVolumeOfDRCADataGridView)
+        Me.GroupBox6.Location = New System.Drawing.Point(12, 1422)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Padding = New System.Windows.Forms.Padding(8)
+        Me.GroupBox6.Size = New System.Drawing.Size(637, 400)
+        Me.GroupBox6.TabIndex = 2
+        Me.GroupBox6.TabStop = False
+        Me.GroupBox6.Text = "Bulk Volume of Dry-rodded Coarse Aggregates per Unit Volume of Concrete"
+        '
+        'BulkVolumeOfDRCABindingSource
+        '
+        Me.BulkVolumeOfDRCABindingSource.DataMember = "BulkVolumeOfDRCA"
+        Me.BulkVolumeOfDRCABindingSource.DataSource = Me.ACIDatabaseDataSet
+        '
+        'BulkVolumeOfDRCATableAdapter
+        '
+        Me.BulkVolumeOfDRCATableAdapter.ClearBeforeFill = True
+        '
+        'BulkVolumeOfDRCADataGridView
+        '
+        Me.BulkVolumeOfDRCADataGridView.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BulkVolumeOfDRCADataGridView.AutoGenerateColumns = False
+        Me.BulkVolumeOfDRCADataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.BulkVolumeOfDRCADataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9})
+        Me.BulkVolumeOfDRCADataGridView.DataSource = Me.BulkVolumeOfDRCABindingSource
+        Me.BulkVolumeOfDRCADataGridView.Location = New System.Drawing.Point(11, 26)
+        Me.BulkVolumeOfDRCADataGridView.Name = "BulkVolumeOfDRCADataGridView"
+        Me.BulkVolumeOfDRCADataGridView.RowHeadersWidth = 51
+        Me.BulkVolumeOfDRCADataGridView.RowTemplate.Height = 24
+        Me.BulkVolumeOfDRCADataGridView.Size = New System.Drawing.Size(614, 362)
+        Me.BulkVolumeOfDRCADataGridView.TabIndex = 0
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.DataPropertyName = "Fineness Modulus"
+        Me.DataGridViewTextBoxColumn1.HeaderText = "Fineness Modulus"
+        Me.DataGridViewTextBoxColumn1.MinimumWidth = 6
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.Width = 125
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        Me.DataGridViewTextBoxColumn2.DataPropertyName = "MSA 3/8"
+        Me.DataGridViewTextBoxColumn2.HeaderText = "MSA 3/8"
+        Me.DataGridViewTextBoxColumn2.MinimumWidth = 6
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.DataGridViewTextBoxColumn2.Width = 125
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.DataPropertyName = "MSA 1/2"
+        Me.DataGridViewTextBoxColumn3.HeaderText = "MSA 1/2"
+        Me.DataGridViewTextBoxColumn3.MinimumWidth = 6
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        Me.DataGridViewTextBoxColumn3.Width = 125
+        '
+        'DataGridViewTextBoxColumn4
+        '
+        Me.DataGridViewTextBoxColumn4.DataPropertyName = "MSA 3/4"
+        Me.DataGridViewTextBoxColumn4.HeaderText = "MSA 3/4"
+        Me.DataGridViewTextBoxColumn4.MinimumWidth = 6
+        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        Me.DataGridViewTextBoxColumn4.Width = 125
+        '
+        'DataGridViewTextBoxColumn5
+        '
+        Me.DataGridViewTextBoxColumn5.DataPropertyName = "MSA 1"
+        Me.DataGridViewTextBoxColumn5.HeaderText = "MSA 1"
+        Me.DataGridViewTextBoxColumn5.MinimumWidth = 6
+        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
+        Me.DataGridViewTextBoxColumn5.Width = 125
+        '
+        'DataGridViewTextBoxColumn6
+        '
+        Me.DataGridViewTextBoxColumn6.DataPropertyName = "MSA 1-1/2"
+        Me.DataGridViewTextBoxColumn6.HeaderText = "MSA 1-1/2"
+        Me.DataGridViewTextBoxColumn6.MinimumWidth = 6
+        Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
+        Me.DataGridViewTextBoxColumn6.Width = 125
+        '
+        'DataGridViewTextBoxColumn7
+        '
+        Me.DataGridViewTextBoxColumn7.DataPropertyName = "MSA 2"
+        Me.DataGridViewTextBoxColumn7.HeaderText = "MSA 2"
+        Me.DataGridViewTextBoxColumn7.MinimumWidth = 6
+        Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
+        Me.DataGridViewTextBoxColumn7.Width = 125
+        '
+        'DataGridViewTextBoxColumn8
+        '
+        Me.DataGridViewTextBoxColumn8.DataPropertyName = "MSA 3"
+        Me.DataGridViewTextBoxColumn8.HeaderText = "MSA 3"
+        Me.DataGridViewTextBoxColumn8.MinimumWidth = 6
+        Me.DataGridViewTextBoxColumn8.Name = "DataGridViewTextBoxColumn8"
+        Me.DataGridViewTextBoxColumn8.Width = 125
+        '
+        'DataGridViewTextBoxColumn9
+        '
+        Me.DataGridViewTextBoxColumn9.DataPropertyName = "MSA 6"
+        Me.DataGridViewTextBoxColumn9.HeaderText = "MSA 6"
+        Me.DataGridViewTextBoxColumn9.MinimumWidth = 6
+        Me.DataGridViewTextBoxColumn9.Name = "DataGridViewTextBoxColumn9"
+        Me.DataGridViewTextBoxColumn9.Width = 125
         '
         'ReferenceTables
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(702, 593)
+        Me.ClientSize = New System.Drawing.Size(702, 645)
         Me.Controls.Add(Me.Panel1)
         Me.MinimumSize = New System.Drawing.Size(720, 640)
         Me.Name = "ReferenceTables"
@@ -605,6 +733,7 @@ Partial Class ReferenceTables
         Me.Panel1.ResumeLayout(False)
         Me.GroupBox5.ResumeLayout(False)
         CType(Me.WaterCementRatioDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ACIDatabaseDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox4.ResumeLayout(False)
         CType(Me.AirContentForAirEntrainedDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox3.ResumeLayout(False)
@@ -613,7 +742,9 @@ Partial Class ReferenceTables
         CType(Me.WaterContentForAirEntrainedDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         CType(Me.WaterContentForNonAirEntrainedDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ACIDatabaseDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox6.ResumeLayout(False)
+        CType(Me.BulkVolumeOfDRCABindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BulkVolumeOfDRCADataGridView, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -674,4 +805,17 @@ Partial Class ReferenceTables
     Friend WithEvents MSA2DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Friend WithEvents MSA3DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Friend WithEvents MSA6DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+    Friend WithEvents GroupBox6 As GroupBox
+    Friend WithEvents BulkVolumeOfDRCABindingSource As BindingSource
+    Friend WithEvents BulkVolumeOfDRCATableAdapter As ACIDatabaseDataSetTableAdapters.BulkVolumeOfDRCATableAdapter
+    Friend WithEvents BulkVolumeOfDRCADataGridView As DataGridView
+    Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn5 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn7 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn8 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn9 As DataGridViewTextBoxColumn
 End Class

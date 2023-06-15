@@ -10,7 +10,13 @@
         Return Math.Round(max * Rnd() + min, 3)
     End Function
 
-    Public Function Interpolate(x1 As Double, y1 As Double, x2 As Double, y2 As Double, x As Double) As Double
+    Public Function LinearInterpolate(
+        x1 As Double,
+        y1 As Double,
+        x2 As Double,
+        y2 As Double,
+        x As Double
+    ) As Double
         Return y2 + ((x - x1) * (y2 - y1)) / (x2 - x1)
     End Function
 End Module

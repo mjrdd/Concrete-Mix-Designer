@@ -46,6 +46,7 @@ Public Class MainForm
         AirContentForNonAirEntrainedTableAdapter.Fill(AciDatabaseDataSet.AirContentForNonAirEntrained)
         AirContentForAirEntrainedTableAdapter.Fill(AciDatabaseDataSet.AirContentForAirEntrained)
         WaterCementRatioTableAdapter.Fill(AciDatabaseDataSet.WaterCementRatio)
+        BulkVolumeOfDRCATableAdapter.Fill(AciDatabaseDataSet.BulkVolumeOfDRCA)
 
         rdbAirEntrained.Checked = True
         cmbMSA.SelectedIndex = 0
@@ -135,7 +136,8 @@ Public Class MainForm
 
             Dim WaterContentTable,
                 AirContentTable,
-                WaterCementRatioTable As DataTable
+                WaterCementRatioTable,
+                BulkVolumeDRCATable As DataTable
 
             Dim SlumpRowIndex As Integer
             Select Case Slump
@@ -167,22 +169,72 @@ Public Class MainForm
 
             WaterCementRatioTable = WaterCementRatioTableAdapter.GetData().CopyToDataTable()
 
-            ' TODO: Interpolate data
-            Dim RowIndex As Integer
-            For RowIndex = 0 To WaterCementRatioTable.Rows.Count - 1
-                If WaterCementRatioTable.Rows.Item(RowIndex).Item(0) = Strength Then
+            For i = 0 To WaterCementRatioTable.Rows.Count - 1
+                If WaterCementRatioTable.Rows.Item(i).Item(0) = Strength Then
+                    WaterCementRatio = WaterCementRatioTable.Rows.Item(i).Item(If(rdbNonAirEntrained.Checked, 1, 2))
                     Exit For
 
-                ElseIf WaterCementRatioTable.Rows.Item(RowIndex).Item(0) < Strength And
-                    WaterCementRatioTable.Rows.Item(RowIndex + 1).Item(0) > Strength Then
+                ElseIf WaterCementRatioTable.Rows.Item(i).Item(0) > Strength And
+                    WaterCementRatioTable.Rows.Item(i + 1).Item(0) < Strength Then
+                    WaterCementRatio = LinearInterpolate(
+                        WaterCementRatioTable.Rows(i).Item(0),
+                        WaterCementRatioTable.Rows(i).Item(If(rdbNonAirEntrained.Checked, 1, 2)),
+                        WaterCementRatioTable.Rows(i + 1).Item(0),
+                        WaterCementRatioTable.Rows(i + 1).Item(If(rdbNonAirEntrained.Checked, 1, 2)),
+                        Strength
+                    )
                     Exit For
+
                 End If
             Next
 
-            WaterCementRatio = WaterCementRatioTable.Rows.Item(RowIndex).Item(If(rdbNonAirEntrained.Checked, 1, 2))
             CementWeight = WaterWeight / WaterCementRatio
 
-            CoarseAggWeight = 0.63 * CoarseAggUW * 27
+            BulkVolumeDRCATable = BulkVolumeOfDRCATableAdapter.GetData().CopyToDataTable()
+            Dim BulkVolumeDRCA As Double
+
+            Select Case FineAggFM
+                Case Is < 2.4
+                    BulkVolumeDRCA = LinearInterpolate(
+                        2.4,
+                        BulkVolumeDRCATable.Rows.Item(0).Item(MSAIndex + 1),
+                        2.5,
+                        BulkVolumeDRCATable.Rows.Item(1).Item(MSAIndex + 1),
+                        FineAggFM
+                    )
+
+                Case Is > 3.0
+                    BulkVolumeDRCA = LinearInterpolate(
+                        2.9,
+                        BulkVolumeDRCATable.Rows.Item(5).Item(MSAIndex + 1),
+                        3.0,
+                        BulkVolumeDRCATable.Rows.Item(6).Item(MSAIndex + 1),
+                        FineAggFM
+                    )
+
+                Case Else
+                    For i As Integer = 0 To BulkVolumeDRCATable.Rows.Count - 1
+                        If BulkVolumeDRCATable.Rows.Item(i).Item(0) = FineAggFM Then
+                            BulkVolumeDRCA = BulkVolumeDRCATable.Rows.Item(i).Item(MSAIndex + 1)
+                            Exit For
+
+                        ElseIf BulkVolumeDRCATable.Rows.Item(i).Item(0) < FineAggFM And
+                            BulkVolumeDRCATable.Rows.Item(i + 1).Item(0) > FineAggFM Then
+                            BulkVolumeDRCA = LinearInterpolate(
+                                BulkVolumeDRCATable.Rows.Item(i).Item(0),
+                                BulkVolumeDRCATable.Rows.Item(i).Item(MSAIndex + 1),
+                                BulkVolumeDRCATable.Rows.Item(i + 1).Item(0),
+                                BulkVolumeDRCATable.Rows.Item(i + 1).Item(MSAIndex + 1),
+                                FineAggFM
+                            )
+                            Exit For
+
+                        End If
+                    Next
+
+            End Select
+
+            CoarseAggWeight = BulkVolumeDRCA * CoarseAggUW * 27
             CoarseAggWeight *= 1 + CoarseAggAC
 
             ' Compute for the volume
@@ -463,15 +515,15 @@ Public Class MainForm
         cmbMSA.SelectedIndex = Rand(0, 7)
 
         txtSlump.Text = Rand(1.0, 7.0)
-        txtCementSG.Text = Rand(1.0, 3.0)
-        txtCAAC.Text = Rand(0.01, 1.0)
-        txtCASG.Text = Rand(1.0, 3.0)
-        txtCASM.Text = Rand(0.01, 1.0)
-        txtCAUW.Text = Rand(1.0, 5.0)
-        txtFAAC.Text = Rand(0.01, 1.0)
-        txtFAFM.Text = Rand(2.4, 3.0)
-        txtFASG.Text = Rand(1.0, 3.0)
-        txtFASM.Text = Rand(0.01, 1.0)
+        txtCementSG.Text = Rand(3.0, 3.16)
+        txtCAAC.Text = Rand(0.01, 0.1)
+        txtCASG.Text = Rand(2.5, 3.0)
+        txtCASM.Text = Rand(0.01, 0.1)
+        txtCAUW.Text = Rand(75.0, 110.0)
+        txtFAAC.Text = Rand(0.01, 0.1)
+        txtFAFM.Text = Rand(2.0, 3.5)
+        txtFASG.Text = Rand(2.5, 3.0)
+        txtFASM.Text = Rand(0.01, 0.1)
     End Sub
 
     Private Sub NewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewToolStripMenuItem.Click

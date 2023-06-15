@@ -102,6 +102,7 @@ Partial Class MainForm
         Me.WaterCementRatioTableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.WaterCementRatioTableAdapter()
         Me.WaterContentForAirEntrainedTableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.WaterContentForAirEntrainedTableAdapter()
         Me.WaterContentForNonAirEntrainedTableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.WaterContentForNonAirEntrainedTableAdapter()
+        Me.BulkVolumeOfDRCATableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.BulkVolumeOfDRCATableAdapter()
         Me.MenuStrip.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -151,7 +152,7 @@ Partial Class MainForm
         Me.NewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
         Me.NewToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
-        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
         Me.NewToolStripMenuItem.Text = "&New"
         '
         'OpenToolStripMenuItem
@@ -160,13 +161,13 @@ Partial Class MainForm
         Me.OpenToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
         Me.OpenToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
-        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
         Me.OpenToolStripMenuItem.Text = "&Open"
         '
         'toolStripSeparator
         '
         Me.toolStripSeparator.Name = "toolStripSeparator"
-        Me.toolStripSeparator.Size = New System.Drawing.Size(221, 6)
+        Me.toolStripSeparator.Size = New System.Drawing.Size(178, 6)
         '
         'SaveToolStripMenuItem
         '
@@ -174,24 +175,24 @@ Partial Class MainForm
         Me.SaveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
         Me.SaveToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
         Me.SaveToolStripMenuItem.Text = "&Save"
         '
         'SaveAsToolStripMenuItem
         '
         Me.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem"
-        Me.SaveAsToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.SaveAsToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
         Me.SaveAsToolStripMenuItem.Text = "Save &As"
         '
         'toolStripSeparator1
         '
         Me.toolStripSeparator1.Name = "toolStripSeparator1"
-        Me.toolStripSeparator1.Size = New System.Drawing.Size(221, 6)
+        Me.toolStripSeparator1.Size = New System.Drawing.Size(178, 6)
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
         Me.ExitToolStripMenuItem.Text = "E&xit"
         '
         'ToolsToolStripMenuItem
@@ -936,6 +937,7 @@ Partial Class MainForm
         Me.TableAdapterManager.AirContentForAirEntrainedTableAdapter = Me.AirContentForAirEntrainedTableAdapter
         Me.TableAdapterManager.AirContentForNonAirEntrainedTableAdapter = Me.AirContentForNonAirEntrainedTableAdapter
         Me.TableAdapterManager.BackupDataSetBeforeUpdate = False
+        Me.TableAdapterManager.BulkVolumeOfDRCATableAdapter = Nothing
         Me.TableAdapterManager.UpdateOrder = Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete
         Me.TableAdapterManager.WaterCementRatioTableAdapter = Me.WaterCementRatioTableAdapter
         Me.TableAdapterManager.WaterContentForAirEntrainedTableAdapter = Me.WaterContentForAirEntrainedTableAdapter
@@ -960,6 +962,10 @@ Partial Class MainForm
         'WaterContentForNonAirEntrainedTableAdapter
         '
         Me.WaterContentForNonAirEntrainedTableAdapter.ClearBeforeFill = True
+        '
+        'BulkVolumeOfDRCATableAdapter
+        '
+        Me.BulkVolumeOfDRCATableAdapter.ClearBeforeFill = True
         '
         'MainForm
         '
@@ -1087,4 +1093,5 @@ Partial Class MainForm
     Friend WithEvents WaterCementRatioTableAdapter As ACIDatabaseDataSetTableAdapters.WaterCementRatioTableAdapter
     Friend WithEvents WaterContentForAirEntrainedTableAdapter As ACIDatabaseDataSetTableAdapters.WaterContentForAirEntrainedTableAdapter
     Friend WithEvents WaterContentForNonAirEntrainedTableAdapter As ACIDatabaseDataSetTableAdapters.WaterContentForNonAirEntrainedTableAdapter
+    Friend WithEvents BulkVolumeOfDRCATableAdapter As ACIDatabaseDataSetTableAdapters.BulkVolumeOfDRCATableAdapter
 End Class

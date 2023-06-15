@@ -5,5 +5,7 @@
         AirContentForNonAirEntrainedTableAdapter.Fill(ACIDatabaseDataSet.AirContentForNonAirEntrained)
         AirContentForAirEntrainedTableAdapter.Fill(ACIDatabaseDataSet.AirContentForAirEntrained)
         WaterCementRatioTableAdapter.Fill(ACIDatabaseDataSet.WaterCementRatio)
+        BulkVolumeOfDRCATableAdapter.Fill(ACIDatabaseDataSet.BulkVolumeOfDRCA)
     End Sub
+
 End Class
