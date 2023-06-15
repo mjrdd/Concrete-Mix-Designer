@@ -30,6 +30,8 @@ Public Class MainForm
         FineAggVolume,
         AirVolume As Double
 
+
+
     Dim FilePath As String
     Dim Saved As Boolean
 
@@ -238,23 +240,6 @@ Public Class MainForm
 
             End Select
 
-
-
-        Catch ex As InvalidCastException
-            MessageBox.Show("Invalid input values", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-
-
-        Catch ex As OverflowException
-            MessageBox.Show("Entered values are too large.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-
-
-        Catch ex As Exception
-            MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
-
-        End Try
-
-        Try
             ReDim MixProportions(5)
 
             MixProportions(0) = CementVolume / 27
@@ -297,16 +282,10 @@ Public Class MainForm
             End If
 
             Dim PieChartExportPathDir As String = IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Concrete Mix Designer")
-
-            If Not IO.Directory.Exists(PieChartExportPathDir) Then
-                IO.Directory.CreateDirectory(PieChartExportPathDir)
-            End If
+            If Not IO.Directory.Exists(PieChartExportPathDir) Then IO.Directory.CreateDirectory(PieChartExportPathDir)
 
             PieChartExportFilename = IO.Path.Combine(PieChartExportPathDir, "PieChart.gif")
-
-            If IO.File.Exists(PieChartExportFilename) Then
-                IO.File.Delete(PieChartExportFilename)
-            End If
+            If IO.File.Exists(PieChartExportFilename) Then IO.File.Delete(PieChartExportFilename)
 
             Chart.Export(Filename:=PieChartExportFilename)
             picPieChart.SizeMode = PictureBoxSizeMode.Zoom
@@ -318,14 +297,20 @@ Public Class MainForm
             Workbook = Nothing
             ExcelApp.Quit()
 
-            ' TODO: Create visual graphics
             HasResult = True
             picBarChart.Refresh()
 
+        Catch ex As InvalidCastException
+            MessageBox.Show("Invalid input values", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+        Catch ex As OverflowException
+            MessageBox.Show("Entered values are too large.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
         Catch ex As Exception
-            MessageBox.Show(ex.Message)
+            MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
         End Try
+
     End Sub
 
     Private Sub btnReset_Click(sender As Object, e As EventArgs) Handles btnReset.Click
@@ -349,6 +334,13 @@ Public Class MainForm
         cmbMSA.SelectedIndex = 0
         rdbAirEntrained.Checked = True
 
+        If PieChartExportFilename <> Nothing Then
+            picPieChart.Image.Dispose()
+            picBarChart.Image = Nothing
+            IO.File.Delete(PieChartExportFilename)
+        End If
+        PieChartExportFilename = Nothing
+
         HasResult = False
         Array.Clear(MixProportions, 0, 5)
         picBarChart.Refresh()
@@ -358,43 +350,96 @@ Public Class MainForm
 
 
     Private Sub picBarChart_Paint(sender As Object, e As PaintEventArgs) Handles picBarChart.Paint
-        If HasResult Then
-            ' TODO: If possible load texture files
-            Dim ColorForCement As Brush = Brushes.Gray
-            Dim ColorForWater As Brush = Brushes.LightBlue
-            Dim ColorForAir As Brush = Brushes.White
-            Dim ColorForCoarseAgg As Brush = Brushes.PeachPuff
-            Dim ColorForFineAgg As Brush = Brushes.SandyBrown
+        Try
+            If HasResult Then
+                Dim RootDir As String = IO.Directory.GetParent(IO.Path.GetDirectoryName(Application.StartupPath)).ToString
 
-            Dim Padding As Single = 32.0
-            Dim Height As Single = 40.0
-            Dim Width As Single = picBarChart.Width - 2 * Padding
+                Dim WaterTexture As Image = Image.FromFile(IO.Path.Combine(RootDir, "WaterTexture.png"))
+                Dim WaterBrush As New TextureBrush(WaterTexture)
+                WaterBrush.ScaleTransform(0.1, 0.1)
+                WaterBrush.WrapMode = Drawing2D.WrapMode.Tile
 
-            Dim X, Y As Single
-            X = Padding
-            Y = picBarChart.Height / 2 - Height / 2
+                Dim CoarseAggTexture As Image = Image.FromFile(IO.Path.Combine(RootDir, "CoarseAggTexture.png"))
+                Dim CoarseAggBrush As New TextureBrush(CoarseAggTexture)
+                CoarseAggBrush.ScaleTransform(0.1, 0.1)
+                CoarseAggBrush.WrapMode = Drawing2D.WrapMode.Tile
 
-            ' TODO: Convert to for next loop
-            e.Graphics.FillRectangle(ColorForCement, X, Y, CSng(MixProportions(0) * Width), Height)
-            X += MixProportions(0) * Width
+                Dim FineAggTexture As Image = Image.FromFile(IO.Path.Combine(RootDir, "FineAggTexture.png"))
+                Dim FineAggBrush As New TextureBrush(FineAggTexture)
+                FineAggBrush.ScaleTransform(0.1, 0.1)
+                FineAggBrush.WrapMode = Drawing2D.WrapMode.Tile
 
-            e.Graphics.FillRectangle(ColorForWater, X, Y, CSng(MixProportions(1) * Width), Height)
-            X += MixProportions(1) * Width
+                Dim CementBrush As Brush = Brushes.LightGray
+                Dim AirBrush As Brush = Brushes.White
 
-            e.Graphics.FillRectangle(ColorForAir, X, Y, CSng(MixProportions(2) * Width), Height)
-            X += MixProportions(2) * Width
+                Dim Padding As Single = 32.0
+                Dim Height As Single = 40.0
+                Dim Width As Single = picBarChart.Width - 2 * Padding
 
-            e.Graphics.FillRectangle(ColorForFineAgg, X, Y, CSng(MixProportions(3) * Width), Height)
-            X += MixProportions(3) * Width
+                Dim X, Y As Single
+                X = Padding
+                Y = Padding
 
-            e.Graphics.FillRectangle(ColorForCoarseAgg, X, Y, CSng(MixProportions(4) * Width), Height)
+                ' TODO: Convert to for next loop
+                e.Graphics.FillRectangle(CementBrush, X, Y, CSng(MixProportions(0) * Width), Height)
+                e.Graphics.DrawRectangle(Pens.Black, X, Y, CSng(MixProportions(0) * Width), Height)
+                X += MixProportions(0) * Width
 
-            ' TODO: Add legends
-        End If
+                e.Graphics.FillRectangle(WaterBrush, X, Y, CSng(MixProportions(1) * Width), Height)
+                e.Graphics.DrawRectangle(Pens.Black, X, Y, CSng(MixProportions(1) * Width), Height)
+                X += MixProportions(1) * Width
+
+                e.Graphics.FillRectangle(AirBrush, X, Y, CSng(MixProportions(2) * Width), Height)
+                e.Graphics.DrawRectangle(Pens.Black, X, Y, CSng(MixProportions(2) * Width), Height)
+                X += MixProportions(2) * Width
+
+                e.Graphics.FillRectangle(FineAggBrush, X, Y, CSng(MixProportions(3) * Width), Height)
+                e.Graphics.DrawRectangle(Pens.Black, X, Y, CSng(MixProportions(3) * Width), Height)
+                X += MixProportions(3) * Width
+
+                e.Graphics.FillRectangle(CoarseAggBrush, X, Y, CSng(MixProportions(4) * Width), Height)
+                e.Graphics.DrawRectangle(Pens.Black, X, Y, CSng(MixProportions(4) * Width), Height)
+
+                ' TODO: Add legends
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+        End Try
+
+    End Sub
+
+    Private Sub picGraph_Paint(sender As Object, e As PaintEventArgs) Handles picGraph.Paint
+        Dim AxisOrigin(1), Interval(1) As Integer
+        AxisOrigin = {30, picGraph.Height - 30}
+
+        Dim AxisWidth = picGraph.Width - 60
+        Dim AxisHeight = picGraph.Height - 60
+        Interval(0) = AxisWidth / 10
+        Interval(1) = AxisHeight / 5
+
+        With e.Graphics
+            .DrawLine(Pens.DarkGray, 0, AxisOrigin(1), picGraph.Width, AxisOrigin(1))
+            .DrawLine(Pens.DarkGray, AxisOrigin(0), 0, AxisOrigin(0), picGraph.Height)
+
+            For i As Integer = AxisOrigin(0) + Interval(0) To AxisOrigin(0) + AxisWidth Step Interval(0)
+                .DrawLine(Pens.Gray, i, AxisOrigin(1) - 4, i, AxisOrigin(1) + 4)
+            Next
+
+            For i As Integer = AxisOrigin(1) - Interval(1) To AxisOrigin(1) - AxisHeight Step -Interval(1)
+                .DrawLine(Pens.Gray, AxisOrigin(0) - 4, i, AxisOrigin(0) + 4, i)
+            Next
+
+            For i As Integer = 0 To AxisWidth
+                Dim y As Single = 17878 * Math.E ^ (-2.623 * i / AxisWidth)
+                .DrawRectangle(Pens.Black, AxisOrigin(0) + i, AxisOrigin(1) - (y / 8000) * AxisHeight, 1, 1)
+            Next
+        End With
     End Sub
 
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
-        Me.Close()
+        Close()
     End Sub
 
     Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
@@ -404,10 +449,6 @@ Public Class MainForm
     Private Sub RadomizeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RadomizeToolStripMenuItem.Click
         ' Randomize input values
         ' TODO: Recheck minimum and maximum values
-
-        cmbExposure.SelectedIndex = Rand(0, 2)
-        cmbMSA.SelectedIndex = Rand(0, 7)
-
         Dim Entrained = Rand(0, 1)
         rdbAirEntrained.Checked = Entrained = 0
         rdbNonAirEntrained.Checked = Entrained = 1
@@ -415,9 +456,11 @@ Public Class MainForm
         Select Case True
             Case rdbAirEntrained.Checked
                 txtStrength.Text = Rand(2000, 5000)
+                cmbExposure.SelectedIndex = Rand(0, 2)
             Case rdbNonAirEntrained.Checked
                 txtStrength.Text = Rand(2000, 6500)
         End Select
+        cmbMSA.SelectedIndex = Rand(0, 7)
 
         txtSlump.Text = Rand(1.0, 7.0)
         txtCementSG.Text = Rand(1.0, 3.0)
@@ -437,7 +480,13 @@ Public Class MainForm
         NewForm.Show()
     End Sub
 
+    Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
+
+    End Sub
+
     Private Sub ReferenceTablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReferenceTablesToolStripMenuItem.Click
         ReferenceTables.Show()
     End Sub
+
+
 End Class

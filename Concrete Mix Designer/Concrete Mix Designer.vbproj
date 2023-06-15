@@ -215,6 +215,9 @@
     <Content Include="ACIDatabase.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="CoarseAggTexture.png" />
+    <Content Include="FineAggTexture.png" />
+    <Content Include="WaterTexture.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

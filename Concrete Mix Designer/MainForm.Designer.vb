@@ -79,6 +79,7 @@ Partial Class MainForm
         Me.btnCompute = New System.Windows.Forms.Button()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.picGraph = New System.Windows.Forms.PictureBox()
+        Me.picBarChart = New System.Windows.Forms.PictureBox()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.txtFAOutput = New System.Windows.Forms.TextBox()
@@ -93,8 +94,6 @@ Partial Class MainForm
         Me.rdbWeight = New System.Windows.Forms.RadioButton()
         Me.rdbVolumePercent = New System.Windows.Forms.RadioButton()
         Me.rdbVolume = New System.Windows.Forms.RadioButton()
-        Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.picBarChart = New System.Windows.Forms.PictureBox()
         Me.picPieChart = New System.Windows.Forms.PictureBox()
         Me.AciDatabaseDataSet = New Concrete_Mix_Designer.ACIDatabaseDataSet()
         Me.TableAdapterManager = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.TableAdapterManager()
@@ -120,10 +119,9 @@ Partial Class MainForm
         Me.Panel1.SuspendLayout()
         Me.Panel4.SuspendLayout()
         CType(Me.picGraph, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picBarChart, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel6.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
-        Me.Panel5.SuspendLayout()
-        CType(Me.picBarChart, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picPieChart, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.AciDatabaseDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -153,7 +151,7 @@ Partial Class MainForm
         Me.NewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
         Me.NewToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
-        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
+        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
         Me.NewToolStripMenuItem.Text = "&New"
         '
         'OpenToolStripMenuItem
@@ -162,13 +160,13 @@ Partial Class MainForm
         Me.OpenToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
         Me.OpenToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
-        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
+        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
         Me.OpenToolStripMenuItem.Text = "&Open"
         '
         'toolStripSeparator
         '
         Me.toolStripSeparator.Name = "toolStripSeparator"
-        Me.toolStripSeparator.Size = New System.Drawing.Size(178, 6)
+        Me.toolStripSeparator.Size = New System.Drawing.Size(221, 6)
         '
         'SaveToolStripMenuItem
         '
@@ -176,24 +174,24 @@ Partial Class MainForm
         Me.SaveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
         Me.SaveToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
+        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
         Me.SaveToolStripMenuItem.Text = "&Save"
         '
         'SaveAsToolStripMenuItem
         '
         Me.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem"
-        Me.SaveAsToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
+        Me.SaveAsToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
         Me.SaveAsToolStripMenuItem.Text = "Save &As"
         '
         'toolStripSeparator1
         '
         Me.toolStripSeparator1.Name = "toolStripSeparator1"
-        Me.toolStripSeparator1.Size = New System.Drawing.Size(178, 6)
+        Me.toolStripSeparator1.Size = New System.Drawing.Size(221, 6)
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(181, 26)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
         Me.ExitToolStripMenuItem.Text = "E&xit"
         '
         'ToolsToolStripMenuItem
@@ -253,8 +251,8 @@ Partial Class MainForm
         '
         'SplitContainer1.Panel2
         '
+        Me.SplitContainer1.Panel2.Controls.Add(Me.picBarChart)
         Me.SplitContainer1.Panel2.Controls.Add(Me.Panel6)
-        Me.SplitContainer1.Panel2.Controls.Add(Me.Panel5)
         Me.SplitContainer1.Panel2.Controls.Add(Me.picPieChart)
         Me.SplitContainer1.Panel2.Padding = New System.Windows.Forms.Padding(9)
         Me.SplitContainer1.Panel2MinSize = 520
@@ -732,6 +730,18 @@ Partial Class MainForm
         Me.picGraph.TabIndex = 0
         Me.picGraph.TabStop = False
         '
+        'picBarChart
+        '
+        Me.picBarChart.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.picBarChart.BackColor = System.Drawing.Color.Transparent
+        Me.picBarChart.Location = New System.Drawing.Point(13, 588)
+        Me.picBarChart.Margin = New System.Windows.Forms.Padding(4)
+        Me.picBarChart.Name = "picBarChart"
+        Me.picBarChart.Size = New System.Drawing.Size(669, 209)
+        Me.picBarChart.TabIndex = 1
+        Me.picBarChart.TabStop = False
+        '
         'Panel6
         '
         Me.Panel6.Controls.Add(Me.GroupBox5)
@@ -905,31 +915,11 @@ Partial Class MainForm
         Me.rdbVolume.Text = "By Volume (yd³)"
         Me.rdbVolume.UseVisualStyleBackColor = True
         '
-        'Panel5
-        '
-        Me.Panel5.Controls.Add(Me.picBarChart)
-        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel5.Location = New System.Drawing.Point(9, 629)
-        Me.Panel5.Margin = New System.Windows.Forms.Padding(4)
-        Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(677, 172)
-        Me.Panel5.TabIndex = 2
-        '
-        'picBarChart
-        '
-        Me.picBarChart.BackColor = System.Drawing.Color.Transparent
-        Me.picBarChart.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.picBarChart.Location = New System.Drawing.Point(0, 0)
-        Me.picBarChart.Margin = New System.Windows.Forms.Padding(4)
-        Me.picBarChart.Name = "picBarChart"
-        Me.picBarChart.Size = New System.Drawing.Size(677, 172)
-        Me.picBarChart.TabIndex = 1
-        Me.picBarChart.TabStop = False
-        '
         'picPieChart
         '
+        Me.picPieChart.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.picPieChart.BackColor = System.Drawing.Color.Transparent
-        Me.picPieChart.Location = New System.Drawing.Point(13, 258)
+        Me.picPieChart.Location = New System.Drawing.Point(125, 258)
         Me.picPieChart.Margin = New System.Windows.Forms.Padding(4)
         Me.picPieChart.Name = "picPieChart"
         Me.picPieChart.Size = New System.Drawing.Size(444, 322)
@@ -1006,12 +996,11 @@ Partial Class MainForm
         Me.Panel1.ResumeLayout(False)
         Me.Panel4.ResumeLayout(False)
         CType(Me.picGraph, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picBarChart, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel6.ResumeLayout(False)
         Me.Panel6.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
-        Me.Panel5.ResumeLayout(False)
-        CType(Me.picBarChart, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picPieChart, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.AciDatabaseDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -1082,7 +1071,6 @@ Partial Class MainForm
     Friend WithEvents Label16 As Label
     Friend WithEvents picBarChart As PictureBox
     Friend WithEvents picPieChart As PictureBox
-    Friend WithEvents Panel5 As Panel
     Friend WithEvents Panel6 As Panel
     Friend WithEvents rdbVolumePercent As RadioButton
     Friend WithEvents rdbVolume As RadioButton
