@@ -314,7 +314,7 @@ Partial Class MainForm
         Me.GroupBox4.Location = New System.Drawing.Point(16, 549)
         Me.GroupBox4.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Padding = New System.Windows.Forms.Padding(4)
+        Me.GroupBox4.Padding = New System.Windows.Forms.Padding(8)
         Me.GroupBox4.Size = New System.Drawing.Size(428, 197)
         Me.GroupBox4.TabIndex = 3
         Me.GroupBox4.TabStop = False
@@ -323,17 +323,17 @@ Partial Class MainForm
         'txtFASM
         '
         Me.txtFASM.Font = New System.Drawing.Font("Segoe UI", 11.0!)
-        Me.txtFASM.Location = New System.Drawing.Point(281, 145)
+        Me.txtFASM.Location = New System.Drawing.Point(246, 147)
         Me.txtFASM.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFASM.Name = "txtFASM"
-        Me.txtFASM.Size = New System.Drawing.Size(137, 32)
+        Me.txtFASM.Size = New System.Drawing.Size(170, 32)
         Me.txtFASM.TabIndex = 3
         '
         'Label11
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Label11.Location = New System.Drawing.Point(115, 110)
+        Me.Label11.Location = New System.Drawing.Point(12, 112)
         Me.Label11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(145, 23)
@@ -344,17 +344,17 @@ Partial Class MainForm
         'txtFAFM
         '
         Me.txtFAFM.Font = New System.Drawing.Font("Segoe UI", 11.0!)
-        Me.txtFAFM.Location = New System.Drawing.Point(281, 105)
+        Me.txtFAFM.Location = New System.Drawing.Point(246, 107)
         Me.txtFAFM.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFAFM.Name = "txtFAFM"
-        Me.txtFAFM.Size = New System.Drawing.Size(137, 32)
+        Me.txtFAFM.Size = New System.Drawing.Size(170, 32)
         Me.txtFAFM.TabIndex = 2
         '
         'Label9
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Label9.Location = New System.Drawing.Point(139, 28)
+        Me.Label9.Location = New System.Drawing.Point(12, 32)
         Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(125, 23)
@@ -365,17 +365,17 @@ Partial Class MainForm
         'txtFAAC
         '
         Me.txtFAAC.Font = New System.Drawing.Font("Segoe UI", 11.0!)
-        Me.txtFAAC.Location = New System.Drawing.Point(281, 64)
+        Me.txtFAAC.Location = New System.Drawing.Point(246, 67)
         Me.txtFAAC.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFAAC.Name = "txtFAAC"
-        Me.txtFAAC.Size = New System.Drawing.Size(137, 32)
+        Me.txtFAAC.Size = New System.Drawing.Size(170, 32)
         Me.txtFAAC.TabIndex = 1
         '
         'Label10
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Label10.Location = New System.Drawing.Point(96, 69)
+        Me.Label10.Location = New System.Drawing.Point(12, 72)
         Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(164, 23)
@@ -386,17 +386,17 @@ Partial Class MainForm
         'txtFASG
         '
         Me.txtFASG.Font = New System.Drawing.Font("Segoe UI", 11.0!)
-        Me.txtFASG.Location = New System.Drawing.Point(281, 23)
+        Me.txtFASG.Location = New System.Drawing.Point(246, 27)
         Me.txtFASG.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFASG.Name = "txtFASG"
-        Me.txtFASG.Size = New System.Drawing.Size(137, 32)
+        Me.txtFASG.Size = New System.Drawing.Size(170, 32)
         Me.txtFASG.TabIndex = 0
         '
         'Label12
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Label12.Location = New System.Drawing.Point(124, 150)
+        Me.Label12.Location = New System.Drawing.Point(12, 152)
         Me.Label12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(138, 23)
@@ -417,7 +417,7 @@ Partial Class MainForm
         Me.GroupBox3.Location = New System.Drawing.Point(16, 345)
         Me.GroupBox3.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Padding = New System.Windows.Forms.Padding(4)
+        Me.GroupBox3.Padding = New System.Windows.Forms.Padding(8)
         Me.GroupBox3.Size = New System.Drawing.Size(428, 197)
         Me.GroupBox3.TabIndex = 2
         Me.GroupBox3.TabStop = False
@@ -426,44 +426,44 @@ Partial Class MainForm
         'txtCASM
         '
         Me.txtCASM.Font = New System.Drawing.Font("Segoe UI", 11.0!)
-        Me.txtCASM.Location = New System.Drawing.Point(281, 145)
+        Me.txtCASM.Location = New System.Drawing.Point(246, 147)
         Me.txtCASM.Margin = New System.Windows.Forms.Padding(4)
         Me.txtCASM.Name = "txtCASM"
-        Me.txtCASM.Size = New System.Drawing.Size(137, 32)
+        Me.txtCASM.Size = New System.Drawing.Size(170, 32)
         Me.txtCASM.TabIndex = 3
         '
         'txtCAUW
         '
         Me.txtCAUW.Font = New System.Drawing.Font("Segoe UI", 11.0!)
-        Me.txtCAUW.Location = New System.Drawing.Point(281, 105)
+        Me.txtCAUW.Location = New System.Drawing.Point(246, 107)
         Me.txtCAUW.Margin = New System.Windows.Forms.Padding(4)
         Me.txtCAUW.Name = "txtCAUW"
-        Me.txtCAUW.Size = New System.Drawing.Size(137, 32)
+        Me.txtCAUW.Size = New System.Drawing.Size(170, 32)
         Me.txtCAUW.TabIndex = 2
         '
         'txtCAAC
         '
         Me.txtCAAC.Font = New System.Drawing.Font("Segoe UI", 11.0!)
-        Me.txtCAAC.Location = New System.Drawing.Point(281, 64)
+        Me.txtCAAC.Location = New System.Drawing.Point(246, 67)
         Me.txtCAAC.Margin = New System.Windows.Forms.Padding(4)
         Me.txtCAAC.Name = "txtCAAC"
-        Me.txtCAAC.Size = New System.Drawing.Size(137, 32)
+        Me.txtCAAC.Size = New System.Drawing.Size(170, 32)
         Me.txtCAAC.TabIndex = 1
         '
         'txtCASG
         '
         Me.txtCASG.Font = New System.Drawing.Font("Segoe UI", 11.0!)
-        Me.txtCASG.Location = New System.Drawing.Point(281, 23)
+        Me.txtCASG.Location = New System.Drawing.Point(246, 27)
         Me.txtCASG.Margin = New System.Windows.Forms.Padding(4)
         Me.txtCASG.Name = "txtCASG"
-        Me.txtCASG.Size = New System.Drawing.Size(137, 32)
+        Me.txtCASG.Size = New System.Drawing.Size(170, 32)
         Me.txtCASG.TabIndex = 0
         '
         'Label8
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Label8.Location = New System.Drawing.Point(124, 150)
+        Me.Label8.Location = New System.Drawing.Point(12, 152)
         Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(138, 23)
@@ -475,7 +475,7 @@ Partial Class MainForm
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Label7.Location = New System.Drawing.Point(63, 110)
+        Me.Label7.Location = New System.Drawing.Point(12, 112)
         Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(194, 23)
@@ -487,7 +487,7 @@ Partial Class MainForm
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Label6.Location = New System.Drawing.Point(96, 69)
+        Me.Label6.Location = New System.Drawing.Point(12, 73)
         Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(164, 23)
@@ -499,7 +499,7 @@ Partial Class MainForm
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Label5.Location = New System.Drawing.Point(139, 28)
+        Me.Label5.Location = New System.Drawing.Point(12, 32)
         Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(125, 23)
@@ -514,7 +514,7 @@ Partial Class MainForm
         Me.GroupBox2.Location = New System.Drawing.Point(16, 258)
         Me.GroupBox2.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(4)
+        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(8)
         Me.GroupBox2.Size = New System.Drawing.Size(428, 79)
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
@@ -523,17 +523,17 @@ Partial Class MainForm
         'txtCementSG
         '
         Me.txtCementSG.Font = New System.Drawing.Font("Segoe UI", 11.0!)
-        Me.txtCementSG.Location = New System.Drawing.Point(281, 23)
+        Me.txtCementSG.Location = New System.Drawing.Point(246, 27)
         Me.txtCementSG.Margin = New System.Windows.Forms.Padding(4)
         Me.txtCementSG.Name = "txtCementSG"
-        Me.txtCementSG.Size = New System.Drawing.Size(137, 32)
+        Me.txtCementSG.Size = New System.Drawing.Size(170, 32)
         Me.txtCementSG.TabIndex = 0
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Label4.Location = New System.Drawing.Point(139, 28)
+        Me.Label4.Location = New System.Drawing.Point(12, 32)
         Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(125, 23)
@@ -556,7 +556,7 @@ Partial Class MainForm
         Me.GroupBox1.Location = New System.Drawing.Point(16, 12)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(8)
         Me.GroupBox1.Size = New System.Drawing.Size(428, 239)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
@@ -565,26 +565,26 @@ Partial Class MainForm
         'txtStrength
         '
         Me.txtStrength.Font = New System.Drawing.Font("Segoe UI", 11.0!)
-        Me.txtStrength.Location = New System.Drawing.Point(283, 23)
+        Me.txtStrength.Location = New System.Drawing.Point(246, 27)
         Me.txtStrength.Margin = New System.Windows.Forms.Padding(4)
         Me.txtStrength.Name = "txtStrength"
-        Me.txtStrength.Size = New System.Drawing.Size(137, 32)
+        Me.txtStrength.Size = New System.Drawing.Size(170, 32)
         Me.txtStrength.TabIndex = 0
         '
         'txtSlump
         '
         Me.txtSlump.Font = New System.Drawing.Font("Segoe UI", 11.0!)
-        Me.txtSlump.Location = New System.Drawing.Point(283, 63)
+        Me.txtSlump.Location = New System.Drawing.Point(246, 67)
         Me.txtSlump.Margin = New System.Windows.Forms.Padding(4)
         Me.txtSlump.Name = "txtSlump"
-        Me.txtSlump.Size = New System.Drawing.Size(137, 32)
+        Me.txtSlump.Size = New System.Drawing.Size(170, 32)
         Me.txtSlump.TabIndex = 1
         '
         'rdbNonAirEntrained
         '
         Me.rdbNonAirEntrained.AutoSize = True
         Me.rdbNonAirEntrained.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.rdbNonAirEntrained.Location = New System.Drawing.Point(250, 144)
+        Me.rdbNonAirEntrained.Location = New System.Drawing.Point(154, 148)
         Me.rdbNonAirEntrained.Margin = New System.Windows.Forms.Padding(4)
         Me.rdbNonAirEntrained.Name = "rdbNonAirEntrained"
         Me.rdbNonAirEntrained.Size = New System.Drawing.Size(170, 27)
@@ -597,7 +597,7 @@ Partial Class MainForm
         '
         Me.rdbAirEntrained.AutoSize = True
         Me.rdbAirEntrained.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.rdbAirEntrained.Location = New System.Drawing.Point(112, 144)
+        Me.rdbAirEntrained.Location = New System.Drawing.Point(16, 148)
         Me.rdbAirEntrained.Margin = New System.Windows.Forms.Padding(4)
         Me.rdbAirEntrained.Name = "rdbAirEntrained"
         Me.rdbAirEntrained.Size = New System.Drawing.Size(130, 27)
@@ -610,7 +610,7 @@ Partial Class MainForm
         '
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Label17.Location = New System.Drawing.Point(84, 108)
+        Me.Label17.Location = New System.Drawing.Point(12, 112)
         Me.Label17.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(191, 23)
@@ -622,7 +622,7 @@ Partial Class MainForm
         '
         Me.lblExposure.AutoSize = True
         Me.lblExposure.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.lblExposure.Location = New System.Drawing.Point(196, 184)
+        Me.lblExposure.Location = New System.Drawing.Point(12, 188)
         Me.lblExposure.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblExposure.Name = "lblExposure"
         Me.lblExposure.Size = New System.Drawing.Size(79, 23)
@@ -634,7 +634,7 @@ Partial Class MainForm
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Label2.Location = New System.Drawing.Point(188, 68)
+        Me.Label2.Location = New System.Drawing.Point(12, 72)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(87, 23)
@@ -646,7 +646,7 @@ Partial Class MainForm
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.Label1.Location = New System.Drawing.Point(65, 28)
+        Me.Label1.Location = New System.Drawing.Point(12, 32)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(210, 23)
@@ -660,10 +660,10 @@ Partial Class MainForm
         Me.cmbMSA.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.cmbMSA.FormattingEnabled = True
         Me.cmbMSA.Items.AddRange(New Object() {"3/8", "1/2", "3/4", "1", "1-1/2", "2", "3", "6"})
-        Me.cmbMSA.Location = New System.Drawing.Point(283, 103)
+        Me.cmbMSA.Location = New System.Drawing.Point(246, 107)
         Me.cmbMSA.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbMSA.Name = "cmbMSA"
-        Me.cmbMSA.Size = New System.Drawing.Size(137, 33)
+        Me.cmbMSA.Size = New System.Drawing.Size(170, 33)
         Me.cmbMSA.TabIndex = 3
         '
         'cmbExposure
@@ -672,10 +672,10 @@ Partial Class MainForm
         Me.cmbExposure.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.cmbExposure.FormattingEnabled = True
         Me.cmbExposure.Items.AddRange(New Object() {"Mild", "Moderate", "Severe"})
-        Me.cmbExposure.Location = New System.Drawing.Point(283, 179)
+        Me.cmbExposure.Location = New System.Drawing.Point(246, 183)
         Me.cmbExposure.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbExposure.Name = "cmbExposure"
-        Me.cmbExposure.Size = New System.Drawing.Size(137, 33)
+        Me.cmbExposure.Size = New System.Drawing.Size(170, 33)
         Me.cmbExposure.TabIndex = 2
         '
         'Panel1
@@ -929,11 +929,10 @@ Partial Class MainForm
         'picPieChart
         '
         Me.picPieChart.BackColor = System.Drawing.Color.Transparent
-        Me.picPieChart.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.picPieChart.Location = New System.Drawing.Point(9, 9)
+        Me.picPieChart.Location = New System.Drawing.Point(13, 258)
         Me.picPieChart.Margin = New System.Windows.Forms.Padding(4)
         Me.picPieChart.Name = "picPieChart"
-        Me.picPieChart.Size = New System.Drawing.Size(677, 792)
+        Me.picPieChart.Size = New System.Drawing.Size(444, 322)
         Me.picPieChart.TabIndex = 1
         Me.picPieChart.TabStop = False
         '

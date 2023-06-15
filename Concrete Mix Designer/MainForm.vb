@@ -33,6 +33,8 @@ Public Class MainForm
     Dim FilePath As String
     Dim Saved As Boolean
 
+    Dim PieChartExportFilename As String
+
     Dim HasResult As Boolean
     Dim MixProportions(4) As Double
 
@@ -53,6 +55,7 @@ Public Class MainForm
     End Sub
 
     Private Sub MainForm_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
+        ' Ask user to confirm exit when the data in the current window is not saved
         If Not Saved Then
             Dim UserResponse As DialogResult = MessageBox.Show(
                 "The file is currently not saved. Disregard changes and close the file?",
@@ -174,16 +177,9 @@ Public Class MainForm
                 End If
             Next
 
-            Dim WCColIndex As Integer
-            Select Case True
-                Case rdbAirEntrained.Checked
-                    WCColIndex = 1
-                Case rdbNonAirEntrained.Checked
-                    WCColIndex = 2
-            End Select
-
-            WaterCementRatio = WaterCementRatioTable.Rows.Item(RowIndex).Item(WCColIndex)
+            WaterCementRatio = WaterCementRatioTable.Rows.Item(RowIndex).Item(If(rdbNonAirEntrained.Checked, 1, 2))
             CementWeight = WaterWeight / WaterCementRatio
+
 
             CoarseAggWeight = 0.63 * CoarseAggUW * 27
             CoarseAggWeight *= 1 + CoarseAggAC
@@ -242,31 +238,92 @@ Public Class MainForm
 
             End Select
 
-            ' TODO: Create pie chart based on result
-            Dim ExcelApp As New Excel.Application
-            Dim WorkBook As Excel.Workbook
 
-            ' TODO: Create visual graphics
-            HasResult = True
-
-            ReDim MixProportions(5)
-
-            MixProportions(0) = CementVolume / 27
-            MixProportions(1) = WaterVolume / 27
-            MixProportions(2) = CoarseAggVolume / 27
-            MixProportions(3) = FineAggVolume / 27
-            MixProportions(4) = AirContent
-
-            picBarChart.Refresh()
 
         Catch ex As InvalidCastException
             MessageBox.Show("Invalid input values", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning)
 
+
         Catch ex As OverflowException
             MessageBox.Show("Entered values are too large.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Warning)
 
+
         Catch ex As Exception
             MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+
+        End Try
+
+        Try
+            ReDim MixProportions(5)
+
+            MixProportions(0) = CementVolume / 27
+            MixProportions(1) = WaterVolume / 27
+            MixProportions(2) = AirContent
+            MixProportions(3) = FineAggVolume / 27
+            MixProportions(4) = CoarseAggVolume / 27
+
+            ' TODO: Create pie chart based on result
+            Dim ExcelApp As New Excel.Application
+            Dim Workbook = ExcelApp.Workbooks.Add
+            Dim Sheet As Excel.Worksheet = Workbook.Sheets("Sheet1")
+            Dim Chart As Excel.Chart = Workbook.Charts.Add
+
+            With Sheet
+                .Range("A1").Value = "Concrete Components"
+                .Range("A2").Value = "Cement"
+                .Range("A3").Value = "Water"
+                .Range("A4").Value = "Air"
+                .Range("A5").Value = "Fine Aggregates"
+                .Range("A6").Value = "Coarse Aggregates"
+                .Range("B1").Value = "Mix Proportions"
+
+                For Row As Integer = 2 To 6
+                    .Cells(Row, 2).Value = MixProportions(Row - 2)
+                Next
+            End With
+
+            With Chart
+                .ApplyCustomType(Excel.XlChartType.xlPie)
+                .SetSourceData(Source:=Sheet.Range("A2:B6"))
+                .HasLegend = True
+                .HasTitle = True
+                .ChartTitle.Text = "Concrete Mix Proportions"
+            End With
+
+            If PieChartExportFilename <> Nothing Then
+                picPieChart.Image.Dispose()
+                picBarChart.Image = Nothing
+            End If
+
+            Dim PieChartExportPathDir As String = IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Concrete Mix Designer")
+
+            If Not IO.Directory.Exists(PieChartExportPathDir) Then
+                IO.Directory.CreateDirectory(PieChartExportPathDir)
+            End If
+
+            PieChartExportFilename = IO.Path.Combine(PieChartExportPathDir, "PieChart.gif")
+
+            If IO.File.Exists(PieChartExportFilename) Then
+                IO.File.Delete(PieChartExportFilename)
+            End If
+
+            Chart.Export(Filename:=PieChartExportFilename)
+            picPieChart.SizeMode = PictureBoxSizeMode.Zoom
+            picPieChart.Image = Image.FromFile(PieChartExportFilename)
+
+            Workbook.Saved = True
+            Chart = Nothing
+            Sheet = Nothing
+            Workbook = Nothing
+            ExcelApp.Quit()
+
+            ' TODO: Create visual graphics
+            HasResult = True
+            picBarChart.Refresh()
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
 
         End Try
     End Sub
@@ -327,10 +384,10 @@ Public Class MainForm
             e.Graphics.FillRectangle(ColorForAir, X, Y, CSng(MixProportions(2) * Width), Height)
             X += MixProportions(2) * Width
 
-            e.Graphics.FillRectangle(ColorForCoarseAgg, X, Y, CSng(MixProportions(3) * Width), Height)
+            e.Graphics.FillRectangle(ColorForFineAgg, X, Y, CSng(MixProportions(3) * Width), Height)
             X += MixProportions(3) * Width
 
-            e.Graphics.FillRectangle(ColorForFineAgg, X, Y, CSng(MixProportions(4) * Width), Height)
+            e.Graphics.FillRectangle(ColorForCoarseAgg, X, Y, CSng(MixProportions(4) * Width), Height)
 
             ' TODO: Add legends
         End If

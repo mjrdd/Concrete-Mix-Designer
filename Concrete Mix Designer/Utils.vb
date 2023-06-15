@@ -1,10 +1,12 @@
 ﻿Module Utils
     Public Function Rand(min As Integer, max As Integer) As Integer
+        Randomize()
         Return (max * Rnd()) + min
     End Function
 
     Public Function Rand(min As Double, max As Double) As Double
         ' TODO: Dynamic number of decimals
+        Randomize()
         Return Math.Round(max * Rnd() + min, 3)
     End Function
 
