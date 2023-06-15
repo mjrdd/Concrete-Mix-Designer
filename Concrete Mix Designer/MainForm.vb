@@ -180,7 +180,6 @@ Public Class MainForm
             WaterCementRatio = WaterCementRatioTable.Rows.Item(RowIndex).Item(If(rdbNonAirEntrained.Checked, 1, 2))
             CementWeight = WaterWeight / WaterCementRatio
 
-
             CoarseAggWeight = 0.63 * CoarseAggUW * 27
             CoarseAggWeight *= 1 + CoarseAggAC
 
@@ -188,9 +187,10 @@ Public Class MainForm
             WaterVolume = WaterWeight / 62.4
             CementVolume = CementWeight / (CementSG * 62.4)
             CoarseAggVolume = CoarseAggWeight / (CoarseAggSG * 62.4)
+            AirVolume = AirContent * 0.01 * 27
 
             ' Compute for the total volume
-            Dim TotalVolume As Double = WaterVolume + CementVolume + CoarseAggVolume
+            Dim TotalVolume As Double = WaterVolume + CementVolume + CoarseAggVolume + AirVolume
 
             ' Compute for the volume of fine aggregates
             FineAggVolume = 27 - TotalVolume
@@ -218,9 +218,9 @@ Public Class MainForm
 
                 Case rdbVolumePercent.Checked
                     txtCementOutput.Text = Math.Round(CementVolume / 27, 3) * 100
-                    txtWaterOutput.Text = Math.Round(WaterVolume / 27, 3)
-                    txtCAOutput.Text = Math.Round(CoarseAggVolume / 27, 3)
-                    txtFAOutput.Text = Math.Round(FineAggVolume / 27, 3)
+                    txtWaterOutput.Text = Math.Round(WaterVolume / 27, 3) * 100
+                    txtCAOutput.Text = Math.Round(CoarseAggVolume / 27, 3) * 100
+                    txtFAOutput.Text = Math.Round(FineAggVolume / 27, 3) * 100
 
                 Case rdbWeight.Checked
                     txtCementOutput.Text = Math.Round(CementWeight, 3)
@@ -259,7 +259,7 @@ Public Class MainForm
 
             MixProportions(0) = CementVolume / 27
             MixProportions(1) = WaterVolume / 27
-            MixProportions(2) = AirContent
+            MixProportions(2) = AirContent / 100
             MixProportions(3) = FineAggVolume / 27
             MixProportions(4) = CoarseAggVolume / 27
 
