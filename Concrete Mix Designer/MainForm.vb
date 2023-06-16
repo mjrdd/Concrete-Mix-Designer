@@ -40,6 +40,7 @@ Public Class MainForm
 
     Dim MousePosX, MousePosY As Integer
     Dim StrengthValueFromGraph As Double
+    Dim MouseOnTop As Boolean
 
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         WaterContentForNonAirEntrainedTableAdapter.Fill(AciDatabaseDataSet.WaterContentForNonAirEntrained)
@@ -131,6 +132,7 @@ Public Class MainForm
             lblExposure.Visible = rdbAirEntrained.Checked
             cmbExposure.Visible = rdbAirEntrained.Checked
             cmbExposure.SelectedIndex = 0
+            picGraph.Refresh()
         End If
     End Sub
 
@@ -170,6 +172,13 @@ Public Class MainForm
                 Case 6.0 To 7.0
                     SlumpRowIndex = 2
                 Case Else
+                    MessageBox.Show(
+                        "This program currently only support 1-7in of slump as per ACI 211",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    )
+
                     Exit Sub
             End Select
 
@@ -190,6 +199,26 @@ Public Class MainForm
             End Select
 
             WaterCementRatioTable = WaterCementRatioTableAdapter.GetData().CopyToDataTable()
+
+            If rdbAirEntrained.Checked And (Strength < 2000 Or Strength > 5000) Then
+                MessageBox.Show(
+                    "This program currently only support 2000-5000psi of compressive strength for air entrained concrete",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                )
+                Exit Sub
+
+            ElseIf rdbNonAirEntrained.Checked And (Strength < 2000 Or Strength > 6500) Then
+                MessageBox.Show(
+                    "This program currently only support 2000-6500psi of compressive strength for non-air entrained concrete",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                )
+                Exit Sub
+
+            End If
 
             For i = 0 To WaterCementRatioTable.Rows.Count - 1
                 If WaterCementRatioTable.Rows.Item(i).Item(0) = Strength Then
@@ -284,7 +313,6 @@ Public Class MainForm
             ' Required mixing water
             Dim RequiredWater As Double = WaterWeight - DeltaWaterWeight
 
-            ' TODO: Display the output based on user selected: volume or weight (or percentages)
             Select Case True
                 Case rdbVolume.Checked
                     txtCementOutput.Text = Math.Round(CementVolume, 3)
@@ -482,15 +510,23 @@ Public Class MainForm
     End Sub
 
     Private Sub picGraph_Paint(sender As Object, e As PaintEventArgs) Handles picGraph.Paint
-        Dim AxisOriginX, AxisOriginY, StepX, StepY As Integer
+        Dim AxisOriginX,
+            AxisOriginY,
+            StepX,
+            StepY,
+            Width,
+            Height As Integer
+        Dim Ratio As Double
+
         AxisOriginX = 30
         AxisOriginY = picGraph.Height - 30
 
-        Dim Width = picGraph.Width - 30
-        Dim Height = picGraph.Height - 30
+        Width = picGraph.Width - 30
+        Height = picGraph.Height - 30
         StepX = Width / 10
         StepY = Height / 5
 
+        ' Draw axes
         With e.Graphics
             .DrawLine(Pens.DarkGray, 0, AxisOriginY, picGraph.Width, AxisOriginY)
             .DrawLine(Pens.DarkGray, AxisOriginX, 0, AxisOriginX, picGraph.Height)
@@ -502,40 +538,99 @@ Public Class MainForm
             For i As Integer = AxisOriginY - StepY To StepY - Height Step -StepY
                 .DrawLine(Pens.Gray, AxisOriginX - 4, i, AxisOriginX + 4, i)
             Next
-
-            For i As Integer = 0 To Width
-                Dim DeltaY As Single = 17878 * Math.E ^ (-2.623 * i / Width)
-                .DrawRectangle(Pens.Black, AxisOriginX + i, AxisOriginY - (DeltaY / 8000) * Height, 1, 1)
-            Next
-
-            Dim Ratio = (MousePosX - 30) / Width
-            StrengthValueFromGraph = 17878 * Math.E ^ (-2.623 * Ratio)
-            Dim PosY As Single = AxisOriginY - (StrengthValueFromGraph / 8000) * Height
-
-            .DrawLine(Pens.Red, MousePosX, PosY, MousePosX, AxisOriginY)
-            .DrawLine(Pens.Red, 30, PosY, MousePosX, PosY)
-
-            Dim TextFont As New Font("Arial", 10, FontStyle.Regular)
-            .DrawString(Math.Round(StrengthValueFromGraph) & " psi", TextFont, Brushes.Red, 35, PosY - 20)
-
-            Dim TextFormat As New StringFormat With {
-                .Alignment = StringAlignment.Center
-            }
-
-            .DrawString(Math.Round(Ratio, 2), TextFont, Brushes.Red, MousePosX, AxisOriginY + 10, TextFormat)
         End With
+
+        Select Case True
+            Case rdbAirEntrained.Checked
+                With e.Graphics
+                    For i As Integer = 0 To Width
+                        Dim DeltaY As Single = 14901 * Math.E ^ (-2.701 * i / Width)
+                        If DeltaY < 2000 Or DeltaY > 5000 Then Continue For
+                        .DrawRectangle(Pens.Black, AxisOriginX + i, AxisOriginY - (DeltaY / 8000) * Height, 1, 1)
+                    Next
+
+                    If MouseOnTop Then
+                        Ratio = (MousePosX - 30) / Width
+                        Dim DeltaY = 14901 * Math.E ^ (-2.701 * Ratio)
+                        If DeltaY > 2000 And DeltaY < 5000 Then
+                            StrengthValueFromGraph = DeltaY
+                            Dim PosY As Single = AxisOriginY - (StrengthValueFromGraph / 8000) * Height
+
+                            .DrawLine(Pens.Red, MousePosX, PosY, MousePosX, AxisOriginY)
+                            .DrawLine(Pens.Red, 30, PosY, MousePosX, PosY)
+
+                            Dim TextFont As New Font("Arial", 10, FontStyle.Regular)
+                            .DrawString(Math.Round(StrengthValueFromGraph) & " psi", TextFont, Brushes.Red, 35, PosY - 20)
+
+                            Dim TextFormat As New StringFormat With {
+                            .Alignment = StringAlignment.Center
+                        }
+                            .DrawString(Math.Round(Ratio, 2), TextFont, Brushes.Red, MousePosX, AxisOriginY + 10, TextFormat)
+
+                        Else
+                            StrengthValueFromGraph = 0
+                        End If
+                    End If
+                End With
+
+            Case rdbNonAirEntrained.Checked
+                With e.Graphics
+                    For i As Integer = 0 To Width
+                        Dim DeltaY As Single = 17878 * Math.E ^ (-2.623 * i / Width)
+                        If DeltaY < 2000 Or DeltaY > 6500 Then Continue For
+                        .DrawRectangle(Pens.Black, AxisOriginX + i, AxisOriginY - (DeltaY / 8000) * Height, 1, 1)
+                    Next
+
+                    If MouseOnTop Then
+                        Ratio = (MousePosX - 30) / Width
+                        Dim DeltaY As Double = 17878 * Math.E ^ (-2.623 * Ratio)
+                        If DeltaY > 2000 And DeltaY < 6500 Then
+                            StrengthValueFromGraph = DeltaY
+                            Dim PosY As Single = AxisOriginY - (StrengthValueFromGraph / 8000) * Height
+
+                            .DrawLine(Pens.Red, MousePosX, PosY, MousePosX, AxisOriginY)
+                            .DrawLine(Pens.Red, 30, PosY, MousePosX, PosY)
+
+                            Dim TextFont As New Font("Arial", 10, FontStyle.Regular)
+                            .DrawString(Math.Round(StrengthValueFromGraph) & " psi", TextFont, Brushes.Red, 35, PosY - 20)
+
+                            Dim TextFormat As New StringFormat With {
+                            .Alignment = StringAlignment.Center
+                        }
+                            .DrawString(Math.Round(Ratio, 2), TextFont, Brushes.Red, MousePosX, AxisOriginY + 10, TextFormat)
+                        Else
+                            StrengthValueFromGraph = 0
+                        End If
+                    End If
+                End With
+        End Select
+
+
+    End Sub
+
+    Private Sub picGraph_MouseEnter(sender As Object, e As EventArgs) Handles picGraph.MouseEnter
+        MouseOnTop = True
+        picGraph.Refresh()
+    End Sub
+
+    Private Sub picGraph_MouseLeave(sender As Object, e As EventArgs) Handles picGraph.MouseLeave
+        MouseOnTop = False
+        picGraph.Refresh()
     End Sub
 
     Private Sub picGraph_MouseMove(sender As Object, e As MouseEventArgs) Handles picGraph.MouseMove
-        MousePosX = e.X
-        MousePosY = e.Y
+        If MouseOnTop Then
+            MousePosX = e.X
+            MousePosY = e.Y
 
-        picGraph.Refresh()
-
+            picGraph.Refresh()
+        End If
     End Sub
 
     Private Sub picGraph_MouseUp(sender As Object, e As MouseEventArgs) Handles picGraph.MouseUp
-        txtStrength.Text = Math.Round(StrengthValueFromGraph)
+        If StrengthValueFromGraph <> 0 Then
+            txtStrength.Text = Math.Round(StrengthValueFromGraph)
+        End If
     End Sub
 
     Private Sub NewToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NewToolStripMenuItem.Click

@@ -105,6 +105,7 @@ Partial Class MainForm
         Me.BulkVolumeOfDRCATableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.BulkVolumeOfDRCATableAdapter()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -127,6 +128,7 @@ Partial Class MainForm
         Me.GroupBox5.SuspendLayout()
         CType(Me.picPieChart, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.AciDatabaseDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox6.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip1
@@ -650,9 +652,9 @@ Partial Class MainForm
         Me.Label1.Location = New System.Drawing.Point(12, 32)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(210, 23)
+        Me.Label1.Size = New System.Drawing.Size(212, 23)
         Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Compressive Strength (ksi)"
+        Me.Label1.Text = "Compressive Strength (psi)"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'cmbMSA
@@ -713,12 +715,12 @@ Partial Class MainForm
         '
         'Panel4
         '
-        Me.Panel4.Controls.Add(Me.picGraph)
+        Me.Panel4.Controls.Add(Me.GroupBox6)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Location = New System.Drawing.Point(0, 0)
         Me.Panel4.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Padding = New System.Windows.Forms.Padding(9)
+        Me.Panel4.Padding = New System.Windows.Forms.Padding(4)
         Me.Panel4.Size = New System.Drawing.Size(560, 390)
         Me.Panel4.TabIndex = 1
         '
@@ -726,10 +728,10 @@ Partial Class MainForm
         '
         Me.picGraph.BackColor = System.Drawing.Color.Transparent
         Me.picGraph.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.picGraph.Location = New System.Drawing.Point(9, 9)
+        Me.picGraph.Location = New System.Drawing.Point(8, 23)
         Me.picGraph.Margin = New System.Windows.Forms.Padding(4)
         Me.picGraph.Name = "picGraph"
-        Me.picGraph.Size = New System.Drawing.Size(542, 372)
+        Me.picGraph.Size = New System.Drawing.Size(536, 351)
         Me.picGraph.TabIndex = 0
         Me.picGraph.TabStop = False
         '
@@ -973,6 +975,18 @@ Partial Class MainForm
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
+        'GroupBox6
+        '
+        Me.GroupBox6.Controls.Add(Me.picGraph)
+        Me.GroupBox6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox6.Location = New System.Drawing.Point(4, 4)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Padding = New System.Windows.Forms.Padding(8)
+        Me.GroupBox6.Size = New System.Drawing.Size(552, 382)
+        Me.GroupBox6.TabIndex = 1
+        Me.GroupBox6.TabStop = False
+        Me.GroupBox6.Text = "Water-Cement Ratio vs Compressive Strength (28 days)"
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -1015,6 +1029,7 @@ Partial Class MainForm
         Me.GroupBox5.PerformLayout()
         CType(Me.picPieChart, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.AciDatabaseDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox6.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1102,4 +1117,5 @@ Partial Class MainForm
     Friend WithEvents BulkVolumeOfDRCATableAdapter As ACIDatabaseDataSetTableAdapters.BulkVolumeOfDRCATableAdapter
     Friend WithEvents SaveFileDialog1 As SaveFileDialog
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
+    Friend WithEvents GroupBox6 As GroupBox
 End Class
