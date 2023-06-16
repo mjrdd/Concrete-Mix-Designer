@@ -335,11 +335,10 @@ Public Class MainForm
                 Case rdbWeightPercent.Checked
                     Dim TotalWeight = CementWeight + WaterWeight + CoarseAggWeight + FineAggWeight
 
-                    txtCementOutput.Text = Math.Round(CementWeight / TotalWeight, 3)
-                    txtWaterOutput.Text = Math.Round(WaterWeight / TotalWeight, 3)
-                    txtCAOutput.Text = Math.Round(CoarseAggWeight / TotalWeight, 3)
-                    txtFAOutput.Text = Math.Round(FineAggWeight / TotalWeight, 3)
-
+                    txtCementOutput.Text = Math.Round(CementWeight / TotalWeight, 3) * 100
+                    txtWaterOutput.Text = Math.Round(WaterWeight / TotalWeight, 3) * 100
+                    txtCAOutput.Text = Math.Round(CoarseAggWeight / TotalWeight, 3) * 100
+                    txtFAOutput.Text = Math.Round(FineAggWeight / TotalWeight, 3) * 100
             End Select
 
             ReDim MixProportions(5)
@@ -447,6 +446,43 @@ Public Class MainForm
         txtStrength.Focus()
     End Sub
 
+    Private Sub TypeOfResult_CheckedChanged(sender As Object, e As EventArgs) Handles _
+        rdbVolume.CheckedChanged,
+        rdbVolumePercent.CheckedChanged,
+        rdbWeight.CheckedChanged,
+        rdbWeightPercent.CheckedChanged
+
+        If sender.Checked And HasResult Then
+            Select Case True
+                Case rdbVolume.Checked
+                    txtCementOutput.Text = Math.Round(CementVolume, 3)
+                    txtWaterOutput.Text = Math.Round(WaterVolume, 3)
+                    txtCAOutput.Text = Math.Round(CoarseAggVolume, 3)
+                    txtFAOutput.Text = Math.Round(FineAggVolume, 3)
+
+                Case rdbVolumePercent.Checked
+                    txtCementOutput.Text = Math.Round(CementVolume / 27, 3) * 100
+                    txtWaterOutput.Text = Math.Round(WaterVolume / 27, 3) * 100
+                    txtCAOutput.Text = Math.Round(CoarseAggVolume / 27, 3) * 100
+                    txtFAOutput.Text = Math.Round(FineAggVolume / 27, 3) * 100
+
+                Case rdbWeight.Checked
+                    txtCementOutput.Text = Math.Round(CementWeight, 3)
+                    txtWaterOutput.Text = Math.Round(WaterWeight, 3)
+                    txtCAOutput.Text = Math.Round(CoarseAggWeight, 3)
+                    txtFAOutput.Text = Math.Round(FineAggWeight, 3)
+
+                Case rdbWeightPercent.Checked
+                    Dim TotalWeight = CementWeight + WaterWeight + CoarseAggWeight + FineAggWeight
+
+                    txtCementOutput.Text = Math.Round(CementWeight / TotalWeight, 3) * 100
+                    txtWaterOutput.Text = Math.Round(WaterWeight / TotalWeight, 3) * 100
+                    txtCAOutput.Text = Math.Round(CoarseAggWeight / TotalWeight, 3) * 100
+                    txtFAOutput.Text = Math.Round(FineAggWeight / TotalWeight, 3) * 100
+            End Select
+        End If
+    End Sub
+
 
     Private Sub picBarChart_Paint(sender As Object, e As PaintEventArgs) Handles picBarChart.Paint
         Try
@@ -479,7 +515,6 @@ Public Class MainForm
                 X = Padding
                 Y = Padding
 
-                ' TODO: Convert to for next loop
                 e.Graphics.FillRectangle(CementBrush, X, Y, CSng(MixProportions(0) * Width), Height)
                 e.Graphics.DrawRectangle(Pens.Black, X, Y, CSng(MixProportions(0) * Width), Height)
                 X += MixProportions(0) * Width
@@ -498,8 +533,6 @@ Public Class MainForm
 
                 e.Graphics.FillRectangle(CoarseAggBrush, X, Y, CSng(MixProportions(4) * Width), Height)
                 e.Graphics.DrawRectangle(Pens.Black, X, Y, CSng(MixProportions(4) * Width), Height)
-
-                ' TODO: Add legends
             End If
 
         Catch ex As Exception
@@ -518,55 +551,65 @@ Public Class MainForm
             Height As Integer
         Dim Ratio As Double
 
-        AxisOriginX = 30
+        AxisOriginX = 40
         AxisOriginY = picGraph.Height - 30
 
-        Width = picGraph.Width - 30
-        Height = picGraph.Height - 30
-        StepX = Width / 10
-        StepY = Height / 5
+        Width = picGraph.Width - 70
+        Height = picGraph.Height - 60
+        StepX = Width / 7
+        StepY = Height / 4
 
         ' Draw axes
         With e.Graphics
             .DrawLine(Pens.DarkGray, 0, AxisOriginY, picGraph.Width, AxisOriginY)
             .DrawLine(Pens.DarkGray, AxisOriginX, 0, AxisOriginX, picGraph.Height)
 
-            For i As Integer = AxisOriginX + StepX To AxisOriginX + Width Step StepX
+            Dim TextFont As New Font("Arial", 8, FontStyle.Regular)
+            Dim TextFormat As New StringFormat With {
+                .Alignment = StringAlignment.Center
+            }
+            Dim Count As Integer
+
+            'Along horizontal axis
+            Count = 0
+            For i As Integer = AxisOriginX + StepX To AxisOriginX + Width - 30 Step StepX
                 .DrawLine(Pens.Gray, i, AxisOriginY - 4, i, AxisOriginY + 4)
+                .DrawString(Count * 0.1 + 0.3, TextFont, Brushes.Black, i, AxisOriginY + 12, TextFormat)
+                Count += 1
             Next
 
-            For i As Integer = AxisOriginY - StepY To StepY - Height Step -StepY
+            'Along vertical axis
+            Count = 0
+            For i As Integer = AxisOriginY - StepY To AxisOriginY - Height + 30 Step -StepY
                 .DrawLine(Pens.Gray, AxisOriginX - 4, i, AxisOriginX + 4, i)
+                .DrawString(Count * 2000 + 2000, TextFont, Brushes.Black, 0, i - 8)
+                Count += 1
             Next
         End With
 
         Select Case True
             Case rdbAirEntrained.Checked
                 With e.Graphics
+                    'Draw the water-to-cement ratio vs compressive strength curve
                     For i As Integer = 0 To Width
-                        Dim DeltaY As Single = 14901 * Math.E ^ (-2.701 * i / Width)
+                        Dim DeltaY As Single = 14901 * Math.E ^ (-2.701 * (i * 0.1 / StepX + 0.2))
                         If DeltaY < 2000 Or DeltaY > 5000 Then Continue For
                         .DrawRectangle(Pens.Black, AxisOriginX + i, AxisOriginY - (DeltaY / 8000) * Height, 1, 1)
                     Next
 
                     If MouseOnTop Then
-                        Ratio = (MousePosX - 30) / Width
+                        Ratio = (MousePosX - 40) * 0.1 / StepX + 0.2
                         Dim DeltaY = 14901 * Math.E ^ (-2.701 * Ratio)
                         If DeltaY > 2000 And DeltaY < 5000 Then
                             StrengthValueFromGraph = DeltaY
                             Dim PosY As Single = AxisOriginY - (StrengthValueFromGraph / 8000) * Height
 
                             .DrawLine(Pens.Red, MousePosX, PosY, MousePosX, AxisOriginY)
-                            .DrawLine(Pens.Red, 30, PosY, MousePosX, PosY)
+                            .DrawLine(Pens.Red, 40, PosY, MousePosX, PosY)
 
                             Dim TextFont As New Font("Arial", 10, FontStyle.Regular)
-                            .DrawString(Math.Round(StrengthValueFromGraph) & " psi", TextFont, Brushes.Red, 35, PosY - 20)
-
-                            Dim TextFormat As New StringFormat With {
-                            .Alignment = StringAlignment.Center
-                        }
-                            .DrawString(Math.Round(Ratio, 2), TextFont, Brushes.Red, MousePosX, AxisOriginY + 10, TextFormat)
-
+                            .DrawString(Math.Round(StrengthValueFromGraph) & " psi", TextFont, Brushes.Red, 45, PosY - 20)
+                            .DrawString(Math.Round(Ratio, 2), TextFont, Brushes.Red, MousePosX + 5, AxisOriginY - 15)
                         Else
                             StrengthValueFromGraph = 0
                         End If
@@ -575,29 +618,26 @@ Public Class MainForm
 
             Case rdbNonAirEntrained.Checked
                 With e.Graphics
+                    'Draw the water-to-cement ratio vs compressive strength curve
                     For i As Integer = 0 To Width
-                        Dim DeltaY As Single = 17878 * Math.E ^ (-2.623 * i / Width)
+                        Dim DeltaY As Single = 17878 * Math.E ^ (-2.623 * (i * 0.1 / StepX + 0.2))
                         If DeltaY < 2000 Or DeltaY > 6500 Then Continue For
                         .DrawRectangle(Pens.Black, AxisOriginX + i, AxisOriginY - (DeltaY / 8000) * Height, 1, 1)
                     Next
 
                     If MouseOnTop Then
-                        Ratio = (MousePosX - 30) / Width
+                        Ratio = (MousePosX - 40) * 0.1 / StepX + 0.2
                         Dim DeltaY As Double = 17878 * Math.E ^ (-2.623 * Ratio)
                         If DeltaY > 2000 And DeltaY < 6500 Then
                             StrengthValueFromGraph = DeltaY
                             Dim PosY As Single = AxisOriginY - (StrengthValueFromGraph / 8000) * Height
 
                             .DrawLine(Pens.Red, MousePosX, PosY, MousePosX, AxisOriginY)
-                            .DrawLine(Pens.Red, 30, PosY, MousePosX, PosY)
+                            .DrawLine(Pens.Red, 40, PosY, MousePosX, PosY)
 
                             Dim TextFont As New Font("Arial", 10, FontStyle.Regular)
-                            .DrawString(Math.Round(StrengthValueFromGraph) & " psi", TextFont, Brushes.Red, 35, PosY - 20)
-
-                            Dim TextFormat As New StringFormat With {
-                            .Alignment = StringAlignment.Center
-                        }
-                            .DrawString(Math.Round(Ratio, 2), TextFont, Brushes.Red, MousePosX, AxisOriginY + 10, TextFormat)
+                            .DrawString(Math.Round(StrengthValueFromGraph) & " psi", TextFont, Brushes.Red, 45, PosY - 20)
+                            .DrawString(Math.Round(Ratio, 2), TextFont, Brushes.Red, MousePosX + 5, AxisOriginY - 15)
                         Else
                             StrengthValueFromGraph = 0
                         End If

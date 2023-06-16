@@ -34,7 +34,6 @@ Partial Class MainForm
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RandomizeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ReferenceTablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
@@ -78,6 +77,7 @@ Partial Class MainForm
         Me.btnReset = New System.Windows.Forms.Button()
         Me.btnCompute = New System.Windows.Forms.Button()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.picGraph = New System.Windows.Forms.PictureBox()
         Me.picBarChart = New System.Windows.Forms.PictureBox()
         Me.Panel6 = New System.Windows.Forms.Panel()
@@ -105,7 +105,6 @@ Partial Class MainForm
         Me.BulkVolumeOfDRCATableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.BulkVolumeOfDRCATableAdapter()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -122,13 +121,13 @@ Partial Class MainForm
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel4.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
         CType(Me.picGraph, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picBarChart, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel6.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         CType(Me.picPieChart, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.AciDatabaseDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox6.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip1
@@ -201,7 +200,7 @@ Partial Class MainForm
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RandomizeToolStripMenuItem, Me.OptionsToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RandomizeToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(58, 24)
         Me.ToolsToolStripMenuItem.Text = "&Tools"
@@ -211,12 +210,6 @@ Partial Class MainForm
         Me.RandomizeToolStripMenuItem.Name = "RandomizeToolStripMenuItem"
         Me.RandomizeToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
         Me.RandomizeToolStripMenuItem.Text = "&Randomize"
-        '
-        'OptionsToolStripMenuItem
-        '
-        Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
-        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
-        Me.OptionsToolStripMenuItem.Text = "&Options"
         '
         'HelpToolStripMenuItem
         '
@@ -724,6 +717,18 @@ Partial Class MainForm
         Me.Panel4.Size = New System.Drawing.Size(560, 390)
         Me.Panel4.TabIndex = 1
         '
+        'GroupBox6
+        '
+        Me.GroupBox6.Controls.Add(Me.picGraph)
+        Me.GroupBox6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox6.Location = New System.Drawing.Point(4, 4)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Padding = New System.Windows.Forms.Padding(8)
+        Me.GroupBox6.Size = New System.Drawing.Size(552, 382)
+        Me.GroupBox6.TabIndex = 1
+        Me.GroupBox6.TabStop = False
+        Me.GroupBox6.Text = "Water-Cement Ratio vs Compressive Strength (28 days)"
+        '
         'picGraph
         '
         Me.picGraph.BackColor = System.Drawing.Color.Transparent
@@ -975,18 +980,6 @@ Partial Class MainForm
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'GroupBox6
-        '
-        Me.GroupBox6.Controls.Add(Me.picGraph)
-        Me.GroupBox6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupBox6.Location = New System.Drawing.Point(4, 4)
-        Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Padding = New System.Windows.Forms.Padding(8)
-        Me.GroupBox6.Size = New System.Drawing.Size(552, 382)
-        Me.GroupBox6.TabIndex = 1
-        Me.GroupBox6.TabStop = False
-        Me.GroupBox6.Text = "Water-Cement Ratio vs Compressive Strength (28 days)"
-        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -1021,6 +1014,7 @@ Partial Class MainForm
         Me.GroupBox1.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel4.ResumeLayout(False)
+        Me.GroupBox6.ResumeLayout(False)
         CType(Me.picGraph, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picBarChart, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel6.ResumeLayout(False)
@@ -1029,7 +1023,6 @@ Partial Class MainForm
         Me.GroupBox5.PerformLayout()
         CType(Me.picPieChart, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.AciDatabaseDataSet, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox6.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1046,7 +1039,6 @@ Partial Class MainForm
     Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents RandomizeToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents OptionsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents HelpToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ReferenceTablesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents toolStripSeparator5 As ToolStripSeparator
