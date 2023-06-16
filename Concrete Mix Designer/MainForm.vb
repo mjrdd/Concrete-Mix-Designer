@@ -504,19 +504,17 @@ Public Class MainForm
     Private Sub picBarChart_Paint(sender As Object, e As PaintEventArgs) Handles picBarChart.Paint
         Try
             If HasResult Then
-                Dim RootDir As String = IO.Directory.GetParent(IO.Path.GetDirectoryName(Application.StartupPath)).ToString
-
-                Dim WaterTexture As Image = Image.FromFile(IO.Path.Combine(RootDir, "WaterTexture.png"))
+                Dim WaterTexture As Image = My.Resources.WaterTexture
                 Dim WaterBrush As New TextureBrush(WaterTexture)
                 WaterBrush.ScaleTransform(0.1, 0.1)
                 WaterBrush.WrapMode = Drawing2D.WrapMode.Tile
 
-                Dim CoarseAggTexture As Image = Image.FromFile(IO.Path.Combine(RootDir, "CoarseAggTexture.png"))
+                Dim CoarseAggTexture As Image = My.Resources.CoarseAggTexture
                 Dim CoarseAggBrush As New TextureBrush(CoarseAggTexture)
                 CoarseAggBrush.ScaleTransform(0.1, 0.1)
                 CoarseAggBrush.WrapMode = Drawing2D.WrapMode.Tile
 
-                Dim FineAggTexture As Image = Image.FromFile(IO.Path.Combine(RootDir, "FineAggTexture.png"))
+                Dim FineAggTexture As Image = My.Resources.FineAggTexture
                 Dim FineAggBrush As New TextureBrush(FineAggTexture)
                 FineAggBrush.ScaleTransform(0.1, 0.1)
                 FineAggBrush.WrapMode = Drawing2D.WrapMode.Tile
