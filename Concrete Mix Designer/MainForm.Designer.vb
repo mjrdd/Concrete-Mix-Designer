@@ -588,7 +588,7 @@ Partial Class MainForm
         Me.rdbNonAirEntrained.Margin = New System.Windows.Forms.Padding(4)
         Me.rdbNonAirEntrained.Name = "rdbNonAirEntrained"
         Me.rdbNonAirEntrained.Size = New System.Drawing.Size(170, 27)
-        Me.rdbNonAirEntrained.TabIndex = 5
+        Me.rdbNonAirEntrained.TabIndex = 4
         Me.rdbNonAirEntrained.TabStop = True
         Me.rdbNonAirEntrained.Text = "Non-Air Entrained"
         Me.rdbNonAirEntrained.UseVisualStyleBackColor = True
@@ -601,7 +601,7 @@ Partial Class MainForm
         Me.rdbAirEntrained.Margin = New System.Windows.Forms.Padding(4)
         Me.rdbAirEntrained.Name = "rdbAirEntrained"
         Me.rdbAirEntrained.Size = New System.Drawing.Size(130, 27)
-        Me.rdbAirEntrained.TabIndex = 4
+        Me.rdbAirEntrained.TabIndex = 3
         Me.rdbAirEntrained.TabStop = True
         Me.rdbAirEntrained.Text = "Air Entrained"
         Me.rdbAirEntrained.UseVisualStyleBackColor = True
@@ -664,7 +664,7 @@ Partial Class MainForm
         Me.cmbMSA.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbMSA.Name = "cmbMSA"
         Me.cmbMSA.Size = New System.Drawing.Size(170, 33)
-        Me.cmbMSA.TabIndex = 3
+        Me.cmbMSA.TabIndex = 2
         '
         'cmbExposure
         '
@@ -676,7 +676,7 @@ Partial Class MainForm
         Me.cmbExposure.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbExposure.Name = "cmbExposure"
         Me.cmbExposure.Size = New System.Drawing.Size(170, 33)
-        Me.cmbExposure.TabIndex = 2
+        Me.cmbExposure.TabIndex = 5
         '
         'Panel1
         '
@@ -1010,8 +1010,10 @@ Partial Class MainForm
         '
         'MainForm
         '
+        Me.AcceptButton = Me.btnCompute
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.btnReset
         Me.ClientSize = New System.Drawing.Size(1262, 873)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.MenuStrip1)

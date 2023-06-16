@@ -56,19 +56,27 @@ Public Class MainForm
         cmbExposure.SelectedIndex = 0
 
         txtStrength.Focus()
-
-        rdbVolume.Checked = True
+        rdbWeight.Checked = True
     End Sub
 
     Private Sub MainForm_Closing(sender As Object, e As CancelEventArgs) Handles MyBase.Closing
         ' Ask user to confirm exit when the data in the current window is not saved
         If Not Saved Then
-            Dim UserResponse As DialogResult = MessageBox.Show(
+            If MessageBox.Show(
                 "The file is currently not saved. Disregard changes and close the file?",
                 "Confirm Exit",
                 MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question)
-            If UserResponse = DialogResult.No Then e.Cancel = True
+                MessageBoxIcon.Question
+            ) = DialogResult.No Then
+                e.Cancel = True
+                Exit Sub
+            End If
+        End If
+
+        If PieChartExportFilename <> Nothing Then
+            picPieChart.Image.Dispose()
+            picPieChart.Image = Nothing
+            If IO.File.Exists(PieChartExportFilename) Then IO.File.Delete(PieChartExportFilename)
         End If
     End Sub
 
@@ -156,7 +164,8 @@ Public Class MainForm
 
             If PieChartExportFilename <> Nothing Then
                 picPieChart.Image.Dispose()
-                picBarChart.Image = Nothing
+                picPieChart.Image = Nothing
+                If IO.File.Exists(PieChartExportFilename) Then IO.File.Delete(PieChartExportFilename)
             End If
 
             Dim WaterContentTable,
@@ -280,10 +289,8 @@ Public Class MainForm
                                 FineAggFM
                             )
                             Exit For
-
                         End If
                     Next
-
             End Select
 
             CoarseAggWeight = BulkVolumeDRCA * CoarseAggUW * 27
@@ -394,8 +401,7 @@ Public Class MainForm
             Dim PieChartExportPathDir As String = IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Concrete Mix Designer")
             If Not IO.Directory.Exists(PieChartExportPathDir) Then IO.Directory.CreateDirectory(PieChartExportPathDir)
 
-            PieChartExportFilename = IO.Path.Combine(PieChartExportPathDir, "PieChart.gif")
-            If IO.File.Exists(PieChartExportFilename) Then IO.File.Delete(PieChartExportFilename)
+            PieChartExportFilename = IO.Path.Combine(PieChartExportPathDir, String.Format("{0}.gif", Rnd()))
 
             Chart.Export(Filename:=PieChartExportFilename)
             picPieChart.SizeMode = PictureBoxSizeMode.Zoom
@@ -446,15 +452,14 @@ Public Class MainForm
 
         If PieChartExportFilename <> Nothing Then
             picPieChart.Image.Dispose()
-            picBarChart.Image = Nothing
-            IO.File.Delete(PieChartExportFilename)
+            picPieChart.Image = Nothing
+            If IO.File.Exists(PieChartExportFilename) Then IO.File.Delete(PieChartExportFilename)
+            PieChartExportFilename = Nothing
         End If
-        PieChartExportFilename = Nothing
 
         HasResult = False
         Array.Clear(VolumeDistribution, 0, 5)
         picBarChart.Refresh()
-
         txtStrength.Focus()
     End Sub
 
