@@ -861,18 +861,18 @@ Public Class MainForm
             Case rdbNonAirEntrained.Checked
                 txtStrength.Text = RandomNumber(2000, 6500)
         End Select
-        cmbMSA.SelectedIndex = RandomNumber(0, 7)
+        cmbMSA.SelectedIndex = RandomNumber(0, 4)
 
         txtSlump.Text = RandomNumber(1.0, 7.0, 3)
         txtCementSG.Text = RandomNumber(3.0, 3.16, 3)
         txtCAAC.Text = RandomNumber(0.01, 0.1, 3)
         txtCASG.Text = RandomNumber(2.5, 3.0, 3)
-        txtCASM.Text = RandomNumber(0.01, 0.1, 3)
+        txtCASM.Text = RandomNumber(0.0, 0.02, 3)
         txtCAUW.Text = RandomNumber(75.0, 110.0, 3)
         txtFAAC.Text = RandomNumber(0.01, 0.1, 3)
         txtFAFM.Text = RandomNumber(2.0, 3.5, 3)
         txtFASG.Text = RandomNumber(2.5, 3.0, 3)
-        txtFASM.Text = RandomNumber(0.01, 0.1, 3)
+        txtFASM.Text = RandomNumber(0.0, 0.02, 3)
     End Sub
 
     Private Sub ReferenceTablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ReferenceTablesToolStripMenuItem.Click
