@@ -692,6 +692,7 @@ Partial Class MainForm
         '
         'btnReset
         '
+        Me.btnReset.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnReset.Location = New System.Drawing.Point(141, 24)
         Me.btnReset.Margin = New System.Windows.Forms.Padding(4)
         Me.btnReset.Name = "btnReset"
@@ -932,10 +933,10 @@ Partial Class MainForm
         Me.rdbWeight.Location = New System.Drawing.Point(15, 85)
         Me.rdbWeight.Margin = New System.Windows.Forms.Padding(4)
         Me.rdbWeight.Name = "rdbWeight"
-        Me.rdbWeight.Size = New System.Drawing.Size(144, 27)
+        Me.rdbWeight.Size = New System.Drawing.Size(175, 27)
         Me.rdbWeight.TabIndex = 2
         Me.rdbWeight.TabStop = True
-        Me.rdbWeight.Text = "By Weight (lbs)"
+        Me.rdbWeight.Text = "By Weight (lbs/yd³)"
         Me.rdbWeight.UseVisualStyleBackColor = True
         '
         'rdbVolumePercent
@@ -958,10 +959,10 @@ Partial Class MainForm
         Me.rdbVolume.Location = New System.Drawing.Point(15, 14)
         Me.rdbVolume.Margin = New System.Windows.Forms.Padding(4)
         Me.rdbVolume.Name = "rdbVolume"
-        Me.rdbVolume.Size = New System.Drawing.Size(151, 27)
+        Me.rdbVolume.Size = New System.Drawing.Size(175, 27)
         Me.rdbVolume.TabIndex = 0
         Me.rdbVolume.TabStop = True
-        Me.rdbVolume.Text = "By Volume (yd³)"
+        Me.rdbVolume.Text = "By Volume (ft³/yd³)"
         Me.rdbVolume.UseVisualStyleBackColor = True
         '
         'AciDatabaseDataSet
