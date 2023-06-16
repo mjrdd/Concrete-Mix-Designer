@@ -79,7 +79,10 @@ Partial Class MainForm
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.picGraph = New System.Windows.Forms.PictureBox()
+        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
         Me.picBarChart = New System.Windows.Forms.PictureBox()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.picPieChart = New System.Windows.Forms.PictureBox()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.txtFAOutput = New System.Windows.Forms.TextBox()
@@ -94,7 +97,6 @@ Partial Class MainForm
         Me.rdbWeight = New System.Windows.Forms.RadioButton()
         Me.rdbVolumePercent = New System.Windows.Forms.RadioButton()
         Me.rdbVolume = New System.Windows.Forms.RadioButton()
-        Me.picPieChart = New System.Windows.Forms.PictureBox()
         Me.AciDatabaseDataSet = New Concrete_Mix_Designer.ACIDatabaseDataSet()
         Me.TableAdapterManager = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.TableAdapterManager()
         Me.AirContentForAirEntrainedTableAdapter = New Concrete_Mix_Designer.ACIDatabaseDataSetTableAdapters.AirContentForAirEntrainedTableAdapter()
@@ -123,10 +125,12 @@ Partial Class MainForm
         Me.Panel4.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         CType(Me.picGraph, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox8.SuspendLayout()
         CType(Me.picBarChart, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox7.SuspendLayout()
+        CType(Me.picPieChart, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel6.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
-        CType(Me.picPieChart, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.AciDatabaseDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -138,7 +142,7 @@ Partial Class MainForm
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(7, 2, 0, 2)
-        Me.MenuStrip1.Size = New System.Drawing.Size(1259, 28)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1262, 28)
         Me.MenuStrip1.TabIndex = 0
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -208,7 +212,7 @@ Partial Class MainForm
         'RandomizeToolStripMenuItem
         '
         Me.RandomizeToolStripMenuItem.Name = "RandomizeToolStripMenuItem"
-        Me.RandomizeToolStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.RandomizeToolStripMenuItem.Size = New System.Drawing.Size(167, 26)
         Me.RandomizeToolStripMenuItem.Text = "&Randomize"
         '
         'HelpToolStripMenuItem
@@ -249,13 +253,13 @@ Partial Class MainForm
         '
         'SplitContainer1.Panel2
         '
-        Me.SplitContainer1.Panel2.Controls.Add(Me.picBarChart)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.GroupBox8)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.GroupBox7)
         Me.SplitContainer1.Panel2.Controls.Add(Me.Panel6)
-        Me.SplitContainer1.Panel2.Controls.Add(Me.picPieChart)
         Me.SplitContainer1.Panel2.Padding = New System.Windows.Forms.Padding(9)
         Me.SplitContainer1.Panel2MinSize = 520
-        Me.SplitContainer1.Size = New System.Drawing.Size(1259, 810)
-        Me.SplitContainer1.SplitterDistance = 560
+        Me.SplitContainer1.Size = New System.Drawing.Size(1262, 845)
+        Me.SplitContainer1.SplitterDistance = 561
         Me.SplitContainer1.TabIndex = 0
         Me.SplitContainer1.TabStop = False
         '
@@ -277,8 +281,8 @@ Partial Class MainForm
         '
         Me.SplitContainer2.Panel2.Controls.Add(Me.Panel4)
         Me.SplitContainer2.Panel2MinSize = 280
-        Me.SplitContainer2.Size = New System.Drawing.Size(560, 810)
-        Me.SplitContainer2.SplitterDistance = 416
+        Me.SplitContainer2.Size = New System.Drawing.Size(561, 845)
+        Me.SplitContainer2.SplitterDistance = 433
         Me.SplitContainer2.TabIndex = 0
         Me.SplitContainer2.TabStop = False
         '
@@ -294,7 +298,7 @@ Partial Class MainForm
         Me.Panel2.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Padding = New System.Windows.Forms.Padding(9)
-        Me.Panel2.Size = New System.Drawing.Size(560, 346)
+        Me.Panel2.Size = New System.Drawing.Size(561, 363)
         Me.Panel2.TabIndex = 0
         '
         'GroupBox4
@@ -679,11 +683,11 @@ Partial Class MainForm
         Me.Panel1.Controls.Add(Me.btnReset)
         Me.Panel1.Controls.Add(Me.btnCompute)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel1.Location = New System.Drawing.Point(0, 346)
+        Me.Panel1.Location = New System.Drawing.Point(0, 363)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Padding = New System.Windows.Forms.Padding(8)
-        Me.Panel1.Size = New System.Drawing.Size(560, 70)
+        Me.Panel1.Size = New System.Drawing.Size(561, 70)
         Me.Panel1.TabIndex = 1
         '
         'btnReset
@@ -714,7 +718,7 @@ Partial Class MainForm
         Me.Panel4.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Padding = New System.Windows.Forms.Padding(4)
-        Me.Panel4.Size = New System.Drawing.Size(560, 390)
+        Me.Panel4.Size = New System.Drawing.Size(561, 408)
         Me.Panel4.TabIndex = 1
         '
         'GroupBox6
@@ -724,7 +728,7 @@ Partial Class MainForm
         Me.GroupBox6.Location = New System.Drawing.Point(4, 4)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.Padding = New System.Windows.Forms.Padding(8)
-        Me.GroupBox6.Size = New System.Drawing.Size(552, 382)
+        Me.GroupBox6.Size = New System.Drawing.Size(553, 400)
         Me.GroupBox6.TabIndex = 1
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Water-Cement Ratio vs Compressive Strength (28 days)"
@@ -736,21 +740,56 @@ Partial Class MainForm
         Me.picGraph.Location = New System.Drawing.Point(8, 23)
         Me.picGraph.Margin = New System.Windows.Forms.Padding(4)
         Me.picGraph.Name = "picGraph"
-        Me.picGraph.Size = New System.Drawing.Size(536, 351)
+        Me.picGraph.Size = New System.Drawing.Size(537, 369)
         Me.picGraph.TabIndex = 0
         Me.picGraph.TabStop = False
         '
+        'GroupBox8
+        '
+        Me.GroupBox8.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox8.Controls.Add(Me.picBarChart)
+        Me.GroupBox8.Location = New System.Drawing.Point(12, 602)
+        Me.GroupBox8.Name = "GroupBox8"
+        Me.GroupBox8.Size = New System.Drawing.Size(673, 231)
+        Me.GroupBox8.TabIndex = 5
+        Me.GroupBox8.TabStop = False
+        Me.GroupBox8.Text = "Volume Distribution"
+        '
         'picBarChart
         '
-        Me.picBarChart.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.picBarChart.BackColor = System.Drawing.Color.Transparent
-        Me.picBarChart.Location = New System.Drawing.Point(13, 588)
+        Me.picBarChart.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.picBarChart.Location = New System.Drawing.Point(3, 18)
         Me.picBarChart.Margin = New System.Windows.Forms.Padding(4)
         Me.picBarChart.Name = "picBarChart"
-        Me.picBarChart.Size = New System.Drawing.Size(669, 209)
+        Me.picBarChart.Size = New System.Drawing.Size(667, 210)
         Me.picBarChart.TabIndex = 1
         Me.picBarChart.TabStop = False
+        '
+        'GroupBox7
+        '
+        Me.GroupBox7.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox7.Controls.Add(Me.picPieChart)
+        Me.GroupBox7.Location = New System.Drawing.Point(12, 236)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(676, 360)
+        Me.GroupBox7.TabIndex = 4
+        Me.GroupBox7.TabStop = False
+        Me.GroupBox7.Text = "Weight Distribution"
+        '
+        'picPieChart
+        '
+        Me.picPieChart.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.picPieChart.BackColor = System.Drawing.Color.Transparent
+        Me.picPieChart.Location = New System.Drawing.Point(116, 22)
+        Me.picPieChart.Margin = New System.Windows.Forms.Padding(4)
+        Me.picPieChart.Name = "picPieChart"
+        Me.picPieChart.Size = New System.Drawing.Size(444, 322)
+        Me.picPieChart.TabIndex = 1
+        Me.picPieChart.TabStop = False
         '
         'Panel6
         '
@@ -764,7 +803,7 @@ Partial Class MainForm
         Me.Panel6.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Padding = New System.Windows.Forms.Padding(11, 10, 11, 10)
-        Me.Panel6.Size = New System.Drawing.Size(677, 241)
+        Me.Panel6.Size = New System.Drawing.Size(679, 220)
         Me.Panel6.TabIndex = 3
         '
         'GroupBox5
@@ -784,7 +823,7 @@ Partial Class MainForm
         Me.GroupBox5.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Padding = New System.Windows.Forms.Padding(4)
-        Me.GroupBox5.Size = New System.Drawing.Size(426, 197)
+        Me.GroupBox5.Size = New System.Drawing.Size(428, 192)
         Me.GroupBox5.TabIndex = 4
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Concrete Mix Proportion"
@@ -925,17 +964,6 @@ Partial Class MainForm
         Me.rdbVolume.Text = "By Volume (yd³)"
         Me.rdbVolume.UseVisualStyleBackColor = True
         '
-        'picPieChart
-        '
-        Me.picPieChart.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.picPieChart.BackColor = System.Drawing.Color.Transparent
-        Me.picPieChart.Location = New System.Drawing.Point(125, 258)
-        Me.picPieChart.Margin = New System.Windows.Forms.Padding(4)
-        Me.picPieChart.Name = "picPieChart"
-        Me.picPieChart.Size = New System.Drawing.Size(444, 322)
-        Me.picPieChart.TabIndex = 1
-        Me.picPieChart.TabStop = False
-        '
         'AciDatabaseDataSet
         '
         Me.AciDatabaseDataSet.DataSetName = "ACIDatabaseDataSet"
@@ -984,12 +1012,12 @@ Partial Class MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1259, 838)
+        Me.ClientSize = New System.Drawing.Size(1262, 873)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Margin = New System.Windows.Forms.Padding(4)
-        Me.MinimumSize = New System.Drawing.Size(1274, 875)
+        Me.MinimumSize = New System.Drawing.Size(1280, 920)
         Me.Name = "MainForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Concrete Mix Designer"
@@ -1016,12 +1044,14 @@ Partial Class MainForm
         Me.Panel4.ResumeLayout(False)
         Me.GroupBox6.ResumeLayout(False)
         CType(Me.picGraph, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox8.ResumeLayout(False)
         CType(Me.picBarChart, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox7.ResumeLayout(False)
+        CType(Me.picPieChart, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel6.ResumeLayout(False)
         Me.Panel6.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
-        CType(Me.picPieChart, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.AciDatabaseDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -1110,4 +1140,6 @@ Partial Class MainForm
     Friend WithEvents SaveFileDialog1 As SaveFileDialog
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents GroupBox6 As GroupBox
+    Friend WithEvents GroupBox7 As GroupBox
+    Friend WithEvents GroupBox8 As GroupBox
 End Class

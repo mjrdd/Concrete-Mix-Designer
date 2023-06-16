@@ -8,7 +8,7 @@ Public Class MainForm
     Dim Strength,
         Slump,
         WaterCementRatio,
-        AirContent As Double
+        AirContent As Single
 
     Dim CementSG,
         CoarseAggAC,
@@ -18,7 +18,7 @@ Public Class MainForm
         FineAggAC,
         FineAggFM,
         FineAggSG,
-        FineAggSM As Double
+        FineAggSM As Single
 
     Dim WaterWeight,
         WaterVolume,
@@ -28,7 +28,7 @@ Public Class MainForm
         CoarseAggVolume,
         FineAggWeight,
         FineAggVolume,
-        AirVolume As Double
+        AirVolume As Single
 
     Dim SaveFilePath As String
     Dim Saved As Boolean = True
@@ -36,10 +36,11 @@ Public Class MainForm
     Dim PieChartExportFilename As String
 
     Dim HasResult As Boolean
-    Dim MixProportions(4) As Double
+    Dim VolumeDistribution(5),
+        WeightDistribution(5) As Single
 
     Dim MousePosX, MousePosY As Integer
-    Dim StrengthValueFromGraph As Double
+    Dim StrengthValueFromGraph As Single
     Dim MouseOnTop As Boolean
 
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -167,7 +168,7 @@ Public Class MainForm
             Select Case Slump
                 Case 1.0 To 2.0
                     SlumpRowIndex = 0
-                Case 2.0 To 5.0
+                Case 2.0 To 6.0
                     SlumpRowIndex = 1
                 Case 6.0 To 7.0
                     SlumpRowIndex = 2
@@ -242,7 +243,7 @@ Public Class MainForm
             CementWeight = WaterWeight / WaterCementRatio
 
             BulkVolumeDRCATable = BulkVolumeOfDRCATableAdapter.GetData().CopyToDataTable()
-            Dim BulkVolumeDRCA As Double
+            Dim BulkVolumeDRCA As Single
 
             Select Case FineAggFM
                 Case Is < 2.4
@@ -304,52 +305,65 @@ Public Class MainForm
             FineAggWeight = FineAggVolume * FineAggSG * 62.4
 
             ' Increase amount of aggregates by the amount equal to surface moisture
-            Dim AdjustedFineAggWeight As Double = FineAggWeight * (1 + FineAggSM)
-            Dim AdjustedCoarseAggWeight As Double = CoarseAggWeight * (1 + CoarseAggSM)
+            Dim AdjustedFineAggWeight As Single = FineAggWeight * (1 + FineAggSM)
+            Dim AdjustedCoarseAggWeight As Single = CoarseAggWeight * (1 + CoarseAggSM)
 
             ' Decrease water content by surface moisture
             Dim DeltaWaterWeight = FineAggWeight * FineAggSM + CoarseAggWeight * CoarseAggSM
 
             ' Required mixing water
-            Dim RequiredWater As Double = WaterWeight - DeltaWaterWeight
+            WaterWeight -= DeltaWaterWeight
+            FineAggWeight = AdjustedFineAggWeight
+            CoarseAggWeight = AdjustedCoarseAggWeight
+
+            ' Adjustments
+            WaterVolume = WaterWeight / 62.4
+            CementVolume = CementWeight / (CementSG * 62.4)
+            CoarseAggVolume = CoarseAggWeight / (CoarseAggSG * 62.4)
+            FineAggVolume = FineAggWeight / (FineAggSG * 62.4)
+
+            ReDim VolumeDistribution(5)
+            ReDim WeightDistribution(5)
+
+            VolumeDistribution(0) = CementVolume / 27
+            VolumeDistribution(1) = WaterVolume / 27
+            VolumeDistribution(2) = AirContent / 100
+            VolumeDistribution(3) = FineAggVolume / 27
+            VolumeDistribution(4) = CoarseAggVolume / 27
+
+            Dim TotalWeight = CementWeight + WaterWeight + CoarseAggWeight + FineAggWeight
+            WeightDistribution(0) = CementWeight / TotalWeight
+            WeightDistribution(1) = WaterWeight / TotalWeight
+            WeightDistribution(2) = 0
+            WeightDistribution(3) = FineAggWeight / TotalWeight
+            WeightDistribution(4) = CoarseAggWeight / TotalWeight
 
             Select Case True
                 Case rdbVolume.Checked
                     txtCementOutput.Text = Math.Round(CementVolume, 3)
                     txtWaterOutput.Text = Math.Round(WaterVolume, 3)
-                    txtCAOutput.Text = Math.Round(CoarseAggVolume, 3)
                     txtFAOutput.Text = Math.Round(FineAggVolume, 3)
+                    txtCAOutput.Text = Math.Round(CoarseAggVolume, 3)
 
                 Case rdbVolumePercent.Checked
-                    txtCementOutput.Text = Math.Round(CementVolume / 27, 3) * 100
-                    txtWaterOutput.Text = Math.Round(WaterVolume / 27, 3) * 100
-                    txtCAOutput.Text = Math.Round(CoarseAggVolume / 27, 3) * 100
-                    txtFAOutput.Text = Math.Round(FineAggVolume / 27, 3) * 100
+                    txtCementOutput.Text = Math.Round(VolumeDistribution(0) * 100, 1)
+                    txtWaterOutput.Text = Math.Round(VolumeDistribution(1) * 100, 1)
+                    txtFAOutput.Text = Math.Round(VolumeDistribution(3) * 100, 1)
+                    txtCAOutput.Text = Math.Round(VolumeDistribution(4) * 100, 1)
 
                 Case rdbWeight.Checked
                     txtCementOutput.Text = Math.Round(CementWeight, 3)
                     txtWaterOutput.Text = Math.Round(WaterWeight, 3)
-                    txtCAOutput.Text = Math.Round(CoarseAggWeight, 3)
                     txtFAOutput.Text = Math.Round(FineAggWeight, 3)
+                    txtCAOutput.Text = Math.Round(CoarseAggWeight, 3)
 
                 Case rdbWeightPercent.Checked
-                    Dim TotalWeight = CementWeight + WaterWeight + CoarseAggWeight + FineAggWeight
-
-                    txtCementOutput.Text = Math.Round(CementWeight / TotalWeight, 3) * 100
-                    txtWaterOutput.Text = Math.Round(WaterWeight / TotalWeight, 3) * 100
-                    txtCAOutput.Text = Math.Round(CoarseAggWeight / TotalWeight, 3) * 100
-                    txtFAOutput.Text = Math.Round(FineAggWeight / TotalWeight, 3) * 100
+                    txtCementOutput.Text = Math.Round(WeightDistribution(0) * 100, 1)
+                    txtWaterOutput.Text = Math.Round(WeightDistribution(1) * 100, 1)
+                    txtFAOutput.Text = Math.Round(WeightDistribution(3) * 100, 1)
+                    txtCAOutput.Text = Math.Round(WeightDistribution(4) * 100, 1)
             End Select
 
-            ReDim MixProportions(5)
-
-            MixProportions(0) = CementVolume / 27
-            MixProportions(1) = WaterVolume / 27
-            MixProportions(2) = AirContent / 100
-            MixProportions(3) = FineAggVolume / 27
-            MixProportions(4) = CoarseAggVolume / 27
-
-            ' TODO: Create pie chart based on result
             Dim ExcelApp As New Excel.Application
             Dim Workbook = ExcelApp.Workbooks.Add
             Dim Sheet As Excel.Worksheet = Workbook.Sheets("Sheet1")
@@ -365,7 +379,7 @@ Public Class MainForm
                 .Range("B1").Value = "Mix Proportions"
 
                 For Row As Integer = 2 To 6
-                    .Cells(Row, 2).Value = MixProportions(Row - 2)
+                    .Cells(Row, 2).Value = WeightDistribution(Row - 2)
                 Next
             End With
 
@@ -374,10 +388,8 @@ Public Class MainForm
                 .SetSourceData(Source:=Sheet.Range("A2:B6"))
                 .HasLegend = True
                 .HasTitle = True
-                .ChartTitle.Text = "Concrete Mix Proportions"
+                .ChartTitle.Text = "Concrete Mix Proportions (by Weight)"
             End With
-
-
 
             Dim PieChartExportPathDir As String = IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Concrete Mix Designer")
             If Not IO.Directory.Exists(PieChartExportPathDir) Then IO.Directory.CreateDirectory(PieChartExportPathDir)
@@ -440,7 +452,7 @@ Public Class MainForm
         PieChartExportFilename = Nothing
 
         HasResult = False
-        Array.Clear(MixProportions, 0, 5)
+        Array.Clear(VolumeDistribution, 0, 5)
         picBarChart.Refresh()
 
         txtStrength.Focus()
@@ -513,26 +525,64 @@ Public Class MainForm
 
                 Dim X, Y As Single
                 X = Padding
-                Y = Padding
+                Y = Padding * 1.5
 
-                e.Graphics.FillRectangle(CementBrush, X, Y, CSng(MixProportions(0) * Width), Height)
-                e.Graphics.DrawRectangle(Pens.Black, X, Y, CSng(MixProportions(0) * Width), Height)
-                X += MixProportions(0) * Width
+                With e.Graphics
+                    Dim TextFont As New Font("Arial", 8, FontStyle.Regular)
+                    Dim TextFormat As New StringFormat With {
+                        .Alignment = StringAlignment.Center
+                    }
+                    Dim BoxWidth As Single
 
-                e.Graphics.FillRectangle(WaterBrush, X, Y, CSng(MixProportions(1) * Width), Height)
-                e.Graphics.DrawRectangle(Pens.Black, X, Y, CSng(MixProportions(1) * Width), Height)
-                X += MixProportions(1) * Width
+                    BoxWidth = VolumeDistribution(0) * Width
+                    .FillRectangle(CementBrush, X, Y, BoxWidth, Height)
+                    .DrawRectangle(Pens.Black, X, Y, BoxWidth, Height)
+                    .DrawString(Math.Round(VolumeDistribution(0) * 100, 1) & "%", TextFont, Brushes.Black, X + BoxWidth / 2, Y - 20, TextFormat)
+                    X += BoxWidth
 
-                e.Graphics.FillRectangle(AirBrush, X, Y, CSng(MixProportions(2) * Width), Height)
-                e.Graphics.DrawRectangle(Pens.Black, X, Y, CSng(MixProportions(2) * Width), Height)
-                X += MixProportions(2) * Width
+                    BoxWidth = VolumeDistribution(1) * Width
+                    .FillRectangle(WaterBrush, X, Y, BoxWidth, Height)
+                    .DrawRectangle(Pens.Black, X, Y, BoxWidth, Height)
+                    .DrawString(Math.Round(VolumeDistribution(1) * 100, 1) & "%", TextFont, Brushes.Black, X + BoxWidth / 2, Y - 20, TextFormat)
+                    X += BoxWidth
 
-                e.Graphics.FillRectangle(FineAggBrush, X, Y, CSng(MixProportions(3) * Width), Height)
-                e.Graphics.DrawRectangle(Pens.Black, X, Y, CSng(MixProportions(3) * Width), Height)
-                X += MixProportions(3) * Width
+                    BoxWidth = VolumeDistribution(2) * Width
+                    .FillRectangle(AirBrush, X, Y, BoxWidth, Height)
+                    .DrawRectangle(Pens.Black, X, Y, BoxWidth, Height)
+                    .DrawString(Math.Round(VolumeDistribution(2) * 100, 1) & "%", TextFont, Brushes.Black, X + BoxWidth / 2, Y - 20, TextFormat)
+                    X += BoxWidth
 
-                e.Graphics.FillRectangle(CoarseAggBrush, X, Y, CSng(MixProportions(4) * Width), Height)
-                e.Graphics.DrawRectangle(Pens.Black, X, Y, CSng(MixProportions(4) * Width), Height)
+                    BoxWidth = VolumeDistribution(3) * Width
+                    .FillRectangle(FineAggBrush, X, Y, BoxWidth, Height)
+                    .DrawRectangle(Pens.Black, X, Y, BoxWidth, Height)
+                    .DrawString(Math.Round(VolumeDistribution(3) * 100, 1) & "%", TextFont, Brushes.Black, X + BoxWidth / 2, Y - 20, TextFormat)
+                    X += BoxWidth
+
+                    BoxWidth = VolumeDistribution(4) * Width
+                    .FillRectangle(CoarseAggBrush, X, Y, BoxWidth, Height)
+                    .DrawRectangle(Pens.Black, X, Y, BoxWidth, Height)
+                    .DrawString(Math.Round(VolumeDistribution(4) * 100, 1) & "%", TextFont, Brushes.Black, X + BoxWidth / 2, Y - 20, TextFormat)
+
+                    .FillRectangle(CementBrush, 32, 100, 10, 10)
+                    .DrawRectangle(Pens.Black, 32, 100, 10, 10)
+                    .DrawString("Cement", TextFont, Brushes.Black, 45, 100)
+
+                    .FillRectangle(WaterBrush, 112, 100, 10, 10)
+                    .DrawRectangle(Pens.Black, 112, 100, 10, 10)
+                    .DrawString("Water", TextFont, Brushes.Black, 125, 100)
+
+                    .FillRectangle(AirBrush, 182, 100, 10, 10)
+                    .DrawRectangle(Pens.Black, 182, 100, 10, 10)
+                    .DrawString("Air", TextFont, Brushes.Black, 195, 100)
+
+                    .FillRectangle(FineAggBrush, 242, 100, 10, 10)
+                    .DrawRectangle(Pens.Black, 242, 100, 10, 10)
+                    .DrawString("Fine Aggregates", TextFont, Brushes.Black, 255, 100)
+
+                    .FillRectangle(CoarseAggBrush, 362, 100, 10, 10)
+                    .DrawRectangle(Pens.Black, 362, 100, 10, 10)
+                    .DrawString("Coarse Aggregates", TextFont, Brushes.Black, 375, 100)
+                End With
             End If
 
         Catch ex As Exception
@@ -759,7 +809,7 @@ Public Class MainForm
     Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
         Try
             If SaveFilePath <> Nothing Then
-                My.Computer.FileSystem.WriteAllText(SaveFilePath, SerializeData, False)
+                My.Computer.FileSystem.WriteAllText(SaveFilePath, SerializeData(), False)
                 Saved = True
 
             Else
@@ -780,7 +830,7 @@ Public Class MainForm
 
             If SaveFileDialog1.ShowDialog = DialogResult.OK Then
                 SaveFilePath = SaveFileDialog1.FileName
-                My.Computer.FileSystem.WriteAllText(SaveFilePath, SerializeData, False)
+                My.Computer.FileSystem.WriteAllText(SaveFilePath, SerializeData(), False)
                 Saved = True
             End If
 
